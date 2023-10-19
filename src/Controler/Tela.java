@@ -7,6 +7,7 @@ import Modelo.BichinhoVaiVemHorizontal;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Modelo.ZigueZague;
+import Modelo.Parede;
 import auxiliar.Posicao;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -35,6 +36,7 @@ import javax.swing.JButton;
 public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
 
     private Hero hero;
+    private Hero hero1;
     private ArrayList<Personagem> faseAtual;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
@@ -71,6 +73,18 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         Caveira bV = new Caveira("caveira.png");
         bV.setPosicao(9, 1);
         this.addPersonagem(bV);
+        
+        Caveira b2 = new Caveira("caveira.png");
+        b2.setPosicao(8, 1);
+        this.addPersonagem(b2);
+        
+        Parede b3 = new Parede("chao.png");
+        b3.setPosicao(5, 5);
+        this.addPersonagem(b3);
+        
+        Parede b4 = new Parede("chao.png");
+        b4.setPosicao(4, 5);
+        this.addPersonagem(b4);
     }
 
     public boolean ehPosicaoValida(Posicao p){
