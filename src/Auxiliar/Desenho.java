@@ -1,17 +1,18 @@
 package Auxiliar;
 
+import Auxiliar.Fase;
 import java.awt.Graphics;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
 import Controler.Tela;
 
 public class Desenho implements Serializable {
-    static Tela jCenario;
-    public static void setCenario(Tela umJCenario) {
+    static Fase jCenario;
+    public static void setCenario(Fase umJCenario) {
         jCenario = umJCenario;
     }
 
-    public static Tela acessoATelaDoJogo() {
+    public static Fase acessoATelaDoJogo() {
         return jCenario;
     }
 

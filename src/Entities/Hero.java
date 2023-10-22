@@ -1,7 +1,7 @@
 package Entities;
 
-import Auxiliar.Consts;
-import Auxiliar.Desenho;
+
+import Auxiliar.*;
 import Controler.ControleDeJogo;
 import Controler.Tela;
 import java.awt.Graphics;
@@ -12,9 +12,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Hero extends Creature implements Serializable{
-    public Hero(String sNomeImagePNG) {
-        super(sNomeImagePNG);
+public class Hero extends Personagem implements Serializable{
+    public Hero(int Linha, int Coluna) {
+        super("skoot.png", new Posicao(Linha, Coluna));
     }
 
     public void voltaAUltimaPosicao(){

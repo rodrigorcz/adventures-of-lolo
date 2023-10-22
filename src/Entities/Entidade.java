@@ -1,10 +1,7 @@
 package Entities;
 
-import java.io.Serializable;
-import Auxiliar.Consts;
-import Auxiliar.Desenho;
+import Auxiliar.*;
 import Controler.Tela;
-import Auxiliar.Position;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -15,68 +12,65 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public abstract class Entity implements Serializable {
-    protected ImageIcon iImage;
-    protected Position startPosition;
-    protected boolean itsPassable;
+public abstract class Entidade implements Serializable {
 
-    protected Entity(String sNomeImagePNG, Position startPosition, boolean itsPassable) {
-        this.startPosition = startPosition;
-        this.itsPassable = itsPassable;
-        
-        /* Set Image */
+    protected ImageIcon iImage;
+    protected Posicao pPosicao;
+    protected boolean bTransponivel; /*Pode passar por cima?*/
+    protected boolean bMortal;       /*Se encostar, morre?*/
+
+
+    protected Entidade(String sNomeImagePNG) {
+        this.pPosicao = new Posicao(1, 1);
+        this.bTransponivel = true;
+        this.bMortal = false;
         try {
             iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
             Image img = iImage.getImage();
-            
             BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
             Graphics g = bi.createGraphics();
             g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-            iImage = new ImageIcon(bi);   
-            
-        }catch (IOException ex) {
+            iImage = new ImageIcon(bi);
+        } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
     }
-    
-    
-        public Position getPosicao() {
+
+    public Posicao getPosicao() {
         /*TODO: Retirar este método para que objetos externos nao possam operar
          diretamente sobre a posição do Personagem*/
-        return startPosition;
+        return pPosicao;
     }
 
     public boolean isbTransponivel() {
-        return itsPassable;
+        return bTransponivel;
     }
 
-    public void setbTransponivel(boolean Transponivel) {
-        this.itsPassable = Transponivel;
+    public void setbTransponivel(boolean bTransponivel) {
+        this.bTransponivel = bTransponivel;
     }
 
     public void autoDesenho(){
-        Desenho.desenhar(this.iImage, this.startPosition.getColuna(), this.startPosition.getLinha());        
+        Desenho.desenhar(this.iImage, this.pPosicao.getColuna(), this.pPosicao.getLinha());        
     }
 
     public boolean setPosicao(int linha, int coluna) {
-        return startPosition.setPosicao(linha, coluna);
+        return pPosicao.setPosicao(linha, coluna);
     }
 
     public boolean moveUp() {
-        return this.startPosition.moveUp();
+        return this.pPosicao.moveUp();
     }
 
     public boolean moveDown() {
-        return this.startPosition.moveDown();
+        return this.pPosicao.moveDown();
     }
 
     public boolean moveRight() {
-        return this.startPosition.moveRight();
+        return this.pPosicao.moveRight();
     }
 
     public boolean moveLeft() {
-        return this.startPosition.moveLeft();
+        return this.pPosicao.moveLeft();
     }
-    
- 
 }

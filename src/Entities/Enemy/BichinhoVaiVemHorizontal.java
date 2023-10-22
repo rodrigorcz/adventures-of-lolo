@@ -1,8 +1,7 @@
 package Entities.Enemy;
 
-import Auxiliar.Consts;
-import Auxiliar.Desenho;
-import Entities.Creature;
+import Auxiliar.*;
+import Entities.Personagem;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -12,13 +11,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class BichinhoVaiVemHorizontal extends Creature  implements Serializable{
+public class BichinhoVaiVemHorizontal extends Personagem  implements Serializable{
     private boolean bRight;
 
-    public BichinhoVaiVemHorizontal(String sNomeImagePNG) {
-        super(sNomeImagePNG);
+    public BichinhoVaiVemHorizontal(int Linha, int Coluna) {
+        super("roboPink.png", new Posicao(Linha, Coluna));
         bRight = true;
     }
+    
     public void autoDesenho(){
         if(bRight)
             this.setPosicao(pPosicao.getLinha(), pPosicao.getColuna()+1);

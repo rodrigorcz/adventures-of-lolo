@@ -1,14 +1,14 @@
 package Entities.Enemy;
 
-import Entities.Creature;
-import Auxiliar.Desenho;
-import Entities.Creature;
+import Entities.Personagem;
+import Auxiliar.*;
+import Entities.Personagem;
 import java.util.Random;
 
-public class ZigueZague extends Creature{
+public class ZigueZague extends Personagem{
     
-    public ZigueZague(String sNomeImagePNG) {
-        super(sNomeImagePNG);
+    public ZigueZague(int Linha, int Coluna) {
+        super("robo.png", new Posicao(Linha, Coluna));
     }
 
     public void autoDesenho(){

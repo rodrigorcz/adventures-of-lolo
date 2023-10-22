@@ -1,19 +1,16 @@
 package Obstacles;
 
-import Auxiliar.Consts;
-import Auxiliar.Desenho;
+import Auxiliar.*;
 import Controler.Tela;
-import Entities.Creature;
+import Entities.Personagem;
 import java.awt.Graphics;
 import java.io.Serializable;
 
 
-public class Parede extends Creature implements Serializable{
-    private int iContaIntervalos;   
-  
-    public Parede(String sNomeImagePNG) {
-        super(sNomeImagePNG);
-        this.bTransponivel = false;
-        this.iContaIntervalos = 0;
+public class Parede extends Personagem implements Serializable{
+    
+    public Parede(int Linha, int Coluna) {
+        super("parede.png", new Posicao(Linha, Coluna));
+        this.ehTransponivel = false; 
     }
 }

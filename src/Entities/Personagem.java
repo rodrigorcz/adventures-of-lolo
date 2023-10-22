@@ -2,7 +2,7 @@ package Entities;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
-import Auxiliar.Position;
+import Auxiliar.Posicao;
 import Controler.Tela;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -14,18 +14,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public abstract class Creature implements Serializable {
+public abstract class Personagem implements Serializable {
 
     protected ImageIcon iImage;
-    protected Position pPosicao;
-    protected boolean bTransponivel; /*Pode passar por cima?*/
-    protected boolean bMortal;       /*Se encostar, morre?*/
+    protected Posicao pPosicao;
+    protected boolean ehTransponivel; /*Pode passar por cima?*/
+    protected boolean ehMortal;       /*Se encostar, morre?*/
 
 
-    protected Creature(String sNomeImagePNG) {
-        this.pPosicao = new Position(1, 1);
-        this.bTransponivel = true;
-        this.bMortal = false;
+    protected Personagem(String sNomeImagePNG, Posicao pPosicao) {
+        this.pPosicao = pPosicao;
+        this.ehTransponivel = true;
+        this.ehMortal = false;
         try {
             iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
             Image img = iImage.getImage();
@@ -38,18 +38,18 @@ public abstract class Creature implements Serializable {
         }
     }
 
-    public Position getPosicao() {
+    public Posicao getPosicao() {
         /*TODO: Retirar este método para que objetos externos nao possam operar
          diretamente sobre a posição do Personagem*/
         return pPosicao;
     }
 
     public boolean isbTransponivel() {
-        return bTransponivel;
+        return ehTransponivel;
     }
 
-    public void setbTransponivel(boolean bTransponivel) {
-        this.bTransponivel = bTransponivel;
+    public void setbTransponivel(boolean ehTransponivel) {
+        this.ehTransponivel = ehTransponivel;
     }
 
     public void autoDesenho(){

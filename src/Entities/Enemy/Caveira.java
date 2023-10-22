@@ -1,22 +1,22 @@
 package Entities.Enemy;
 
-import Auxiliar.Consts;
-import Auxiliar.Desenho;
+import Auxiliar.*;
 import Controler.Tela;
 import Entities.Elements.Fogo;
-import Entities.Creature;
+import Entities.Personagem;
 import java.awt.Graphics;
 import java.io.Serializable;
 
-public class Caveira extends Creature implements Serializable{
+public class Caveira extends Personagem implements Serializable{
     private int iContaIntervalos;
     
-    public Caveira(String sNomeImagePNG) {
-        super(sNomeImagePNG);
-        this.bTransponivel = false;
+    public Caveira(int Linha, int Coluna) {
+        super("caveira.png", new Posicao(Linha, Coluna));
+        this.ehTransponivel = false;
         this.iContaIntervalos = 0;
     }
-
+    
+    /*
     public void autoDesenho() {
         super.autoDesenho();
 
@@ -27,5 +27,5 @@ public class Caveira extends Creature implements Serializable{
             f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()+1);
             Desenho.acessoATelaDoJogo().addPersonagem(f);
         }
-    }    
+    }  */  
 }
