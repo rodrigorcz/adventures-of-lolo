@@ -1,5 +1,4 @@
 import Controler.Tela;
-import java.util.concurrent.TimeUnit;
 
 public class Main {
 

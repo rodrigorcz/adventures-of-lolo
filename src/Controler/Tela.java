@@ -1,14 +1,14 @@
 package Controler;
 
-import Entities.Personagem;
+import Entities.Creature;
 import Entities.Enemy.Caveira;
 import Entities.Hero;
 import Entities.Enemy.BichinhoVaiVemHorizontal;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Entities.Enemy.ZigueZague;
-import Obstacle.Parede;
-import auxiliar.Posicao;
+import Obstacles.Parede;
+import Auxiliar.Position;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -31,16 +31,15 @@ import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import javax.swing.JButton;
-
+import java.util.concurrent.TimeUnit;
 
 public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
 
     private Hero hero;
-    private Hero hero1;
-    private ArrayList<Personagem> faseAtual;
+    private ArrayList<Creature> faseAtual;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
-
+    
     public Tela() {
         Desenho.setCenario(this);
         initComponents();
@@ -51,7 +50,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right,
                 Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
 
-        faseAtual = new ArrayList<Personagem>();
+        faseAtual = new ArrayList<Creature>();
 
         /*Cria faseAtual adiciona personagens*/
         hero = new Hero("skoot.png");
@@ -87,14 +86,14 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         this.addPersonagem(b4);
     }
 
-    public boolean ehPosicaoValida(Posicao p){
+    public boolean ehPosicaoValida(Position p){
         return cj.ehPosicaoValida(this.faseAtual, p);
     }
-    public void addPersonagem(Personagem umPersonagem) {
+    public void addPersonagem(Creature umPersonagem) {
         faseAtual.add(umPersonagem);
     }
 
-    public void removePersonagem(Personagem umPersonagem) {
+    public void removePersonagem(Creature umPersonagem) {
         faseAtual.remove(umPersonagem);
     }
 

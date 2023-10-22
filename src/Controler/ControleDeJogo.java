@@ -1,19 +1,19 @@
 package Controler;
 
-import Entities.Personagem;
+import Entities.Creature;
 import Entities.Hero;
-import auxiliar.Posicao;
+import Auxiliar.Position;
 import java.util.ArrayList;
 
 public class ControleDeJogo {
-    public void desenhaTudo(ArrayList<Personagem> e){
+    public void desenhaTudo(ArrayList<Creature> e){
         for(int i = 0; i < e.size(); i++){
             e.get(i).autoDesenho();
         }
     }
-    public void processaTudo(ArrayList<Personagem> umaFase){
+    public void processaTudo(ArrayList<Creature> umaFase){
         Hero hero = (Hero)umaFase.get(0);
-        Personagem pIesimoPersonagem;
+        Creature pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
             pIesimoPersonagem = umaFase.get(i);
             if(hero.getPosicao().igual(pIesimoPersonagem.getPosicao()))
@@ -24,8 +24,8 @@ public class ControleDeJogo {
     }
     
     /*Retorna true se a posicao p é válida para Hero com relacao a todos os personagens no array*/
-    public boolean ehPosicaoValida(ArrayList<Personagem> umaFase, Posicao p){
-        Personagem pIesimoPersonagem;
+    public boolean ehPosicaoValida(ArrayList<Creature> umaFase, Position p){
+        Creature pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
             pIesimoPersonagem = umaFase.get(i);            
             if(!pIesimoPersonagem.isbTransponivel())

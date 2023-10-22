@@ -2,8 +2,8 @@ package Entities;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
+import Auxiliar.Position;
 import Controler.Tela;
-import auxiliar.Posicao;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -14,16 +14,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public abstract class Personagem implements Serializable {
+public abstract class Creature implements Serializable {
 
     protected ImageIcon iImage;
-    protected Posicao pPosicao;
+    protected Position pPosicao;
     protected boolean bTransponivel; /*Pode passar por cima?*/
     protected boolean bMortal;       /*Se encostar, morre?*/
 
 
-    protected Personagem(String sNomeImagePNG) {
-        this.pPosicao = new Posicao(1, 1);
+    protected Creature(String sNomeImagePNG) {
+        this.pPosicao = new Position(1, 1);
         this.bTransponivel = true;
         this.bMortal = false;
         try {
@@ -38,7 +38,7 @@ public abstract class Personagem implements Serializable {
         }
     }
 
-    public Posicao getPosicao() {
+    public Position getPosicao() {
         /*TODO: Retirar este método para que objetos externos nao possam operar
          diretamente sobre a posição do Personagem*/
         return pPosicao;

@@ -1,15 +1,15 @@
-package auxiliar;
+package Auxiliar;
 
 import java.io.Serializable;
 
-public class Posicao  implements Serializable{
+public class Position implements Serializable{
     private int	linha;
     private int coluna;
     
     private int linhaAnterior;
     private int colunaAnterior;
 
-    public Posicao(int linha, int coluna){
+    public Position(int linha, int coluna){
         this.setPosicao(linha,coluna);
     }
 
@@ -39,11 +39,11 @@ public class Posicao  implements Serializable{
         return coluna;
     }
 
-    public boolean igual(Posicao posicao){
+    public boolean igual(Position posicao){
         return (linha == posicao.getLinha() && coluna == posicao.getColuna());
     }
 
-    public boolean copia(Posicao posicao){
+    public boolean copia(Position posicao){
         return this.setPosicao(posicao.getLinha(),posicao.getColuna());
     }
     

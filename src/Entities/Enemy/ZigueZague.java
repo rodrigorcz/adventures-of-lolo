@@ -1,11 +1,11 @@
 package Entities.Enemy;
 
-import Entities.Personagem;
+import Entities.Creature;
 import Auxiliar.Desenho;
-import Entities.Personagem;
+import Entities.Creature;
 import java.util.Random;
 
-public class ZigueZague extends Personagem{
+public class ZigueZague extends Creature{
     
     public ZigueZague(String sNomeImagePNG) {
         super(sNomeImagePNG);

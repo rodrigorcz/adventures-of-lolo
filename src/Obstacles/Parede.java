@@ -1,14 +1,14 @@
-package Obstacle;
+package Obstacles;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Controler.Tela;
-import Entities.Personagem;
+import Entities.Creature;
 import java.awt.Graphics;
 import java.io.Serializable;
 
 
-public class Parede extends Personagem implements Serializable{
+public class Parede extends Creature implements Serializable{
     private int iContaIntervalos;   
   
     public Parede(String sNomeImagePNG) {

@@ -2,7 +2,7 @@ package Entities.Enemy;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
-import Entities.Personagem;
+import Entities.Creature;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class BichinhoVaiVemHorizontal extends Personagem  implements Serializable{
+public class BichinhoVaiVemHorizontal extends Creature  implements Serializable{
     private boolean bRight;
 
     public BichinhoVaiVemHorizontal(String sNomeImagePNG) {

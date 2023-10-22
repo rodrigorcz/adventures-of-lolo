@@ -3,12 +3,12 @@ package Entities.Enemy;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Controler.Tela;
-import Entities.Fogo;
-import Entities.Personagem;
+import Entities.Elements.Fogo;
+import Entities.Creature;
 import java.awt.Graphics;
 import java.io.Serializable;
 
-public class Caveira extends Personagem implements Serializable{
+public class Caveira extends Creature implements Serializable{
     private int iContaIntervalos;
     
     public Caveira(String sNomeImagePNG) {
