@@ -1,4 +1,4 @@
-package Modelo;
+package Entities;
 
 import Auxiliar.Desenho;
 import Controler.Tela;

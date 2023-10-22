@@ -1,8 +1,9 @@
-package Modelo;
+package Obstacle;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Controler.Tela;
+import Entities.Personagem;
 import java.awt.Graphics;
 import java.io.Serializable;
 

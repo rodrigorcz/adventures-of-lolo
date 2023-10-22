@@ -1,13 +1,13 @@
 package Controler;
 
-import Modelo.Personagem;
-import Modelo.Caveira;
-import Modelo.Hero;
-import Modelo.BichinhoVaiVemHorizontal;
+import Entities.Personagem;
+import Entities.Enemy.Caveira;
+import Entities.Hero;
+import Entities.Enemy.BichinhoVaiVemHorizontal;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
-import Modelo.ZigueZague;
-import Modelo.Parede;
+import Entities.Enemy.ZigueZague;
+import Obstacle.Parede;
 import auxiliar.Posicao;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -109,7 +109,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         for (int i = 0; i < Consts.RES; i++) {
             for (int j = 0; j < Consts.RES; j++) {
                 try {
-                    Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "bricks.png");
+                    Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "brick.png");
                     g2.drawImage(newImage,
                             j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
 

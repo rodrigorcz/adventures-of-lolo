@@ -1,6 +1,8 @@
-package Modelo;
+package Entities.Enemy;
 
+import Entities.Personagem;
 import Auxiliar.Desenho;
+import Entities.Personagem;
 import java.util.Random;
 
 public class ZigueZague extends Personagem{

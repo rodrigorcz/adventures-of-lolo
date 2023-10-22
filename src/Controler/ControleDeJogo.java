@@ -1,7 +1,7 @@
 package Controler;
 
-import Modelo.Personagem;
-import Modelo.Hero;
+import Entities.Personagem;
+import Entities.Hero;
 import auxiliar.Posicao;
 import java.util.ArrayList;
 

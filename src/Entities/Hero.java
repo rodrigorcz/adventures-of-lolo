@@ -1,4 +1,4 @@
-package Modelo;
+package Entities;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;

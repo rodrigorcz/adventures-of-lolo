@@ -1,8 +1,10 @@
-package Modelo;
+package Entities.Enemy;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Controler.Tela;
+import Entities.Fogo;
+import Entities.Personagem;
 import java.awt.Graphics;
 import java.io.Serializable;
 
