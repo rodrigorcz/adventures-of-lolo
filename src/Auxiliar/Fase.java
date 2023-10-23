@@ -124,11 +124,15 @@ public abstract class Fase extends Tela{
             this.Elements.clear();
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
             lolo.moveUp();
+            lolo.setImage("LoloCima.png");
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             lolo.moveDown();
+            lolo.setImage("LoloBaixo.png");
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             lolo.moveLeft();
+            lolo.setImage("LoloEsquerda.png");
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            lolo.setImage("LoloDireita.png");
             lolo.moveRight();
         }
 
