@@ -3,7 +3,7 @@ package Controler;
 import Entities.Personagem;
 import Entities.Enemy.Caveira;
 import Entities.Hero;
-import Entities.Enemy.BichinhoVaiVemHorizontal;
+import Entities.Enemy.Minhoca;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Entities.Enemy.ZigueZague;
@@ -29,16 +29,18 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import javax.swing.JButton;
 
 public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
-
     TimerTask task;
+    
+    private ScheduledExecutorService scheduler;
+
     public void go() {
         task = new TimerTask() {
-            @Override
             public void run() {
                 repaint();
             }
@@ -46,7 +48,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         Timer timer = new Timer();
         timer.schedule(task, 0, Consts.PERIOD);
     }
-
+    
     public void cancel() {
         this.task.cancel();
     }
@@ -54,23 +56,21 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     @Override
     public void mousePressed(MouseEvent e) {
     }
-    
-    public void mouseMoved(MouseEvent e) {
-    }
+  
     @Override
     public void mouseClicked(MouseEvent e) {
     }
+    
     @Override
     public void mouseReleased(MouseEvent e) {
-    }
+    } 
+
     @Override
     public void mouseEntered(MouseEvent e) {
     }
+    
     @Override
     public void mouseExited(MouseEvent e) {
-    }
-    
-    public void mouseDragged(MouseEvent e) {
     }
     
     @Override
@@ -79,6 +79,12 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     
     @Override
     public void keyReleased(KeyEvent e) {
+    }
+    
+    public void mouseMoved(MouseEvent e) {
+    } 
+    
+    public void mouseDragged(MouseEvent e) {
     }
     
     public void keyPressed(KeyEvent e){

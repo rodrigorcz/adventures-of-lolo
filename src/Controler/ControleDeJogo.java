@@ -4,6 +4,7 @@ import Entities.Personagem;
 import Entities.Hero;
 import Auxiliar.Posicao;
 import java.util.ArrayList;
+import Controler.VideoGame;
 
 public class ControleDeJogo {
     public void desenhaTudo(ArrayList<Personagem> e){
@@ -13,6 +14,7 @@ public class ControleDeJogo {
     }
     public void processaTudo(ArrayList<Personagem> umaFase){
         Hero hero = (Hero)umaFase.get(0);
+        VideoGame v2 = new VideoGame();
         Personagem pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
             pIesimoPersonagem = umaFase.get(i);
@@ -21,7 +23,9 @@ public class ControleDeJogo {
                     /*TO-DO: verificar se o personagem eh mortal antes de retirar*/                    
                     umaFase.remove(pIesimoPersonagem);
         }
+        
     }
+    
     
     /*Retorna true se a posicao p é válida para Hero com relacao a todos os personagens no array*/
     public boolean ehPosicaoValida(ArrayList<Personagem> umaFase, Posicao p){

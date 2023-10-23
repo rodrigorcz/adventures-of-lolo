@@ -6,13 +6,14 @@ import Entities.Hero;
 import Entities.Entidade;
 import Controler.Tela;
 import Auxiliar.Consts;
-import Entities.Enemy.BichinhoVaiVemHorizontal;
+import Entities.Enemy.Minhoca;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Entities.Enemy.ZigueZague;
 import Obstacles.Parede;
 import Auxiliar.Posicao;
-import Controler.ControleDeJogo;
+import Controler.*;
+
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -39,13 +40,15 @@ import java.util.logging.Level;
 
 public abstract class Fase extends Tela{
     public Hero lolo;
+    private final Complete phaseCompleteListener;
     protected ArrayList<Personagem> Elements;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
     
-    public Fase(){
-        this.Elements = new ArrayList<>(195);
-        
+    public Fase(Complete phaseCompleteListener){
+        this.Elements = new ArrayList<>();
+        this.phaseCompleteListener = phaseCompleteListener;
+        //Cria o Heroi e adiciona na posição 0 da Lista
         lolo = new Hero(0,7);
         this.addElement(lolo);
     }
@@ -55,6 +58,12 @@ public abstract class Fase extends Tela{
         this.createBufferStrategy(2);
         Desenho.setCenario(this);
         this.go();
+    }
+    
+   
+    public void stopFase(){
+        this.setVisible(false);
+        this.cancel();
     }
     
     public void addElement(Personagem e1){
@@ -79,6 +88,7 @@ public abstract class Fase extends Tela{
     public boolean ehPosicaoValida(Posicao p){
         return cj.ehPosicaoValida(this.Elements, p);
     }
+    
     public void removePersonagem(Personagem e1) {
         Elements.remove(e1);
     }
@@ -88,6 +98,12 @@ public abstract class Fase extends Tela{
     }
     
     public void paint(Graphics gOld) {
+        if((lolo.getPosicao().igual(new Posicao(0,0)))){
+            this.stopFase();
+            phaseCompleteListener.onPhaseComplete();
+            return;
+        }
+        
         Graphics g = this.getBufferStrategy().getDrawGraphics();
         /*Criamos um contexto gráfico*/
         g2 = g.create(getInsets().left, getInsets().top, getWidth() - getInsets().right, getHeight() - getInsets().top);
@@ -109,7 +125,9 @@ public abstract class Fase extends Tela{
         if (!this.Elements.isEmpty()) {
             this.cj.desenhaTudo(Elements);
             this.cj.processaTudo(Elements);
-        }
+  
+       }
+       
 
         g.dispose();
         g2.dispose();
@@ -118,16 +136,7 @@ public abstract class Fase extends Tela{
         }
     }
     
-    public void go() {
-        TimerTask task = new TimerTask() {
-            public void run() {
-                repaint();
-            }
-        };
-        Timer timer = new Timer();
-        timer.schedule(task, 0, Consts.PERIOD);
-    }
-
+    
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_C) {
             this.Elements.clear();
@@ -139,6 +148,8 @@ public abstract class Fase extends Tela{
             lolo.moveLeft();
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             lolo.moveRight();
+        } else if (e.getKeyCode() == KeyEvent.VK_R){ //Reset
+            lolo.setPosicao(0,0);
         }
 
         this.setTitle("-> Cell: " + (lolo.getPosicao().getColuna()) + ", "
@@ -159,8 +170,8 @@ public abstract class Fase extends Tela{
          
         repaint();
     }
-    
-        // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -183,29 +194,5 @@ public abstract class Fase extends Tela{
         pack();
     }// </editor-fold>                        
     // Variables declaration - do not modify                     
-    // End of variables declaration                   
-
-    public void mouseMoved(MouseEvent e) {
-    }
-
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    public void mouseExited(MouseEvent e) {
-    }
-
-    public void mouseDragged(MouseEvent e) {
-    }
-
-    public void keyTyped(KeyEvent e) {
-    }
-
-    public void keyReleased(KeyEvent e) {
-    }
+    // End of variables declaration  
 }

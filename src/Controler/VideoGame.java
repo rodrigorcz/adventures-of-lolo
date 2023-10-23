@@ -5,27 +5,36 @@ import java.util.List;
 import Level.*;
 import Auxiliar.*;
 
-public class VideoGame {
-    private final ArrayList<Fase> fase;
+public class VideoGame implements Complete{
+    private final ArrayList<Fase> fases;
     private int indexLevel;
     
     public VideoGame(){
-        this.fase = new ArrayList<>();
-        this.fase.add(new Level_1());
-  
+        this.fases = new ArrayList<>();
+        this.fases.add(new Level_1(this));
+        this.fases.add(new Level_2(this));
+        this.fases.add(new Level_1(this));
+
+        
         this.indexLevel = 0;
     }
     
     public Fase getFase(){
-        return this.fase.get(this.indexLevel);
+        return this.fases.get(this.indexLevel);
     }
     
-    public void nextFase() {
-        this.indexLevel++;
-        this.startGame();
+    public void setLevel(int indexLevel){
+        this.indexLevel = indexLevel;
     }
     
     public void startGame(){
+        Fase fase = this.getFase();
+        java.awt.EventQueue.invokeLater(fase::start);
+    }
+    
+    @Override
+    public void onPhaseComplete(){
+        this.indexLevel++;
         Fase fase = this.getFase();
         java.awt.EventQueue.invokeLater(fase::start);
     }

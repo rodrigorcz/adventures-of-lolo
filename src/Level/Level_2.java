@@ -5,16 +5,16 @@ import java.util.List;
 import Controler.Tela;
 import Entities.Hero;
 import Entities.Entidade;
-import Auxiliar.Fase;
+import Auxiliar.*;
 import Controler.Complete;
 import Entities.Enemy.Minhoca;
 import Entities.Enemy.Caveira;
 import Entities.Enemy.ZigueZague;
 import Obstacles.Parede;
 
-public class Level_1 extends Fase{
+public class Level_2 extends Fase{
     
-    public Level_1(Complete phaseCompleteListener){
+    public Level_2(Complete phaseCompleteListener){
         super(phaseCompleteListener);
     }
     @Override
@@ -25,13 +25,12 @@ public class Level_1 extends Fase{
     
     @Override
     public void createEntities(){
-        this.addElement(new Parede(1,1));
-        this.addElement(new Parede(1,2));
-        this.addElement(new Parede(1,3));
-        this.addElement(new Caveira(9,1));
-        this.addElement(new Caveira(8,1));
-        this.addElement(new Minhoca(5,5));
-        this.addElement(new Minhoca(10,10));
-   
+        
+        for(int i = 5; i<Consts.RES-1;i++){
+            for(int j = 0; j<Consts.RES;j++){
+                this.addElement(new Parede(i,j));
+            }
+        }
     }
+    
 }

@@ -11,10 +11,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class BichinhoVaiVemHorizontal extends Personagem  implements Serializable{
+public class Minhoca extends Personagem  implements Serializable{
     private boolean bRight;
 
-    public BichinhoVaiVemHorizontal(int Linha, int Coluna) {
+    public Minhoca(int Linha, int Coluna) {
         super("roboPink.png", new Posicao(Linha, Coluna));
         bRight = true;
     }
