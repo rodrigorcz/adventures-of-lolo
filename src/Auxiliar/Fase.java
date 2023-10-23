@@ -3,7 +3,7 @@ package Auxiliar;
 import Entities.Personagem;
 import Entities.Enemy.Caveira;
 import Entities.Hero;
-import Entities.Entidade;
+import Entities.Elemento;
 import Controler.Tela;
 import Auxiliar.Consts;
 import Entities.Enemy.BichinhoVaiVemHorizontal;
@@ -79,6 +79,7 @@ public abstract class Fase extends Tela{
     public boolean ehPosicaoValida(Posicao p){
         return cj.ehPosicaoValida(this.Elements, p);
     }
+    
     public void removePersonagem(Personagem e1) {
         Elements.remove(e1);
     }
