@@ -46,7 +46,7 @@ public abstract class Fase extends Tela{
     public Fase(){
         this.Elements = new ArrayList<>(195);
         
-        lolo = new Hero(0,7);
+        lolo = new Hero(7,7);
         this.addElement(lolo);
     }
     

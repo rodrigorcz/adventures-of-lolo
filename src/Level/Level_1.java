@@ -10,6 +10,9 @@ import Entities.Enemy.BichinhoVaiVemHorizontal;
 import Entities.Enemy.Caveira;
 import Entities.Enemy.ZigueZague;
 import Obstacles.Parede;
+import Obstacles.Arbusto;
+import Obstacles.Feno;
+import Entities.Lootable.Chest_1;
 
 public class Level_1 extends Fase{
     
@@ -21,10 +24,17 @@ public class Level_1 extends Fase{
     
     public void createEntities(){
         
-        this.addElement(new Parede(1,1));
-        this.addElement(new Parede(1,2));
-        this.addElement(new Parede(1,3));
-        this.addElement(new Caveira(9,1));
-        this.addElement(new Caveira(8,1));
+        for(int i = 0; i <= 12; i++){
+            this.addElement(new Parede(i,0));
+        }
+        
+        this.addElement(new Feno(2,1));
+        this.addElement(new Feno(4,1));
+        this.addElement(new Arbusto(5,1));
+        this.addElement(new Arbusto(7,1));
+        this.addElement(new Arbusto(8,1));
+        this.addElement(new Arbusto(9,1));
+        this.addElement(new Feno(10,1));
+        this.addElement(new Feno(11,1));
     }
 }

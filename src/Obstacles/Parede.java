@@ -10,7 +10,8 @@ import java.io.Serializable;
 public class Parede extends Personagem implements Serializable{
     
     public Parede(int Linha, int Coluna) {
-        super("parede.png", new Posicao(Linha, Coluna));
-        this.ehTransponivel = false; 
+        super("ParedeCima.jpeg", new Posicao(Linha, Coluna));
+        this.ehTransponivel = false;
+
     }
 }
