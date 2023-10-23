@@ -43,6 +43,7 @@ public class Hero extends Personagem implements Serializable{
         }
         return true;       
     }
+    
     public void setImage(String newImg){
        try {
             iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + newImg);

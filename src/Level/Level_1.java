@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Controler.Tela;
 import Entities.Hero;
-import Entities.Entidade;
+import Entities.Elemento;
 import Auxiliar.Fase;
 import Entities.Enemy.BichinhoVaiVemHorizontal;
 import Entities.Enemy.Caveira;

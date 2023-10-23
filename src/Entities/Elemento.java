@@ -12,18 +12,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public abstract class Entidade implements Serializable {
+public abstract class Elemento implements Serializable {
 
     protected ImageIcon iImage;
     protected Posicao pPosicao;
-    protected boolean bTransponivel; /*Pode passar por cima?*/
-    protected boolean bMortal;       /*Se encostar, morre?*/
+    protected boolean bTransponivel; 
+    protected boolean bMortal;       
 
 
-    protected Entidade(String sNomeImagePNG) {
+    protected Elemento(String sNomeImagePNG) {
         this.pPosicao = new Posicao(1, 1);
         this.bTransponivel = true;
         this.bMortal = false;
+        
         try {
             iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
             Image img = iImage.getImage();
