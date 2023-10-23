@@ -118,15 +118,6 @@ public abstract class Fase extends Tela{
         }
     }
     
-    public void go() {
-        TimerTask task = new TimerTask() {
-            public void run() {
-                repaint();
-            }
-        };
-        Timer timer = new Timer();
-        timer.schedule(task, 0, Consts.PERIOD);
-    }
 
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_C) {

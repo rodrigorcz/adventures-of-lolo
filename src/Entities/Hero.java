@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Hero extends Personagem implements Serializable{
+    
     public Hero(int Linha, int Coluna) {
         super("skoot.png", new Posicao(Linha, Coluna));
     }
@@ -41,6 +42,10 @@ public class Hero extends Personagem implements Serializable{
         return true;       
     }
     
+    public void setImage(String imagem){
+        this.sNomeImagePNG = imagem;
+    
+    }
     public boolean moveUp() {
         if(super.moveUp())
             return validaPosicao();
