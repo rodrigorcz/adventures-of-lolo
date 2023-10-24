@@ -57,7 +57,7 @@ public abstract class Fase extends Tela{
     
     public void start(){
         this.setVisible(true);
-        this.createBufferStrategy(2);
+        this.createBufferStrategy(3);
         Desenho.setCenario(this);
         this.go();
     }
@@ -84,6 +84,7 @@ public abstract class Fase extends Tela{
         this.setVisible(false);
         this.Elements.clear();
     }
+    
     public boolean ehPosicaoValida(Posicao p){
         return cj.ehPosicaoValida(this.Elements, p);
     }
