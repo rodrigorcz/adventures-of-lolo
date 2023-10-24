@@ -73,7 +73,14 @@ public class Level_1 extends Fase{
             this.addElement(new Feno(i,9));
         }
         
-       
+        this.addElement(new PortaFechada(1,6));
+        
+        this.addElement(new BauFechado(4,6));
+
+        this.addElement(new Coracao(3,1));
+        this.addElement(new Coracao(2,8));
+        this.addElement(new Coracao(2,11));
+
         this.addElement(new Arbusto(5,1));
         this.addElement(new Arbusto(10,1));
         this.addElement(new Arbusto(10,2));
@@ -98,6 +105,7 @@ public class Level_1 extends Fase{
         this.addElement(new Feno(11,6));
         this.addElement(new Feno(11,10));
         this.addElement(new Feno(10,11));
+      
         this.addElement(new Minhoca(7,4));
         this.addElement(new Minhoca(7,8));
         
