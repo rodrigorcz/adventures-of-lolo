@@ -119,6 +119,9 @@ public abstract class Fase extends Tela{
         
         for (int i = 0; i < Consts.RES; i++) {
             for (int j = 0; j < Consts.RES; j++) {
+                if(lolo.getPosicao() == (new Posicao(1,6))){
+                    
+                }
                 try {
                     Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "brick.png");
                     g2.drawImage(newImage,

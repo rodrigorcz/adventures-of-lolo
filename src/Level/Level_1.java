@@ -114,9 +114,12 @@ public class Level_1 extends Fase{
             }
             else{
                 this.addElement(new Icone(i, 13, "Icons/IconLolo.png"));
-                this.addElement(new Icone(i+1,13, "Icons/num2.png"));
+                this.addElement(new Icone(i+1,13, "Icons/num5.png"));
                 i++;
             }
         }
+        
+        this.addElement(new Icone(6,13, "Icons/IconPoder.png"));
+        this.addElement(new Icone(7,13, "Icons/num3.png"));
     }
 }
