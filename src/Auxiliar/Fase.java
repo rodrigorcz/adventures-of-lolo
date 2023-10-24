@@ -49,7 +49,7 @@ public abstract class Fase extends Tela{
     public Fase(InterfaceFase Terminador){
         this.Elements = new ArrayList<>(195);
         this.Terminador = Terminador;
-        lolo = new Hero(7,7);
+        lolo = new Hero(11,9);
         this.addElement(lolo);
     }
     
