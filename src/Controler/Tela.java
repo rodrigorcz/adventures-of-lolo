@@ -36,7 +36,7 @@ import javax.swing.JButton;
 public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
 
     TimerTask task;
-    private int contador;
+    public int contador;
     
     public void go() {
         this.contador = 0;

@@ -25,11 +25,11 @@ public class Minhoca extends Personagem  implements Serializable{
     
     @Override
     public void autoDesenho(){
-        if(delay < 15){
+        if(delay < Consts.TIMER){
             this.setImage("minhocaE.png");
             delay++;
         }
-        else if(delay <30){
+        else if(delay < 2*Consts.TIMER){
             this.setImage("minhocaD.png"); 
             delay++;
         } else 

@@ -6,6 +6,7 @@ import Entities.Hero;
 import Entities.Elemento;
 import Controler.Tela;
 import Auxiliar.Consts;
+import Auxiliar.InterfaceFase;
 import Entities.Enemy.Minhoca;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
@@ -39,38 +40,21 @@ import java.util.logging.Level;
 
 public abstract class Fase extends Tela{
     public Hero lolo;
-    TimerTask task;
     public int contador;
     protected ArrayList<Personagem> Elements;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
+    private InterfaceFase Terminador;
     
-    public Fase(){
+    public Fase(InterfaceFase Terminador){
         this.Elements = new ArrayList<>(195);
-        
+        this.Terminador = Terminador;
         lolo = new Hero(7,7);
         this.addElement(lolo);
     }
-   
-    public void go() {
-        this.contador = 0;
-        task = new TimerTask() {
-            @Override
-            public void run() {
-                if(contador <= 100){
-                    contador++;
-                }else 
-                    contador = 0;
-                repaint();
-            }
-        };
-        Timer timer = new Timer();
-        timer.schedule(task, 0, Consts.PERIOD);
-    }
-
-    public void cancel() {
-        this.task.cancel();
-    }
+    
+    public abstract void createEntities();
+    
     public void start(){
         this.setVisible(true);
         this.createBufferStrategy(2);
@@ -96,8 +80,10 @@ public abstract class Fase extends Tela{
         Desenho.setCenario(this);
     }
     
-    public abstract void createEntities();
-          
+    public void stopFase(){
+        this.setVisible(false);
+        this.Elements.clear();
+    }
     public boolean ehPosicaoValida(Posicao p){
         return cj.ehPosicaoValida(this.Elements, p);
     }
@@ -111,6 +97,10 @@ public abstract class Fase extends Tela{
     }
     
     public void paint(Graphics gOld) {
+        if((lolo.getPosicao().igual(new Posicao(1,6)))){
+            this.Terminador.terminaFase();
+            return;
+        }
         Graphics g = this.getBufferStrategy().getDrawGraphics();
         /*Criamos um contexto gráfico*/
         g2 = g.create(getInsets().left, getInsets().top, getWidth() - getInsets().right, getHeight() - getInsets().top);
@@ -119,9 +109,6 @@ public abstract class Fase extends Tela{
         
         for (int i = 0; i < Consts.RES; i++) {
             for (int j = 0; j < Consts.RES; j++) {
-                if(lolo.getPosicao() == (new Posicao(1,6))){
-                    
-                }
                 try {
                     Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "brick.png");
                     g2.drawImage(newImage,
@@ -132,6 +119,7 @@ public abstract class Fase extends Tela{
                 }
             }
         }
+        
         if (!this.Elements.isEmpty()) {
             this.cj.desenhaTudo(Elements);
             this.cj.processaTudo(Elements);
@@ -160,6 +148,8 @@ public abstract class Fase extends Tela{
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             lolo.setImage("LoloDireita.png");
             lolo.moveRight();
+        } else if (e.getKeyCode() == KeyEvent.VK_Q){
+            lolo.atirar();
         }
 
         this.setTitle("-> Cell: " + (lolo.getPosicao().getColuna()) + ", "

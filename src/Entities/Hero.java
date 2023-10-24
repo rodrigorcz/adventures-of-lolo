@@ -4,6 +4,7 @@ package Entities;
 import Auxiliar.*;
 import Controler.ControleDeJogo;
 import Controler.Tela;
+import Entities.Elements.Fogo;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -15,9 +16,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Hero extends Personagem implements Serializable{
+    private int delay;
     
     public Hero(int Linha, int Coluna) {
         super("LoloBaixo.png", new Posicao(Linha, Coluna));
+        this.delay = 0;
     }
 
     public void voltaAUltimaPosicao(){
@@ -44,6 +47,17 @@ public class Hero extends Personagem implements Serializable{
         return true;       
     }
     
+    public void atirar(){
+        super.autoDesenho();
+
+        this.delay++;
+        if(this.delay == Consts.TIMER){
+            this.delay = 0;
+            Fogo f = new Fogo();
+            f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()+1);
+            Desenho.acessoATelaDoJogo().addElement(f);
+        }
+    }
     
     public boolean moveUp() {
         if(super.moveUp())

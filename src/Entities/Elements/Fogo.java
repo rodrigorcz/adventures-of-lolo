@@ -21,4 +21,22 @@ public class Fogo extends Personagem implements Serializable{
             Desenho.acessoATelaDoJogo().removePersonagem(this);
     
     }
+    
+    public boolean moveRight() {
+        if(super.moveRight())
+            return validaPosicao();
+        return false;
+    }
+    
+    private boolean validaPosicao(){
+        if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
+            this.voltaAUltimaPosicao();
+            return false;
+        }
+        return true;       
+    }
+    
+     public void voltaAUltimaPosicao(){
+        this.pPosicao.volta();
+    }
 }
