@@ -81,7 +81,11 @@ public abstract class Fase extends Tela{
     
     public void addElement(Personagem e1){
         this.Elements.add(e1);
-    } 
+    }
+    
+    public void removeElement(Personagem el){
+        this.Elements.remove(el);
+    }
     
     public void createFase(){
         initComponents();

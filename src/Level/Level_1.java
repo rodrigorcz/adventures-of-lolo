@@ -10,6 +10,7 @@ import Entities.Enemy.Minhoca;
 import Entities.Enemy.Caveira;
 import Entities.Enemy.ZigueZague;
 import Obstacles.*;
+import Controler.ControleDeJogo;
 import Entities.Lootable.Chest_1;
 import Icons.Icone;
 
@@ -24,25 +25,25 @@ public class Level_1 extends Fase{
     public void createEntities(){
         
         for(int i = 0; i <= 13; i++){
-            this.addElement(new Parede(i,0));
+            this.addElement(new Parede(i,0,"Parede.png"));
         }
         for(int i = 1; i <=11;i++){
-            this.addElement(new ParedeTopo(0,i));
+            this.addElement(new Parede(0,i,"paredeTopo.png"));
         }
         
         for(int i = 0; i <= 13; i++){
-            this.addElement(new Parede(i,12));
+            this.addElement(new Parede(i,12,"Parede.png"));
         }
         
         for(int i = 1; i <= 12; i++){
-            this.addElement(new ParedeH(13,i));
+            this.addElement(new Parede(13,i,"Parede.png"));
         }
         
         for(int i = 1; i <= 11; i++){
             if(i == 6){
                 this.addElement(new Porta(1, i));
             }else
-                this.addElement(new Parede3D(1,i));
+                this.addElement(new Parede(1,i,"Parede3D.png"));
         }
         
         for(int i = 3; i <= 4; i++){
@@ -73,11 +74,25 @@ public class Level_1 extends Fase{
             this.addElement(new Feno(i,9));
         }
    
-        this.addElement(new BauFechado(4,6));
-
-        this.addElement(new Coracao(3,1));
-        this.addElement(new Coracao(2,8));
-        this.addElement(new Coracao(2,11));
+        this.addElement(new Bau(4,6,"BauFechado.png"));
+        
+        int heart = 0;
+        for(int i = 0; i <= 3; i++){
+            for(int j = 0; j <= 11; j++){
+                if(i == 3 && j== 1){
+                    this.addElement(new Coracao(i,j));
+                    heart++;
+                }
+                if(i == 2 && j == 8){
+                   this.addElement(new Coracao(i,j));
+                   heart++; 
+                }
+                if(i == 2 && j == 11){
+                    this.addElement(new Coracao(i,j));
+                    heart++;
+                }
+            }
+        }
 
         this.addElement(new Arbusto(5,1));
         this.addElement(new Arbusto(10,1));
@@ -121,5 +136,10 @@ public class Level_1 extends Fase{
         
         this.addElement(new Icone(6,13, "Icons/IconPoder.png"));
         this.addElement(new Icone(7,13, "Icons/num3.png"));
+        
+        if(heart == 0){
+            this.addElement(new Bau(4,6,"BauAberto.png"));
+        }
+        
     }
 }
