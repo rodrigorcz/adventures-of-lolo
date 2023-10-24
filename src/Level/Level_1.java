@@ -72,9 +72,7 @@ public class Level_1 extends Fase{
         for(int i = 4; i <= 5; i++){
             this.addElement(new Feno(i,9));
         }
-        
-        this.addElement(new PortaFechada(1,6));
-        
+   
         this.addElement(new BauFechado(4,6));
 
         this.addElement(new Coracao(3,1));
