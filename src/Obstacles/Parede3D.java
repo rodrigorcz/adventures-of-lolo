@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Parede3D extends Personagem implements Serializable{
     
     public Parede3D(int Linha, int Coluna){
-        super("Parede3D.jpeg", new Posicao(Linha, Coluna));
+        super("Parede3D.png", new Posicao(Linha, Coluna));
         this.ehTransponivel = false;
     }
     

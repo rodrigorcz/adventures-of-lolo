@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class ParedeTopo extends Personagem implements Serializable{
 
     public ParedeTopo(int Linha, int Coluna) {
-        super("paredeTopo.jpeg", new Posicao(Linha, Coluna));
+        super("paredeTopo.png", new Posicao(Linha, Coluna));
         this.ehTransponivel = false;
 
     }

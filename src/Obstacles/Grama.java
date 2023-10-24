@@ -13,7 +13,8 @@ import java.io.Serializable;
 public class Grama extends Personagem implements Serializable{
     
     public Grama(int Linha, int Coluna){
-        super("grama2.jpeg", new Posicao(Linha, Coluna));
+        super("grama.png", new Posicao(Linha, Coluna));
         this.ehTransponivel = true;
+        this.ehMortal = true;
     }
 }

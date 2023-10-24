@@ -6,17 +6,12 @@ import Controler.Tela;
 import Entities.Hero;
 import Entities.Elemento;
 import Auxiliar.Fase;
-import Entities.Enemy.BichinhoVaiVemHorizontal;
+import Entities.Enemy.Minhoca;
 import Entities.Enemy.Caveira;
 import Entities.Enemy.ZigueZague;
-import Obstacles.Parede;
-import Obstacles.Arbusto;
-import Obstacles.Feno;
-import Obstacles.ParedeTopo;
-import Obstacles.ParedeH;
-import Obstacles.Parede3D;
-import Obstacles.Grama;
+import Obstacles.*;
 import Entities.Lootable.Chest_1;
+import Icons.Icone;
 
 public class Level_1 extends Fase{
     
@@ -44,7 +39,10 @@ public class Level_1 extends Fase{
         }
         
         for(int i = 1; i <= 11; i++){
-            this.addElement(new Parede3D(1,i));
+            if(i == 6){
+                this.addElement(new Porta(1, i));
+            }else
+                this.addElement(new Parede3D(1,i));
         }
         
         for(int i = 3; i <= 4; i++){
@@ -75,6 +73,7 @@ public class Level_1 extends Fase{
             this.addElement(new Feno(i,9));
         }
         
+       
         this.addElement(new Arbusto(5,1));
         this.addElement(new Arbusto(10,1));
         this.addElement(new Arbusto(10,2));
@@ -99,5 +98,18 @@ public class Level_1 extends Fase{
         this.addElement(new Feno(11,6));
         this.addElement(new Feno(11,10));
         this.addElement(new Feno(10,11));
+        this.addElement(new Minhoca(7,4));
+        this.addElement(new Minhoca(7,8));
+        
+        for(int i = 0; i <= 13; i++){
+            if(i!=2){
+                this.addElement(new Icone(i,13, "Icons/TelaPreta.png"));
+            }
+            else{
+                this.addElement(new Icone(i, 13, "Icons/IconLolo.png"));
+                this.addElement(new Icone(i+1,13, "Icons/num2.png"));
+                i++;
+            }
+        }
     }
 }

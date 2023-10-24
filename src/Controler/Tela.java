@@ -3,7 +3,7 @@ package Controler;
 import Entities.Personagem;
 import Entities.Enemy.Caveira;
 import Entities.Hero;
-import Entities.Enemy.BichinhoVaiVemHorizontal;
+import Entities.Enemy.Minhoca;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Entities.Enemy.ZigueZague;
@@ -36,10 +36,14 @@ import javax.swing.JButton;
 public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
 
     TimerTask task;
+    private int contador;
+    
     public void go() {
+        this.contador = 0;
         task = new TimerTask() {
             @Override
             public void run() {
+                contador++;
                 repaint();
             }
         };
