@@ -108,6 +108,7 @@ public class Level_1 extends Fase{
       
         this.addElement(new Minhoca(7,4));
         this.addElement(new Minhoca(7,8));
+        this.addElement(new Minhoca(3,2));
         
         for(int i = 0; i <= 13; i++){
             if(i!=2){

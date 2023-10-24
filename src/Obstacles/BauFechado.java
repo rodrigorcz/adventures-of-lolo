@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class BauFechado extends Personagem implements Serializable{
     
     public BauFechado(int Linha, int Coluna){
-        super("bauFechado.jpeg", new Posicao(Linha, Coluna));
+        super("BauFechado.png", new Posicao(Linha, Coluna));
         this.ehTransponivel = false;
     }
 }
