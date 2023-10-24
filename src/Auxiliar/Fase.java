@@ -6,7 +6,7 @@ import Entities.Hero;
 import Entities.Elemento;
 import Controler.Tela;
 import Auxiliar.Consts;
-import Entities.Enemy.BichinhoVaiVemHorizontal;
+import Entities.Enemy.Minhoca;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Entities.Enemy.ZigueZague;
@@ -39,6 +39,8 @@ import java.util.logging.Level;
 
 public abstract class Fase extends Tela{
     public Hero lolo;
+    TimerTask task;
+    public int contador;
     protected ArrayList<Personagem> Elements;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
@@ -49,13 +51,33 @@ public abstract class Fase extends Tela{
         lolo = new Hero(7,7);
         this.addElement(lolo);
     }
-    
+   
+    public void go() {
+        this.contador = 0;
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                if(contador <= 100){
+                    contador++;
+                }else 
+                    contador = 0;
+                repaint();
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(task, 0, Consts.PERIOD);
+    }
+
+    public void cancel() {
+        this.task.cancel();
+    }
     public void start(){
         this.setVisible(true);
         this.createBufferStrategy(2);
         Desenho.setCenario(this);
         this.go();
     }
+    
     
     public void addElement(Personagem e1){
         this.Elements.add(e1);
