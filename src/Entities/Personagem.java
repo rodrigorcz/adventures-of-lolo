@@ -50,6 +50,10 @@ public abstract class Personagem implements Serializable {
     public boolean isbTransponivel() {
         return ehTransponivel;
     }
+    
+    public boolean isbMortal(){
+        return ehMortal;
+    }
 
     public void setbTransponivel(boolean ehTransponivel) {
         this.ehTransponivel = ehTransponivel;
