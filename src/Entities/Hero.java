@@ -48,15 +48,9 @@ public class Hero extends Personagem implements Serializable{
     }
     
     public void atirar(){
-        super.autoDesenho();
-
-        this.delay++;
-        if(this.delay == Consts.TIMER){
-            this.delay = 0;
-            Fogo f = new Fogo();
-            f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()+1);
-            Desenho.acessoATelaDoJogo().addElement(f);
-        }
+        Fogo f = new Fogo();
+        f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()+1);
+        Desenho.acessoATelaDoJogo().addElement(f); 
     }
     
     public boolean moveUp() {

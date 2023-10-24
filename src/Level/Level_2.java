@@ -27,25 +27,25 @@ public class Level_2 extends Fase{
     public void createEntities(){
         
         for(int i = 0; i <= 13; i++){
-            this.addElement(new Parede(i,0));
+            this.addElement(new Parede(i,0,"Parede.png"));
         }
         for(int i = 1; i <=11;i++){
-            this.addElement(new ParedeTopo(0,i));
+            this.addElement(new Parede(0,i,"paredeTopo.png"));
         }
         
         for(int i = 0; i <= 13; i++){
-            this.addElement(new Parede(i,12));
+            this.addElement(new Parede(i,12,"Parede.png"));
         }
         
         for(int i = 1; i <= 12; i++){
-            this.addElement(new ParedeH(13,i));
+            this.addElement(new Parede(13,i,"Parede.png"));
         }
         
         for(int i = 1; i <= 11; i++){
             if(i == 6){
                 this.addElement(new Porta(1, i));
             }else
-                this.addElement(new Parede3D(1,i));
+                this.addElement(new Parede(1,i,"Parede3D.png"));
         }
         
        
