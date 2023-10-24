@@ -17,7 +17,6 @@ public class Level_2 extends Fase{
     
     public Level_2(InterfaceFase Terminador){
         super(Terminador);
-        this.createEntities();
     }
     @Override
     public void start(){
@@ -25,13 +24,16 @@ public class Level_2 extends Fase{
         super.start();
     }
     
-    public void createEntities(){
-        
+    public void createCoracao(){
         //Coracao
         this.addElement(new Coracao(2,3));
         this.addElement(new Coracao(2,7));
         this.addElement(new Coracao(7,1));
         this.addElement(new Coracao(7,6));
+        
+        this.coracoes = 4;
+    }
+    public void createEntities(){
 
         //Paredes
         for(int i = 0; i <= 13; i++){
@@ -50,9 +52,7 @@ public class Level_2 extends Fase{
         }
 
         for(int i = 1; i <= 11; i++){
-            if(i == 7){
-                this.addElement(new Porta(1, i));
-            }else
+            if(i != 7)  
                 this.addElement(new Parede(1,i,"Parede3D.png"));
         }
 
@@ -97,17 +97,14 @@ public class Level_2 extends Fase{
         this.addElement(new Caveira(4,5));
         
         for(int i = 0; i <= 13; i++){
-            if(i!=2){
-                this.addElement(new Icone(i,13, "Icons/TelaPreta.png"));
-            }
-            else{
-                this.addElement(new Icone(i, 13, "Icons/IconLolo.png"));
-                this.addElement(new Icone(i+1,13, "Icons/num5.png"));
-                i++;
-            }
+            this.addElement(new Icone(i,13, "Icons/TelaPreta.png"));  
         }
         
+        this.addElement(new Icone(2, 13, "Icons/IconLolo.png"));
+        this.addElement(new Icone(3,13, "Icons/num5.png"));
         this.addElement(new Icone(6,13, "Icons/IconPoder.png"));
         this.addElement(new Icone(7,13, "Icons/num3.png"));
+        
+        this.addElement(new Porta(1, 7, false));
     }
 }
