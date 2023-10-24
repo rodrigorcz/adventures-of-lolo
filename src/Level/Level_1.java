@@ -9,13 +9,7 @@ import Auxiliar.Fase;
 import Entities.Enemy.BichinhoVaiVemHorizontal;
 import Entities.Enemy.Caveira;
 import Entities.Enemy.ZigueZague;
-import Obstacles.Parede;
-import Obstacles.Arbusto;
-import Obstacles.Feno;
-import Obstacles.ParedeTopo;
-import Obstacles.ParedeH;
-import Obstacles.Parede3D;
-import Obstacles.Grama;
+import Obstacles.*;
 import Entities.Lootable.Chest_1;
 
 public class Level_1 extends Fase{
@@ -74,6 +68,18 @@ public class Level_1 extends Fase{
         for(int i = 4; i <= 5; i++){
             this.addElement(new Feno(i,9));
         }
+        
+        this.addElement(new PortaFechada(1,6));
+        
+        this.addElement(new BauFechado(4,6));
+        
+        this.addElement(new BichinhoVaiVemHorizontal(3,2));
+        this.addElement(new BichinhoVaiVemHorizontal(7,4));
+        this.addElement(new BichinhoVaiVemHorizontal(7,8));
+        
+        this.addElement(new Coracao(3,1));
+        this.addElement(new Coracao(2,8));
+        this.addElement(new Coracao(2,11));
         
         this.addElement(new Arbusto(5,1));
         this.addElement(new Arbusto(10,1));
