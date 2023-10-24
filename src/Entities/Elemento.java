@@ -17,7 +17,8 @@ public abstract class Elemento implements Serializable {
     protected ImageIcon iImage;
     protected Posicao pPosicao;
     protected boolean bTransponivel; 
-    protected boolean bMortal;       
+    protected boolean bMortal; 
+    protected int tipoElem;
 
 
     protected Elemento(String sNomeImagePNG) {

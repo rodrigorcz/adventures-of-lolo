@@ -16,5 +16,6 @@ public class Coracao extends Personagem implements Serializable{
         super("Coracao.png",new Posicao(Linha, Coluna));
         this.ehTransponivel = true;
         this.ehMortal = true;
+        this.tipoElem = 1;
     }
 }

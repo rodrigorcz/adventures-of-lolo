@@ -11,7 +11,7 @@ import Entities.Enemy.Minhoca;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Entities.Enemy.ZigueZague;
-import Obstacles.Parede;
+import Obstacles.*;
 import Auxiliar.Posicao;
 import Controler.ControleDeJogo;
 import java.awt.FlowLayout;
@@ -40,20 +40,23 @@ import java.util.logging.Level;
 
 public abstract class Fase extends Tela{
     public Hero lolo;
-    public int contador;
     protected ArrayList<Personagem> Elements;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
     private InterfaceFase Terminador;
+    protected Porta porta;
+    protected int coracoes;
     
     public Fase(InterfaceFase Terminador){
         this.Elements = new ArrayList<>(195);
         this.Terminador = Terminador;
+        
         lolo = new Hero(11,9);
         this.addElement(lolo);
     }
     
     public abstract void createEntities();
+    public abstract void createCoracao();
     
     public void start(){
         this.setVisible(true);
@@ -74,6 +77,7 @@ public abstract class Fase extends Tela{
     public void createFase(){
         initComponents();
         createEntities();
+        createCoracao();
         
         this.addMouseListener(this);
         this.addKeyListener(this);
@@ -99,6 +103,22 @@ public abstract class Fase extends Tela{
 
     public Graphics getGraphicsBuffer(){
         return g2;
+    }
+    
+    public void leituraCoracao(ArrayList<Personagem> elemFase){
+        if(coracoes == 0){
+            porta.setImage("PortaAb.png");
+            porta.abrirPorta();
+        }
+        
+        Hero hero = (Hero)elemFase.get(0);
+        Personagem auxPersonagem;
+        for(int i = 1; i < elemFase.size(); i++){
+            auxPersonagem = elemFase.get(i);
+            if(hero.getPosicao().igual(auxPersonagem.getPosicao()))
+                if(auxPersonagem.numTipo() == 1)
+                    this.coracoes--;
+        }
     }
     
     public void paint(Graphics gOld) {
@@ -127,6 +147,7 @@ public abstract class Fase extends Tela{
         
         if (!this.Elements.isEmpty()) {
             this.cj.desenhaTudo(Elements);
+            this.leituraCoracao(Elements);
             this.cj.processaTudo(Elements);
         }
 
