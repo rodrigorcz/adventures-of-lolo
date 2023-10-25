@@ -13,7 +13,7 @@ public class VideoGame implements InterfaceFase{
         this.fase = new ArrayList<>();
         this.fase.add(new Level_1(this));
         this.fase.add(new Level_2(this));
-        boolean add = this.fase.add(new Level_3(this));
+        this.fase.add(new Level_3(this));
         
         this.indexLevel = 0;
     }

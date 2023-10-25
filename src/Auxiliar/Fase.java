@@ -133,7 +133,7 @@ public abstract class Fase extends Tela{
     }
     
     public void paint(Graphics gOld) {
-        if((lolo.getPosicao().igual(new Posicao(1,6)))){
+        if((lolo.getPosicao().igual(porta.getPosicao()))){
             this.Terminador.terminaFase();
             return;
         }

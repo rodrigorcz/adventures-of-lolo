@@ -47,6 +47,7 @@ public class Level_1 extends Fase{
                 
         this.coracoes = 6;
     }
+    
     public void createEntities(){
         
         for(int i = 0; i <= 13; i++){
