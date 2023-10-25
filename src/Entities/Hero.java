@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 public class Hero extends Personagem implements Serializable{
     private int delay;
+    private int orientacao;
     
     public Hero(int Linha, int Coluna) {
         super("LoloBaixo.png", new Posicao(Linha, Coluna));
@@ -47,17 +48,19 @@ public class Hero extends Personagem implements Serializable{
         return true;       
     }
     
-    public void atirar(int orientacao){
+    public void atirar(){
         Poder f = new Poder();
+        this.orientacao = pPosicao.getOrientacao();
+        f.orientacaoPoder = orientacao;
         
-        if(orientacao == 0)
-           f.setPosicao(pPosicao.getLinha()+1,pPosicao.getColuna());
         if(orientacao == 1)
-            f.setPosicao(pPosicao.getLinha()-1,pPosicao.getColuna());
+           f.setPosicao(pPosicao.getLinha()+1,pPosicao.getColuna());
         if(orientacao == 2)
-            f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()-1);
-        if(orientacao == 3)
             f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()+1);
+        if(orientacao == 3)
+            f.setPosicao(pPosicao.getLinha()-1,pPosicao.getColuna());
+        if(orientacao == 4)
+            f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()-1);
         
         Desenho.acessoATelaDoJogo().addElement(f); 
     }

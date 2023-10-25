@@ -16,11 +16,11 @@ public class Agua extends Personagem implements Serializable{
     
     @Override
     public void autoDesenho(){
-        if(delay < Consts.TIMER){
+        if(delay < 5){
             this.setImage("Agua1.png");
             delay++;
         }
-        else if(delay < 2*Consts.TIMER){
+        else if(delay < 10){
             this.setImage("Agua2.png"); 
             delay++;
         } else 

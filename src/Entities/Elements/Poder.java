@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @author rodrigo
  */
 public class Poder extends Personagem implements Serializable{
- 
+    public int orientacaoPoder;
     public Poder() {
         super("Poder.png", new Posicao(1, 1));
         this.ehMortal = true;
@@ -22,17 +22,52 @@ public class Poder extends Personagem implements Serializable{
     
     @Override
     public void autoDesenho() {
+        
         super.autoDesenho();
-        if(!this.moveRight())
-            Desenho.acessoATelaDoJogo().removePersonagem(this);
-    
+        if(orientacaoPoder == 1){
+            if(!this.moveDown())
+                Desenho.acessoATelaDoJogo().removePersonagem(this);
+        }
+        
+        if(orientacaoPoder == 2){
+            if(!this.moveRight())
+                Desenho.acessoATelaDoJogo().removePersonagem(this);
+        }
+        
+        if(orientacaoPoder == 3){
+            if(!this.moveUp())
+                Desenho.acessoATelaDoJogo().removePersonagem(this);
+        }
+
+        if(orientacaoPoder == 4){
+            if(!this.moveLeft())
+                Desenho.acessoATelaDoJogo().removePersonagem(this);
+        }
     }
     
+    public boolean moveUp() {
+        if(super.moveUp())
+            return validaPosicao();
+        return false;
+    }
+
+    public boolean moveDown() {
+        if(super.moveDown())
+            return validaPosicao();
+        return false;
+    }
+
     public boolean moveRight() {
         if(super.moveRight())
             return validaPosicao();
         return false;
     }
+
+    public boolean moveLeft() {
+        if(super.moveLeft())
+            return validaPosicao();
+        return false;
+    }   
     
     private boolean validaPosicao(){
         if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {

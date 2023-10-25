@@ -41,20 +41,20 @@ public class Posicao implements Serializable{
 
     public int getOrientacao(){
         if(linhaAnterior < this.linha){
-            return 0;
-        }else if(linhaAnterior > this.linha){
             return 1;
-        }else if(colunaAnterior > this.coluna){
+        }else if(colunaAnterior < this.coluna){
             return 2;
-        }else 
+        }else if(linhaAnterior > this.linha){
             return 3;
+        }else 
+            return 4;
         
         /* 
-                (0)   q
-                 |  
-            (2)--|---(3)
-                 |
-                (1)
+                 (1)   
+                  |  
+            (4)---|---(2)
+                  |
+                 (3)
         */
     }
     

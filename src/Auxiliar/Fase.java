@@ -112,14 +112,19 @@ public abstract class Fase extends Tela{
     
     public void leituraCoracao(ArrayList<Personagem> elemFase){
         if(coracoes == 0){
-            bau.setImage("BauAberto.png");
             bau.abrirBau();
+            this.coracoes--;
+            if(bau.bauAberto()){
+                bau.setImage("BauAberto.png");
+                bau.bauEstado(false);
+            }
         }
      
         Hero hero = (Hero)elemFase.get(0);
         Personagem auxPersonagem;
         
         if(hero.getPosicao().igual(bau.getPosicao())){
+            bau.setImage("BauVazio.png");
             porta.setImage("PortaAb.png");
             porta.abrirPorta();
         }
@@ -186,7 +191,7 @@ public abstract class Fase extends Tela{
             lolo.setImage("LoloDireita.png");
             lolo.moveRight();
         } else if (e.getKeyCode() == KeyEvent.VK_Q){
-            lolo.atirar(3);
+            lolo.atirar();
         }
 
         this.setTitle("-> Cell: " + (lolo.getPosicao().getColuna()) + ", "

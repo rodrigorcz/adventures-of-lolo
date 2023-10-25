@@ -19,4 +19,12 @@ public class Bau extends Personagem implements Serializable{
         this.estaAberto = true;
         this.ehTransponivel = true;
     }
+    
+    public boolean bauAberto(){
+        return estaAberto;
+    }
+    
+    public void bauEstado(boolean aberto){
+        this.estaAberto = aberto;
+    }
 }
