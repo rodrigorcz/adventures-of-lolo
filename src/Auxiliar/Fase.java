@@ -14,6 +14,7 @@ import Entities.Enemy.ZigueZague;
 import Obstacles.*;
 import Auxiliar.Posicao;
 import Controler.ControleDeJogo;
+import Icons.Icone;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -50,12 +51,14 @@ public abstract class Fase extends Tela{
     protected Porta porta;
     protected int coracoes;
     protected int vidas;
+    protected int poderes;
     
     public Fase(InterfaceFase Terminador){
         this.Elements = new ArrayList<>(195);
         this.Terminador = Terminador;
         
         this.vidas = 5;
+        this.poderes = 3;
         lolo = new Hero(9,6);
         this.addElement(lolo);
     }
@@ -69,7 +72,6 @@ public abstract class Fase extends Tela{
         Desenho.setCenario(this);
         this.go();
     }
-    
     
     public void addElement(Personagem e1){
         this.Elements.add(e1);
@@ -93,9 +95,24 @@ public abstract class Fase extends Tela{
         Desenho.setCenario(this);
     }
     
+    public boolean addDelay(int tamanho){
+        this.contador = 0;
+        while(contador<tamanho){
+            return false;
+        }
+            return true;
+    }
+    
     public void stopFase(){
+        this.contador = 0;
+        for(int i = 0; i <= 13; i++){
+            for(int j = 0; j<=13;j++)
+                this.addElement(new Icone(i,j, "Icons/TelaPreta.png"));  
+        }
+        
         this.setVisible(false);
         this.Elements.clear();
+        this.cancelar();
     }
     
     public boolean ehPosicaoValida(Posicao p){
@@ -138,10 +155,7 @@ public abstract class Fase extends Tela{
     }
     
     public void paint(Graphics gOld) {
-        if((lolo.getPosicao().igual(porta.getPosicao()))){
-            this.Terminador.terminaFase();
-            return;
-        }
+ 
         Graphics g = this.getBufferStrategy().getDrawGraphics();
         /*Criamos um contexto gráfico*/
         g2 = g.create(getInsets().left, getInsets().top, getWidth() - getInsets().right, getHeight() - getInsets().top);
@@ -170,7 +184,14 @@ public abstract class Fase extends Tela{
         g.dispose();
         g2.dispose();
         if (!getBufferStrategy().contentsLost()) {
-            getBufferStrategy().show();
+            getBufferStrategy().show();    
+        }
+        
+        if((lolo.getPosicao().igual(porta.getPosicao()))){
+            if(contador>10){
+                this.Terminador.terminaFase();
+                return;
+            }
         }
     }
     
@@ -191,7 +212,10 @@ public abstract class Fase extends Tela{
             lolo.setImage("LoloDireita.png");
             lolo.moveRight();
         } else if (e.getKeyCode() == KeyEvent.VK_Q){
-            lolo.atirar();
+            if(poderes > 0){
+               lolo.atirar();
+               poderes--;
+            }
         }
 
         this.setTitle("-> Cell: " + (lolo.getPosicao().getColuna()) + ", "
