@@ -122,6 +122,9 @@ public class Level_2 extends Fase{
         //Caveira
         this.addElement(new Caveira(7,8));
         this.addElement(new Caveira(4,5));
+   
+        //Mihnoca
+        this.addElement(new Minhoca(8,5));
         
         for(int i = 0; i <= 13; i++){
             this.addElement(new Icone(i,13, "Icons/TelaPreta.png"));  
