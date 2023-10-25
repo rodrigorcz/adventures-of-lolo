@@ -49,11 +49,13 @@ public abstract class Fase extends Tela{
     protected Bau bau;
     protected Porta porta;
     protected int coracoes;
+    protected int vidas;
     
     public Fase(InterfaceFase Terminador){
         this.Elements = new ArrayList<>(195);
         this.Terminador = Terminador;
         
+        this.vidas = 5;
         lolo = new Hero(9,6);
         this.addElement(lolo);
     }
@@ -116,14 +118,14 @@ public abstract class Fase extends Tela{
      
         Hero hero = (Hero)elemFase.get(0);
         Personagem auxPersonagem;
+        
+        if(hero.getPosicao().igual(bau.getPosicao())){
+            porta.setImage("PortaAb.png");
+            porta.abrirPorta();
+        }
+        
         for(int i = 1; i < elemFase.size(); i++){
-            if(hero.getPosicao().igual(bau.getPosicao())){
-                porta.setImage("PortaAb.png");
-                porta.abrirPorta();
-            }
-            
             auxPersonagem = elemFase.get(i);
-            
             if(hero.getPosicao().igual(auxPersonagem.getPosicao()))
                 if(auxPersonagem.numTipo() == 1)
                     this.coracoes--;
@@ -184,7 +186,7 @@ public abstract class Fase extends Tela{
             lolo.setImage("LoloDireita.png");
             lolo.moveRight();
         } else if (e.getKeyCode() == KeyEvent.VK_Q){
-            lolo.atirar();
+            lolo.atirar(3);
         }
 
         this.setTitle("-> Cell: " + (lolo.getPosicao().getColuna()) + ", "

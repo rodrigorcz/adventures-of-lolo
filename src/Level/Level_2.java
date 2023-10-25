@@ -119,9 +119,6 @@ public class Level_2 extends Fase{
         this.addElement(new Feno(9,8));
         this.addElement(new Feno(12,9));
         
-        
-        
-        
         //Caveira
         this.addElement(new Caveira(7,8));
         this.addElement(new Caveira(4,5));

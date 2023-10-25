@@ -39,6 +39,25 @@ public class Posicao implements Serializable{
         return coluna;
     }
 
+    public int getOrientacao(){
+        if(linhaAnterior < this.linha){
+            return 0;
+        }else if(linhaAnterior > this.linha){
+            return 1;
+        }else if(colunaAnterior > this.coluna){
+            return 2;
+        }else 
+            return 3;
+        
+        /* 
+                (0)   q
+                 |  
+            (2)--|---(3)
+                 |
+                (1)
+        */
+    }
+    
     public boolean igual(Posicao posicao){
         return (linha == posicao.getLinha() && coluna == posicao.getColuna());
     }

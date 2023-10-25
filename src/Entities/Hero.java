@@ -4,7 +4,7 @@ package Entities;
 import Auxiliar.*;
 import Controler.ControleDeJogo;
 import Controler.Tela;
-import Entities.Elements.Fogo;
+import Entities.Elements.Poder;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -47,9 +47,18 @@ public class Hero extends Personagem implements Serializable{
         return true;       
     }
     
-    public void atirar(){
-        Fogo f = new Fogo();
-        f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()+1);
+    public void atirar(int orientacao){
+        Poder f = new Poder();
+        
+        if(orientacao == 0)
+           f.setPosicao(pPosicao.getLinha()+1,pPosicao.getColuna());
+        if(orientacao == 1)
+            f.setPosicao(pPosicao.getLinha()-1,pPosicao.getColuna());
+        if(orientacao == 2)
+            f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()-1);
+        if(orientacao == 3)
+            f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()+1);
+        
         Desenho.acessoATelaDoJogo().addElement(f); 
     }
     

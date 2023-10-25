@@ -14,9 +14,9 @@ import java.io.Serializable;
  * @author rodrigo
  */
 public class Poder extends Personagem implements Serializable{
-            
+ 
     public Poder() {
-        super("fire.png", new Posicao(1, 1));
+        super("Poder.png", new Posicao(1, 1));
         this.ehMortal = true;
     }
     
@@ -25,5 +25,24 @@ public class Poder extends Personagem implements Serializable{
         super.autoDesenho();
         if(!this.moveRight())
             Desenho.acessoATelaDoJogo().removePersonagem(this);
+    
+    }
+    
+    public boolean moveRight() {
+        if(super.moveRight())
+            return validaPosicao();
+        return false;
+    }
+    
+    private boolean validaPosicao(){
+        if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
+            this.voltaAUltimaPosicao();
+            return false;
+        }
+        return true;       
+    }
+    
+     public void voltaAUltimaPosicao(){
+        this.pPosicao.volta();
     }
 }
