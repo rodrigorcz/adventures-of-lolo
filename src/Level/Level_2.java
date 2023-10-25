@@ -4,7 +4,6 @@
  */
 package Level;
 
-import Entities.Enemy.Minhoca;
 import Icons.Icone;
 import Entities.Enemy.*;
 import Obstacles.*;
@@ -26,13 +25,24 @@ public class Level_2 extends Fase{
     
     public void createCoracao(){
         //Coracao
-        this.addElement(new Coracao(2,3));
-        this.addElement(new Coracao(2,7));
-        this.addElement(new Coracao(7,1));
-        this.addElement(new Coracao(7,6));
-        this.addElement(new Coracao(11,1));
-        this.addElement(new Coracao(10,7));
-        this.addElement(new Coracao(9,11));
+        Coracao c1 = new Coracao(2,3);
+        Coracao c2 = new Coracao(2,7);
+        Coracao c3 = new Coracao(7,1);
+        Coracao c4 = new Coracao(7,6);
+        Coracao c5 = new Coracao(11,1);
+        Coracao c6 = new Coracao(10,7);
+        Coracao c7 = new Coracao(9,11);
+        
+        this.addElement(c1);
+        this.addElement(c2);
+        this.addElement(c3);
+        this.addElement(c4);
+        this.addElement(c5);
+        this.addElement(c6);
+        this.addElement(c7);
+        
+        this.porta = new Porta(1,7,false);
+        this.addElement(porta);
         
         this.coracoes =7;
     }
@@ -113,12 +123,12 @@ public class Level_2 extends Fase{
         this.addElement(new Feno(9,8));
         this.addElement(new Feno(12,9));
         
-        
-        
-        
         //Caveira
         this.addElement(new Caveira(7,8));
         this.addElement(new Caveira(4,5));
+        
+        //Mihnoca
+        this.addElement(new Minhoca(8,5));
         
         for(int i = 0; i <= 13; i++){
             this.addElement(new Icone(i,13, "Icons/TelaPreta.png"));  
@@ -128,7 +138,6 @@ public class Level_2 extends Fase{
         this.addElement(new Icone(3,13, "Icons/num5.png"));
         this.addElement(new Icone(6,13, "Icons/IconPoder.png"));
         this.addElement(new Icone(7,13, "Icons/num3.png"));
-        
-        this.addElement(new Porta(1, 7, false));
+       
     }
 }
