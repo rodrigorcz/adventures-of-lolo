@@ -6,14 +6,17 @@ import Entities.Personagem;
 import java.awt.Graphics;
 import java.io.Serializable;
 
-/**
- *
- * @author marcussilva
- */
 public class Bau extends Personagem implements Serializable{
+    private boolean estaAberto;
     
-    public Bau(int Linha, int Coluna, String Bau){
-        super(Bau, new Posicao(Linha, Coluna));
+    public Bau(int Linha, int Coluna, boolean estaAberto){
+        super("BauFechado.png", new Posicao(Linha, Coluna));
         this.ehTransponivel = false;
+        this.estaAberto = false;
+    }
+    
+    public void abrirBau(){ 
+        this.estaAberto = true;
+        this.ehTransponivel = true;
     }
 }

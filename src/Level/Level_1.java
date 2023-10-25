@@ -26,19 +26,26 @@ public class Level_1 extends Fase{
         super.start();
     }
     
-    public void createCoracao(){
+    public void createInteragivel(){
         Coracao c1 = new Coracao(3,1);
         Coracao c2 = new Coracao(2,8);
         Coracao c3 = new Coracao(2,11);
         
-        this.addElement(c1);
-        this.addElement(c2);
-        this.addElement(c3);
+        //Coracao
+        this.addElement(new Coracao(3,1));
+        this.addElement(new Coracao(2,8));
+        this.addElement(new Coracao(2,11));
+        this.addElement(new Coracao(12,2));
+        this.addElement(new Coracao(12,8));
+        this.addElement(new Coracao(12,9));
         
         this.porta = new Porta(1,6,false);
         this.addElement(porta);
         
-        this.coracoes = 3;
+        this.bau = new Bau(4,6,false);
+        this.addElement(bau);
+                
+        this.coracoes = 6;
     }
     public void createEntities(){
         
@@ -90,8 +97,6 @@ public class Level_1 extends Fase{
             this.addElement(new Feno(i,9));
         }
    
-        this.addElement(new Bau(4,6,"BauFechado.png"));
-
         this.addElement(new Arbusto(5,1));
         this.addElement(new Arbusto(10,1));
         this.addElement(new Arbusto(10,2));

@@ -18,13 +18,15 @@ public class Level_2 extends Fase{
     public Level_2(InterfaceFase Terminador){
         super(Terminador);
     }
+    
     @Override
     public void start(){
         super.createFase();
         super.start();
+        lolo.setPosicao(12,11);
     }
     
-    public void createCoracao(){
+    public void createInteragivel(){
         //Coracao
         this.addElement(new Coracao(2,3));
         this.addElement(new Coracao(2,7));
@@ -34,7 +36,13 @@ public class Level_2 extends Fase{
         this.addElement(new Coracao(10,7));
         this.addElement(new Coracao(9,11));
         
-        this.coracoes =7;
+        this.porta = new Porta(1,7,false);
+        this.addElement(porta);
+        
+        this.bau = new Bau(2,1,false);
+        this.addElement(bau);
+                
+        this.coracoes = 7;
     }
   
     public void createEntities(){
@@ -58,8 +66,6 @@ public class Level_2 extends Fase{
             if(i != 7)  
                 this.addElement(new Parede(1,i,"Parede3D.png"));
         }
-
-        this.addElement(new Bau(2,1,"BauFechado.png"));
 
         //Arbustos
         this.addElement(new Arbusto(2,2));
@@ -128,7 +134,6 @@ public class Level_2 extends Fase{
         this.addElement(new Icone(3,13, "Icons/num5.png"));
         this.addElement(new Icone(6,13, "Icons/IconPoder.png"));
         this.addElement(new Icone(7,13, "Icons/num3.png"));
-        
-        this.addElement(new Porta(1, 7, false));
+
     }
 }

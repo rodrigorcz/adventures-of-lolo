@@ -39,11 +39,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 public abstract class Fase extends Tela{
-    public Hero lolo;
     protected ArrayList<Personagem> Elements;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
     private InterfaceFase Terminador;
+    
+    //Variaveis inerentes de cada fase
+    protected Hero lolo;
+    protected Bau bau;
     protected Porta porta;
     protected int coracoes;
     
@@ -51,12 +54,12 @@ public abstract class Fase extends Tela{
         this.Elements = new ArrayList<>(195);
         this.Terminador = Terminador;
         
-        lolo = new Hero(11,9);
+        lolo = new Hero(9,6);
         this.addElement(lolo);
     }
     
     public abstract void createEntities();
-    public abstract void createCoracao();
+    public abstract void createInteragivel();
     
     public void start(){
         this.setVisible(true);
@@ -77,7 +80,7 @@ public abstract class Fase extends Tela{
     public void createFase(){
         initComponents();
         createEntities();
-        createCoracao();
+        createInteragivel();
         
         this.addMouseListener(this);
         this.addKeyListener(this);
@@ -107,14 +110,20 @@ public abstract class Fase extends Tela{
     
     public void leituraCoracao(ArrayList<Personagem> elemFase){
         if(coracoes == 0){
-            porta.setImage("PortaAb.png");
-            porta.abrirPorta();
+            bau.setImage("BauAberto.png");
+            bau.abrirBau();
         }
-        
+     
         Hero hero = (Hero)elemFase.get(0);
         Personagem auxPersonagem;
         for(int i = 1; i < elemFase.size(); i++){
+            if(hero.getPosicao().igual(bau.getPosicao())){
+                porta.setImage("PortaAb.png");
+                porta.abrirPorta();
+            }
+            
             auxPersonagem = elemFase.get(i);
+            
             if(hero.getPosicao().igual(auxPersonagem.getPosicao()))
                 if(auxPersonagem.numTipo() == 1)
                     this.coracoes--;
