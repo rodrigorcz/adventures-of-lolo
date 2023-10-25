@@ -19,28 +19,23 @@ public class Level_3 extends Fase{
         super.start();
     }
 
-    
-    public void createCoracao() {
-        Coracao c1 = new Coracao(4,4);
-        Coracao c2 = new Coracao(6,1);
-        Coracao c3 = new Coracao(6,3);
-        Coracao c4 = new Coracao(9,2);
-        Coracao c5 = new Coracao(10,10);
-        Coracao c6 = new Coracao(2,8);
-        
-        this.addElement(c1);
-        this.addElement(c2);
-        this.addElement(c3);
-        this.addElement(c4);
-        this.addElement(c5);
-        this.addElement(c6);
+    @Override
+    public void createInteragivel() {
+        this.addElement(new Coracao(4,4));
+        this.addElement(new Coracao(6,1));
+        this.addElement(new Coracao(6,3));
+        this.addElement(new Coracao(9,2));
+        this.addElement(new Coracao(10,10));
+        this.addElement(new Coracao(2,8));
         
         this.porta = new Porta(1,7,false);
         this.addElement(porta);
         
-        this.coracoes = 6;
-    }
-    
+        this.bau = new Bau(6,2,false);
+        this.addElement(bau);
+        
+        this.coracoes = 6;       
+    }   
     
     public void createEntities() {
         //Paredes
@@ -63,8 +58,6 @@ public class Level_3 extends Fase{
             if(i != 7)  
                 this.addElement(new Parede(1,i,"Parede3D.png"));
         }
-        
-        this.addElement(new Bau(6,2,"BauFechado.png"));
         
         //Arbusto
         for(int j = 5; j <= 7; j++){
