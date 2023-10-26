@@ -44,6 +44,7 @@ public abstract class Fase extends Tela{
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
     private InterfaceFase Terminador;
+    private int count = 0;
     
     //Variaveis inerentes de cada fase
     protected Hero lolo;
@@ -193,31 +194,37 @@ public abstract class Fase extends Tela{
                 return;
             }
         }
+        if(this.count <= 5){
+            this.count++;
+        }
     }
     
 
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_C) {
-            this.Elements.clear();
-        } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            lolo.moveUp();
-            lolo.setImage("LoloCima.png");
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            lolo.moveDown();
-            lolo.setImage("LoloBaixo.png");
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            lolo.moveLeft();
-            lolo.setImage("LoloEsquerda.png");
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            lolo.setImage("LoloDireita.png");
-            lolo.moveRight();
-        } else if (e.getKeyCode() == KeyEvent.VK_Q){
-            if(poderes > 0){
-               lolo.atirar();
-               poderes--;
+        if(this.count > 3){
+            if (e.getKeyCode() == KeyEvent.VK_C) {
+                this.Elements.clear();
+            } else if (e.getKeyCode() == KeyEvent.VK_UP) {
+                lolo.moveUp();
+                lolo.setImage("LoloCima.png");
+            } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                lolo.moveDown();
+                lolo.setImage("LoloBaixo.png");
+            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                lolo.moveLeft();
+                lolo.setImage("LoloEsquerda.png");
+            } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                lolo.setImage("LoloDireita.png");
+                lolo.moveRight();
+            } else if (e.getKeyCode() == KeyEvent.VK_Q){
+                if(poderes > 0){
+                   lolo.atirar();
+                   poderes--;
+                }
             }
+            this.count = 0;
         }
-
+        
         this.setTitle("-> Cell: " + (lolo.getPosicao().getColuna()) + ", "
                 + (lolo.getPosicao().getLinha()));
 
