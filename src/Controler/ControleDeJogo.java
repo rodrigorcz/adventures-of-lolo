@@ -1,9 +1,12 @@
 package Controler;
 
+import Auxiliar.Desenho;
 import Entities.Personagem;
 import Entities.Hero;
+import Entities.Elements.Poder;
 import Auxiliar.Posicao;
 import java.util.ArrayList;
+import Obstacles.*;
 
 public class ControleDeJogo {
     public void desenhaTudo(ArrayList<Personagem> e){
@@ -20,9 +23,10 @@ public class ControleDeJogo {
                 if(pIesimoPersonagem.isbTransponivel())
                     if(pIesimoPersonagem.isbMortal() != false)
                         umaFase.remove(pIesimoPersonagem);
+                  
         }
     }
-    
+
     /*Retorna true se a posicao p é válida para Hero com relacao a todos os personagens no array*/
     public boolean ehPosicaoValida(ArrayList<Personagem> umaFase, Posicao p){
         Personagem pIesimoPersonagem;
@@ -33,5 +37,20 @@ public class ControleDeJogo {
                     return false;
         }        
         return true;
+    }
+    
+    public boolean ehInimigo(ArrayList<Personagem> umaFase, Posicao p){
+        Personagem pIesimoPersonagem;
+        for(int i = 1; i < umaFase.size(); i++){
+            pIesimoPersonagem = umaFase.get(i);            
+            if(pIesimoPersonagem.getTipo() == 2)
+                if(pIesimoPersonagem.getPosicao().igual(p)){
+                    Ovo o = new Ovo(pIesimoPersonagem.getPosicao().getLinha(),pIesimoPersonagem.getPosicao().getColuna());
+                    umaFase.remove(pIesimoPersonagem);
+                    umaFase.add(o);
+                    return true;
+                }
+        } 
+        return false;
     }
 }

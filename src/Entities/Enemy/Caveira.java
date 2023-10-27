@@ -17,6 +17,7 @@ public class Caveira extends Personagem implements Serializable{
         this.linha = Linha;
         this.coluna = Coluna;
         this.ehTransponivel = false;
+        this.tipoElem = 2;
         this.iContaIntervalos = 0;
     }
     

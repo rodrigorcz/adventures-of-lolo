@@ -22,6 +22,7 @@ public class Minhoca extends Personagem  implements Serializable{
         super("minhocaD.png", new Posicao(Linha, Coluna));
         this.delay = 0;
         this.ehMortal = true;
+        this.tipoElem = 2;
     }
     
     @Override

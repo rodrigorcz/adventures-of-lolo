@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
@@ -120,6 +121,10 @@ public abstract class Fase extends Tela{
         return cj.ehPosicaoValida(this.Elements, p);
     }
     
+    public boolean ehInimigo(Posicao p){
+        return cj.ehInimigo(this.Elements, p);
+    }
+    
     public void removePersonagem(Personagem e1) {
         Elements.remove(e1);
     }
@@ -150,10 +155,11 @@ public abstract class Fase extends Tela{
         for(int i = 1; i < elemFase.size(); i++){
             auxPersonagem = elemFase.get(i);
             if(hero.getPosicao().igual(auxPersonagem.getPosicao()))
-                if(auxPersonagem.numTipo() == 1)
+                if(auxPersonagem.getTipo() == 1)
                     this.coracoes--;
         }
     }
+    
     
     public void paint(Graphics gOld) {
  
@@ -201,7 +207,7 @@ public abstract class Fase extends Tela{
     
 
     public void keyPressed(KeyEvent e) {
-        if(this.count > 3){
+        if(this.count > 0){
             if (e.getKeyCode() == KeyEvent.VK_C) {
                 this.Elements.clear();
             } else if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -217,7 +223,7 @@ public abstract class Fase extends Tela{
                 lolo.setImage("LoloDireita.png");
                 lolo.moveRight();
             } else if (e.getKeyCode() == KeyEvent.VK_Q){
-                if(poderes > 0){
+                if(poderes > -10){
                    lolo.atirar();
                    poderes--;
                 }

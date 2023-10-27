@@ -40,9 +40,16 @@ public class Poder extends Personagem implements Serializable{
         }
 
         if(orientacaoPoder == 4){
-            if(!this.moveLeft())
-                Desenho.acessoATelaDoJogo().removePersonagem(this);
+            if(!this.moveLeft()){
+                Desenho.acessoATelaDoJogo().removePersonagem(this); 
+            }
         }
+        
+        if(Desenho.acessoATelaDoJogo().ehInimigo(this.getPosicao())){
+            Desenho.acessoATelaDoJogo().removePersonagem(this);
+
+        }
+        
     }
     
     public boolean moveUp() {

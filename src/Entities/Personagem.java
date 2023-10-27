@@ -52,7 +52,7 @@ public abstract class Personagem implements Serializable {
         return ehTransponivel;
     }
     
-    public int numTipo(){
+    public int getTipo(){
         return tipoElem;
     }
     
