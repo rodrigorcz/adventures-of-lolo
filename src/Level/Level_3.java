@@ -101,6 +101,7 @@ public class Level_3 extends Fase{
      
         
         this.addElement(new Tatu(2,1));
+        this.addElement(new Tatu(2,3));
         
         for(int i = 0; i <= 13; i++){
             this.addElement(new Icone(i,13, "Icons/TelaPreta.png"));  

@@ -6,68 +6,52 @@ import Entities.Elements.Fogo;
 import Entities.Personagem;
 import java.awt.Graphics;
 import java.io.Serializable;
-import java.util.Random;
 /**
  *
  * @author marcussilva
  */
 public class Tatu extends Personagem implements Serializable{
     
-    int linha;
-    int coluna;
+    private int linha;
+    private int coluna;
+    private int delay = 0;
+    private int movimentoDelay = 3; 
+    private int moveCount = 0;
+    private boolean move;
     
     public Tatu(int Linha, int Coluna){
         super("tatu.png", new Posicao(Linha, Coluna));
         this.linha = Linha;
         this.coluna = Coluna;
+        move = true;
+    }
+
+    public void contador() {
+        delay++;
+        if (delay >= movimentoDelay) {
+            delay = 0; // Zerar o atraso para permitir o próximo movimento
+            if (move) {
+                this.setPosicao(pPosicao.getLinha() + 1, pPosicao.getColuna());
+                moveCount++;
+                if (moveCount >= 2) {
+                    move = !move;
+                    moveCount = 0;
+                }
+            } else {
+                this.setPosicao(pPosicao.getLinha() - 1, pPosicao.getColuna());
+                moveCount++;
+                if (moveCount >= 2) {
+                    move = !move;
+                    moveCount = 0;
+                }
+            }
+        }
     }
     
     public void autoDesenho(){
-        //Random rand = new Random();
-        //int iDirecao = 0;//rand.nextInt(4);
         
-        for(int i = 0; i <= 1; i++){
-            this.moveDown();
-            //this.setPosicao(pPosicao.getLinha()+1, pPosicao.getColuna());
-        }
+        contador();
         
-        for(int i = 0; i <= 1; i++){
-            this.moveRight();
-            //this.setPosicao(pPosicao.getLinha()+1, pPosicao.getColuna());
-        }
-        
-        /*
-        for(iDirecao = 0; iDirecao <= 6; iDirecao++){
-            if(iDirecao <= 1){
-                this.setPosicao(pPosicao.getLinha()+1, pPosicao.getColuna());
-            }else if(iDirecao == 2 || iDirecao == 3){
-                this.setPosicao(pPosicao.getLinha(), pPosicao.getColuna()+1);
-            }else if(iDirecao == 4 || iDirecao == 5){
-                this.setPosicao(pPosicao.getLinha()-1, pPosicao.getColuna());
-            }else if(iDirecao == 5 || iDirecao == 6){
-                this.setPosicao(pPosicao.getLinha(), pPosicao.getColuna()-1);
-            }
-            
-        }*/
-        
-        //iDirecao = 0;
         super.autoDesenho();
     }  
-    
-   public boolean movimenta() {
-       int randomNum = Random().nextInt(1, 5);
-       switch (randomNum) {
-           case 1:
-               return moveUp();
-           case 2:
-               return moveDown();
-           case 3:
-               return moveRight();
-           case 4:
-               return moveLeft();
-           default:
-               return false;
-       }
-       
-  }
 }
