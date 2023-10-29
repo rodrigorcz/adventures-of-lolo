@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 public class Hero extends Personagem implements Serializable{
     private int delay;
     private int orientacao;
+    private int direcao;
     
     public Hero(int Linha, int Coluna) {
         super("LoloBaixo.png", new Posicao(Linha, Coluna));
@@ -66,27 +67,35 @@ public class Hero extends Personagem implements Serializable{
     }
     
     public boolean moveUp() {
+        direcao = 0;
         if(super.moveUp())
             return validaPosicao();
         return false;
     }
 
     public boolean moveDown() {
+        direcao = 1;
         if(super.moveDown())
             return validaPosicao();
         return false;
     }
 
     public boolean moveRight() {
+        direcao = 2;
         if(super.moveRight())
             return validaPosicao();
         return false;
     }
 
     public boolean moveLeft() {
+        direcao = 3;
         if(super.moveLeft())
             return validaPosicao();
         return false;
-    }    
+    }
+    
+    public int getDirecao(){
+        return direcao;
+    }
     
 }

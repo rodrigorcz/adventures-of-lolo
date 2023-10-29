@@ -21,12 +21,14 @@ public abstract class Personagem implements Serializable {
     protected Posicao pPosicao;
     protected boolean ehTransponivel; /*Pode passar por cima?*/
     protected boolean ehMortal;       /*Se encostar, morre?*/
+    protected boolean ehEmpurravel;
     protected int tipoElem;
 
     protected Personagem(String sNomeImagePNG, Posicao pPosicao) {
         this.pPosicao = pPosicao;
         this.ehTransponivel = true;
         this.ehMortal = false;
+        this.ehEmpurravel = true;
         setImage(sNomeImagePNG);
         this.tipoElem = 0;
     }
@@ -51,6 +53,10 @@ public abstract class Personagem implements Serializable {
     }
     public boolean isbTransponivel() {
         return ehTransponivel;
+    }
+    
+    public boolean ehEmpurravel(){
+        return ehEmpurravel;
     }
     
     public int getTipo(){

@@ -49,11 +49,13 @@ public abstract class Fase extends Tela{
     
     //Variaveis inerentes de cada fase
     protected Hero lolo;
+    protected BlocoEmpurravel bloco;
     protected Bau bau;
     protected Porta porta;
     protected int coracoes;
     protected int vidas;
     protected int poderes;
+    protected int empurra = 0;
     
     public Fase(InterfaceFase Terminador){
         this.Elements = new ArrayList<>(195);
@@ -61,8 +63,10 @@ public abstract class Fase extends Tela{
         
         this.vidas = 5;
         this.poderes = 3;
-        lolo = new Hero(9,6);
+        lolo = new Hero(9,7);
+        //bloco = new BlocoEmpurravel();
         this.addElement(lolo);
+        //this.addElement(bloco);
     }
     
     public abstract void createEntities();
@@ -231,11 +235,60 @@ public abstract class Fase extends Tela{
             this.count = 0;
         }
         
+        this.verficaEmpurrar();
+        
         this.setTitle("-> Cell: " + (lolo.getPosicao().getColuna()) + ", "
                 + (lolo.getPosicao().getLinha()));
 
         //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
     }
+    /*
+    public void verficaEmpurrar(){
+        //BlocoEmpurravel emp;
+
+        if(lolo.getPosicao().igual(bloco.getPosicao())){
+            switch(lolo.getDirecao()){
+                case 0:
+                    bloco.moveDown();
+                    break;
+                case 1:
+                    bloco.moveLeft();
+                    break;
+                case 2:
+                    bloco.moveRight();
+                    break;
+                case 3:
+                    bloco.moveUp();
+                    break;
+            }
+        }
+    }*/
+    
+    public void verficaEmpurrar() {
+        for (Personagem elemento : Elements) {
+            if (elemento instanceof BlocoEmpurravel) {
+                BlocoEmpurravel blocoAtual = (BlocoEmpurravel) elemento;
+
+                if (lolo.getPosicao().igual(blocoAtual.getPosicao())) {
+                    switch (lolo.getDirecao()) {
+                        case 0:
+                            blocoAtual.moveUp();
+                            break;
+                        case 1:
+                            blocoAtual.moveDown();
+                            break;
+                        case 2:
+                            blocoAtual.moveRight();
+                            break;
+                        case 3:
+                            blocoAtual.moveLeft();
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
 
     public void mousePressed(MouseEvent e) {
         /* Clique do mouse desligado*/

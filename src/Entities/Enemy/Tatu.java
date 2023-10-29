@@ -6,6 +6,7 @@ import Entities.Elements.Fogo;
 import Entities.Personagem;
 import java.awt.Graphics;
 import java.io.Serializable;
+import java.util.Random;
 /**
  *
  * @author marcussilva
@@ -14,7 +15,7 @@ public class Tatu extends Personagem implements Serializable{
     
     private int linha;
     private int coluna;
-    private int delay = 0;
+    private int delay;
     private int movimentoDelay = 3; 
     private int moveCount = 0;
     private boolean move;
@@ -25,7 +26,7 @@ public class Tatu extends Personagem implements Serializable{
         this.coluna = Coluna;
         move = true;
     }
-
+    
     public void contador() {
         delay++;
         if (delay >= movimentoDelay) {
@@ -51,7 +52,6 @@ public class Tatu extends Personagem implements Serializable{
     public void autoDesenho(){
         
         contador();
-        
         super.autoDesenho();
     }  
 }
