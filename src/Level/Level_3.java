@@ -74,7 +74,9 @@ public class Level_3 extends Fase{
         this.addElement(new Arbusto(12,9));
         this.addElement(new Arbusto(10,5));
         this.addElement(new Arbusto(9,6));
-        
+        this.addElement(new Arbusto(11,5));
+        this.addElement(new Arbusto(10,6));
+              
         //Feno
         for(int j = 2; j <= 4; j++){
             this.addElement(new Feno(5,j));
@@ -104,7 +106,15 @@ public class Level_3 extends Fase{
         this.addElement(new Tatu(2,3));
         
         //Bloco Empurravel
-        this.addElement(new BlocoEmpurravel(10,1));
+        for(int j = 1; j <= 3; j++){
+            this.addElement(new BlocoEmpurravel(8, j));
+        }
+        
+        for(int j = 1; j <= 3; j++){
+            this.addElement(new BlocoEmpurravel(11, j));
+        }
+        
+        this.addElement(new BlocoEmpurravel(8,10));
         
         for(int i = 0; i <= 13; i++){
             this.addElement(new Icone(i,13, "Icons/TelaPreta.png"));  
