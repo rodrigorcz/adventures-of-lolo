@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -86,5 +87,9 @@ public abstract class Personagem implements Serializable {
 
     public boolean moveLeft() {
         return this.pPosicao.moveLeft();
+    }
+    
+    public boolean seMove(){
+        return (new Random().nextInt(0, 99) >= 90);
     }
 }
