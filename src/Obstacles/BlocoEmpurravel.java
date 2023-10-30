@@ -14,23 +14,43 @@ public class BlocoEmpurravel extends Personagem implements Serializable{
     
     public BlocoEmpurravel(int Linha, int Coluna){
         super("bloco_empurravel.png", new Posicao(Linha, Coluna));
-        //this.setbTransponivel(false);
         this.ehEmpurravel = true;
     }
     
-    public boolean moveUp(){
-        return this.pPosicao.moveUp();
+    public boolean moveUp() {
+        if(super.moveUp())
+            return validaPosicao();
+        return false;
+    }
+
+    public boolean moveDown() {
+        if(super.moveDown())
+            return validaPosicao();
+        return false;
+    }
+
+    public boolean moveRight() {
+        if(super.moveRight())
+            return validaPosicao();
+        return false;
+    }
+
+    public boolean moveLeft() {
+        if(super.moveLeft())
+            return validaPosicao();
+        return false;
     }
     
-    public boolean moveDown(){
-        return this.pPosicao.moveDown();
+    
+    private boolean validaPosicao(){
+        if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
+            this.voltaAUltimaPosicao();
+            return false;
+        }
+        return true;       
     }
     
-    public boolean moveRight(){
-        return this.pPosicao.moveRight();
-    }
-    
-    public boolean moveLeft(){
-        return this.pPosicao.moveLeft();
+    public void voltaAUltimaPosicao(){
+        this.pPosicao.volta();
     }
 }

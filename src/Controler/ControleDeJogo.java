@@ -43,8 +43,12 @@ public class ControleDeJogo {
         Personagem pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
             pIesimoPersonagem = umaFase.get(i);            
-            if(pIesimoPersonagem.getTipo() == 2)
+            if(pIesimoPersonagem.getTipo() == 2 || pIesimoPersonagem instanceof Ovo)
                 if(pIesimoPersonagem.getPosicao().igual(p)){
+                    if(pIesimoPersonagem instanceof Ovo){
+                        umaFase.remove(pIesimoPersonagem);
+                        return true;
+                    }
                     Ovo o = new Ovo(pIesimoPersonagem.getPosicao().getLinha(),pIesimoPersonagem.getPosicao().getColuna());
                     umaFase.remove(pIesimoPersonagem);
                     umaFase.add(o);

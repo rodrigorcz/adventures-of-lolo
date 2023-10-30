@@ -28,7 +28,7 @@ public abstract class Personagem implements Serializable {
         this.pPosicao = pPosicao;
         this.ehTransponivel = true;
         this.ehMortal = false;
-        this.ehEmpurravel = true;
+        this.ehEmpurravel = false;
         setImage(sNomeImagePNG);
         this.tipoElem = 0;
     }

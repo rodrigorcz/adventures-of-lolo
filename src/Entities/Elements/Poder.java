@@ -78,7 +78,6 @@ public class Poder extends Personagem implements Serializable{
     
     private boolean validaPosicao(){
         if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
-            this.voltaAUltimaPosicao();
             return false;
         }
         return true;       

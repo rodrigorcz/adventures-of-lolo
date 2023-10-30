@@ -265,10 +265,8 @@ public abstract class Fase extends Tela{
     }*/
     
     public void verficaEmpurrar() {
-        for (Personagem elemento : Elements) {
-            if (elemento instanceof BlocoEmpurravel) {
-                BlocoEmpurravel blocoAtual = (BlocoEmpurravel) elemento;
-
+        for (Personagem blocoAtual : Elements) {
+            if (blocoAtual.ehEmpurravel()) {
                 if (lolo.getPosicao().igual(blocoAtual.getPosicao())) {
                     switch (lolo.getDirecao()) {
                         case 0:

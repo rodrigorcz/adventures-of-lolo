@@ -23,8 +23,44 @@ import java.util.concurrent.TimeUnit;
 public class Ovo extends Personagem implements Serializable{
     public Ovo(int Linha, int Coluna) {
         super("ovo.png", new Posicao(Linha, Coluna));
-        this.ehTransponivel = false;
+        this.ehEmpurravel = true;
         this.ehMortal = false;
     }
     
+    public boolean moveUp() {
+        if(super.moveUp())
+            return validaPosicao();
+        return false;
+    }
+
+    public boolean moveDown() {
+        if(super.moveDown())
+            return validaPosicao();
+        return false;
+    }
+
+    public boolean moveRight() {
+        if(super.moveRight())
+            return validaPosicao();
+        return false;
+    }
+
+    public boolean moveLeft() {
+        if(super.moveLeft())
+            return validaPosicao();
+        return false;
+    }
+    
+    
+    private boolean validaPosicao(){
+        if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
+            this.voltaAUltimaPosicao();
+            return false;
+        }
+        return true;       
+    }
+    
+    public void voltaAUltimaPosicao(){
+        this.pPosicao.volta();
+    }
 }

@@ -19,12 +19,13 @@ public class Tatu extends Personagem implements Serializable{
     private int movimentoDelay = 3; 
     private int moveCount = 0;
     private boolean move;
-    
+
     public Tatu(int Linha, int Coluna){
         super("tatu.png", new Posicao(Linha, Coluna));
         this.linha = Linha;
         this.coluna = Coluna;
         move = true;
+        this.tipoElem = 2;
     }
     
     public void contador() {
