@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class Minhoca extends Personagem  implements Serializable{
+public class Minhoca extends Personagem implements Serializable{
     private int delay;
 
     public Minhoca(int Linha, int Coluna) {

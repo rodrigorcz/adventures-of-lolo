@@ -4,10 +4,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/marcussilva/github/adventures-of-lolo/src/Obstacles/Parede.java</file>
-            <file>file:/home/marcussilva/github/adventures-of-lolo/src/Level/Level_1.java</file>
-            <file>file:/home/marcussilva/github/adventures-of-lolo/src/Obstacles/Feno.java</file>
-            <file>file:/home/marcussilva/github/adventures-of-lolo/src/Obstacles/Arbusto.java</file>
+            <file>file:/home/rodrigo/adventures-of-lolo/src/Level/Level_2.java</file>
+            <file>file:/home/rodrigo/adventures-of-lolo/src/Level/Level_3.java</file>
+            <file>file:/home/rodrigo/adventures-of-lolo/src/Auxiliar/Desenho.java</file>
+            <file>file:/home/rodrigo/adventures-of-lolo/src/Level/Level_1.java</file>
+            <file>file:/home/rodrigo/adventures-of-lolo/src/Auxiliar/Fase.java</file>
         </group>
     </open-files>
 </project-private>
