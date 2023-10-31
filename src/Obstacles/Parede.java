@@ -12,6 +12,7 @@ public class Parede extends Personagem implements Serializable{
     public Parede(int Linha, int Coluna, String nomeParede) {
         super(nomeParede, new Posicao(Linha, Coluna));
         this.ehTransponivel = false;
+        this.ehSolido = true;
 
     }
 }

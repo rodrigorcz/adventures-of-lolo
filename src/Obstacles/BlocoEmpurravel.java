@@ -16,7 +16,7 @@ public class BlocoEmpurravel extends Personagem implements Serializable{
         super("bloco_empurravel.png", new Posicao(Linha, Coluna));
         this.ehEmpurravel = true;
     }
-    
+
     public boolean moveUp() {
         if(super.moveUp())
             return validaPosicao();

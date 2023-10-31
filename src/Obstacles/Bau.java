@@ -13,6 +13,7 @@ public class Bau extends Personagem implements Serializable{
         super("BauFechado.png", new Posicao(Linha, Coluna));
         this.ehTransponivel = false;
         this.estaAberto = false;
+        this.ehSolido = true;
     }
     
     public void abrirBau(){ 

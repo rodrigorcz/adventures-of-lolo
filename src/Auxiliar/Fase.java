@@ -52,6 +52,7 @@ public abstract class Fase extends Tela{
     protected BlocoEmpurravel bloco;
     protected Bau bau;
     protected Porta porta;
+    protected Fase faseAtual;
     protected int coracoes;
     protected int vidas;
     protected int poderes;
@@ -287,26 +288,36 @@ public abstract class Fase extends Tela{
                             blocoAtual.moveLeft();
                             break;
                     }
-                }
-            }
-        }
-    }
-    
-    public void paraBloco(){
-        for(Personagem blocoAtual : Elements){
-            for(Personagem bl : Elements){
-                if(blocoAtual.ehEmpurravel()){
-                    if(blocoAtual.getPosicao().igual(bl.getPosicao())){
-                        blocoAtual.notTransponivel();
-                    }else{
-                        blocoAtual.isbTransponivel();
+                    if(!posicaoValidaBloco(blocoAtual)){
+                        blocoAtual.voltaAUltimaPosicao();
+                        lolo.voltaAUltimaPosicao();
                     }
                 }
             }
         }
     }
-
-
+    
+    public boolean posicaoValidaBloco(Personagem elem){
+        if(elem instanceof Hero){
+            for(Personagem temp : Elements){
+                if(temp.isbTransponivel() && elem != temp){
+                    if(temp.getPosicao().igual(elem.getPosicao()));
+                    return false;
+                }
+            }
+        }
+        else if(elem instanceof BlocoEmpurravel || elem instanceof Caveira || elem instanceof Minhoca){
+            for(Personagem temp : Elements){
+                if(!temp.isbTransponivel() || (temp instanceof Bau) && elem != temp){
+                    if(temp.getPosicao().igual(elem.getPosicao())){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
     public void mousePressed(MouseEvent e) {
         /* Clique do mouse desligado*/
          int x = e.getX();
