@@ -229,6 +229,7 @@ public abstract class Fase extends Tela{
         }
         
         this.verficaEmpurrar();
+        //this.paraBloco();
         
         this.setTitle("-> Cell: " + (lolo.getPosicao().getColuna()) + ", "
                 + (lolo.getPosicao().getLinha()));
@@ -285,6 +286,20 @@ public abstract class Fase extends Tela{
                         case 3:
                             blocoAtual.moveLeft();
                             break;
+                    }
+                }
+            }
+        }
+    }
+    
+    public void paraBloco(){
+        for(Personagem blocoAtual : Elements){
+            for(Personagem bl : Elements){
+                if(blocoAtual.ehEmpurravel()){
+                    if(blocoAtual.getPosicao().igual(bl.getPosicao())){
+                        blocoAtual.notTransponivel();
+                    }else{
+                        blocoAtual.isbTransponivel();
                     }
                 }
             }

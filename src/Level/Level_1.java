@@ -47,13 +47,22 @@ public class Level_1 extends Fase{
                 
         this.coracoes = 6;
     }
+    
     public void createPassavel(){
         for(int i = 9; i <= 10; i++){
             paintPassavel(i,10,"gramanovo.png");
         }
+        for(int i = 7; i <= 9; i++){
+            paintPassavel(i,11,"gramanovo.png");
+        }
+        paintPassavel(6,1,"gramanovo.png");
+        paintPassavel(7,1,"gramanovo.png");
+        paintPassavel(7,2,"gramanovo.png");
+        paintPassavel(8,2,"gramanovo.png");
     }
     public void createEntities(){
         
+        //Parededs Laterais
         for(int i = 0; i <= 13; i++){
             this.addElement(new Parede(i,0,"Parede.png"));
         }
@@ -74,6 +83,7 @@ public class Level_1 extends Fase{
                 this.addElement(new Parede(1,i,"Parede3D.png"));
         }
         
+        //Arbusto
         for(int i = 3; i <= 4; i++){
             for(int j = 3; j<= 4; j++){
                 this.addElement(new Arbusto(i,j));
@@ -84,15 +94,6 @@ public class Level_1 extends Fase{
             for(int j = 9; j<= 10; j++){
                 this.addElement(new Arbusto(i,j));
             }
-        }
-        
-
-        for(int i = 3; i <= 4; i++){
-            this.addElement(new Feno(i,8));
-        }
-        
-        for(int i = 4; i <= 5; i++){
-            this.addElement(new Feno(i,9));
         }
    
         this.addElement(new Arbusto(5,1));
@@ -109,6 +110,15 @@ public class Level_1 extends Fase{
         this.addElement(new Arbusto(11,7));
         this.addElement(new Arbusto(10,7));
         
+        //Feno
+        for(int i = 3; i <= 4; i++){
+            this.addElement(new Feno(i,8));
+        }
+        
+        for(int i = 4; i <= 5; i++){
+            this.addElement(new Feno(i,9));
+        }
+        
         this.addElement(new Feno(2,1));
         this.addElement(new Feno(4,1));
         this.addElement(new Feno(11,1));
@@ -119,7 +129,8 @@ public class Level_1 extends Fase{
         this.addElement(new Feno(11,6));
         this.addElement(new Feno(11,10));
         this.addElement(new Feno(10,11));
-      
+        
+        //Minhoca
         this.addElement(new Minhoca(7,4));
         this.addElement(new Minhoca(7,8));
         this.addElement(new Minhoca(3,2));
