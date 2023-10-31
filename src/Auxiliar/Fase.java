@@ -164,7 +164,7 @@ public abstract class Fase extends Tela{
         }
     }
     
-    
+    public abstract void createPassavel();
     public void paint(Graphics gOld) {
  
         Graphics g = this.getBufferStrategy().getDrawGraphics();
@@ -175,17 +175,10 @@ public abstract class Fase extends Tela{
         
         for (int i = 0; i < Consts.RES; i++) {
             for (int j = 0; j < Consts.RES; j++) {
-                try {
-                    Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "brick.png");
-                    g2.drawImage(newImage,
-                            j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-
-                } catch (IOException ex) {
-                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                paintPassavel(i,j,"brick.png");
             }
         }
-        
+        createPassavel();
         if (!this.Elements.isEmpty()) {
             this.cj.desenhaTudo(Elements);
             this.leituraCoracao(Elements);
@@ -241,6 +234,17 @@ public abstract class Fase extends Tela{
                 + (lolo.getPosicao().getLinha()));
 
         //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
+    }
+    
+    public void paintPassavel(int i, int j, String Imagem){
+        try{
+            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + Imagem);
+            g2.drawImage(newImage,
+                            j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+
+                } catch (IOException ex) {
+                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                }
     }
     /*
     public void verficaEmpurrar(){

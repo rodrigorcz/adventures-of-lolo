@@ -47,7 +47,11 @@ public class Level_1 extends Fase{
                 
         this.coracoes = 6;
     }
-    
+    public void createPassavel(){
+        for(int i = 9; i <= 10; i++){
+            paintPassavel(i,10,"gramanovo.png");
+        }
+    }
     public void createEntities(){
         
         for(int i = 0; i <= 13; i++){
@@ -82,14 +86,7 @@ public class Level_1 extends Fase{
             }
         }
         
-        for(int i = 7; i <= 9; i++){
-            this.addElement(new Grama(i,11));
-        }
-        
-        for(int i = 9; i <= 10; i++){
-            this.addElement(new Grama(i,10));
-        }
-        
+
         for(int i = 3; i <= 4; i++){
             this.addElement(new Feno(i,8));
         }

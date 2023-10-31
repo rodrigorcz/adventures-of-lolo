@@ -18,7 +18,9 @@ public class Level_3 extends Fase{
         super.createFase();
         super.start();
     }
+    public void createPassavel(){
 
+    }
     @Override
     public void createInteragivel() {
         this.addElement(new Coracao(4,4));

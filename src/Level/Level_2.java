@@ -25,7 +25,9 @@ public class Level_2 extends Fase{
         super.start();
         lolo.setPosicao(12,11);
     }
-    
+    public void createPassavel(){
+
+    }
     public void createInteragivel(){
         //Coracao
         this.addElement(new Coracao(2,3));
