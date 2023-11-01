@@ -138,6 +138,48 @@ public abstract class Fase extends Tela{
         return g2;
     }
     
+    public void verificaPoder(){
+        switch(this.poderes){
+            case 0:
+                this.addElement(new Icone(7,13, "Icons/num0.png"));
+                break;
+            case 1:
+                this.addElement(new Icone(7,13, "Icons/num1.png"));
+                break;
+            case 2:
+                this.addElement(new Icone(7,13, "Icons/num2.png"));
+                break;
+            case 3:
+                this.addElement(new Icone(7,13, "Icons/num3.png"));
+                break;
+            case 4:
+               this.addElement(new Icone(7,13, "Icons/num4.png"));
+               break;
+        }
+    }
+    
+    public void verificaVida(){
+        switch(this.vidas){
+            case 0:
+                this.addElement(new Icone(3,13, "Icons/num0.png"));
+                break;
+            case 1:
+                this.addElement(new Icone(3,13, "Icons/num1.png"));
+                break;
+            case 2:
+                this.addElement(new Icone(3,13, "Icons/num2.png"));
+                break;
+            case 3:
+                this.addElement(new Icone(3,13, "Icons/num3.png"));
+                break;
+            case 4:
+               this.addElement(new Icone(3,13, "Icons/num4.png"));
+               break;
+            case 5:
+               this.addElement(new Icone(3,13, "Icons/num5.png"));
+               break;
+        }
+    }
     public void leituraCoracao(ArrayList<Personagem> elemFase){
         if(coracoes == 0){
             bau.abrirBau();
@@ -147,7 +189,9 @@ public abstract class Fase extends Tela{
                 bau.bauEstado(false);
             }
         }
-     
+        verificaPoder();
+        verificaVida();
+        
         Hero hero = (Hero)elemFase.get(0);
         Personagem auxPersonagem;
         
@@ -221,10 +265,13 @@ public abstract class Fase extends Tela{
                 lolo.setImage("LoloDireita.png");
                 lolo.moveRight();
             } else if (e.getKeyCode() == KeyEvent.VK_Q){
-                if(poderes > -10){
+                if(poderes > -5){
                    lolo.atirar();
                    poderes--;
                 }
+            }else if(e.getKeyCode() == KeyEvent.VK_R){
+                this.Terminador.terminaFase();
+                return;
             }
             this.count = 0;
         }

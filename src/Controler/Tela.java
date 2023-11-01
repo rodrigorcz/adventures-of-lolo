@@ -44,7 +44,6 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             @Override
             public void run() {
                 contador++;
-                System.out.println(contador);
                 repaint();
             }
         };

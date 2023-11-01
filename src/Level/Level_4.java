@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Level;
 
 import Entities.Enemy.Minhoca;
@@ -9,10 +5,7 @@ import Icons.Icone;
 import Entities.Enemy.*;
 import Obstacles.*;
 import Auxiliar.*;
-/**
- *
- * @author rodrigo
- */
+
 public class Level_4 extends Fase{
     
     public Level_4(InterfaceFase Terminador){
