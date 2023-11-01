@@ -322,9 +322,6 @@ public abstract class Fase extends Tela{
             if (blocoAtual.ehEmpurravel()) {
                 if (lolo.getPosicao().igual(blocoAtual.getPosicao())) {
                     switch (lolo.getDirecao()) {
-                        case 0:
-                            blocoAtual.moveUp();
-                            break;
                         case 1:
                             blocoAtual.moveDown();
                             break;
@@ -332,6 +329,9 @@ public abstract class Fase extends Tela{
                             blocoAtual.moveRight();
                             break;
                         case 3:
+                            blocoAtual.moveUp();
+                            break;
+                        case 4:
                             blocoAtual.moveLeft();
                             break;
                     }

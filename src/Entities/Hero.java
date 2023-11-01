@@ -51,7 +51,7 @@ public class Hero extends Personagem implements Serializable{
     
     public void atirar(){
         Poder f = new Poder();
-        this.orientacao = pPosicao.getOrientacao();
+        this.orientacao = this.direcao;
         f.orientacaoPoder = orientacao;
         
         if(orientacao == 1)
@@ -67,7 +67,7 @@ public class Hero extends Personagem implements Serializable{
     }
     
     public boolean moveUp() {
-        direcao = 0;
+        direcao = 3;
         if(super.moveUp())
             return validaPosicao();
         return false;
@@ -88,7 +88,7 @@ public class Hero extends Personagem implements Serializable{
     }
 
     public boolean moveLeft() {
-        direcao = 3;
+        direcao = 4;
         if(super.moveLeft())
             return validaPosicao();
         return false;
