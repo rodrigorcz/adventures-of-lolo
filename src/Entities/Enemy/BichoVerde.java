@@ -17,6 +17,7 @@ public class BichoVerde extends Personagem  implements Serializable{
         super("verdeB.png", new Posicao(Linha, Coluna));
         this.ehTransponivel = true;
         this.tipoElem = 2;
+        
         this.orientacao = 1;
         this.countTime = 0;
         this.moveCount = 0;
