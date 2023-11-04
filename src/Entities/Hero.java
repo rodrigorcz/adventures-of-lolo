@@ -20,11 +20,13 @@ public class Hero extends Personagem implements Serializable{
     private int delay;
     private int orientacao;
     private int direcao;
+    public int vidas;
     private ArrayList<Personagem> Element;
     
     public Hero(int Linha, int Coluna) {
         super("LoloBaixo.png", new Posicao(Linha, Coluna));
         this.delay = 0;
+        this.vidas = 3;
     }
 
     public void voltaAUltimaPosicao(){

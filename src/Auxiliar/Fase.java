@@ -47,6 +47,7 @@ public abstract class Fase extends Tela{
     private Graphics g2;
     private InterfaceFase Terminador;
     private int count = 0;
+    private boolean faseTerminou;
     
     //Variaveis inerentes de cada fase
     protected Hero lolo;
@@ -55,20 +56,17 @@ public abstract class Fase extends Tela{
     protected Porta porta;
     protected Fase faseAtual;
     protected int coracoes;
-    protected int vidas;
     protected int poderes;
     protected int empurra = 0;
     
     public Fase(InterfaceFase Terminador){
         this.Elements = new ArrayList<>(195);
         this.Terminador = Terminador;
-        
-        this.vidas = 5;
+
         this.poderes = 3;
+        this.faseTerminou = false;
         lolo = new Hero(9,7);
-        //bloco = new BlocoEmpurravel();
         this.addElement(lolo);
-        //this.addElement(bloco);
     }
       
     public abstract void createEntities();
@@ -87,6 +85,10 @@ public abstract class Fase extends Tela{
     
     public void removeElement(Personagem el){
         this.Elements.remove(el);
+    }
+    
+    public boolean faseTerminou(){
+        return this.faseTerminou;
     }
     
     public void createFase(){
@@ -127,6 +129,10 @@ public abstract class Fase extends Tela{
         return cj.ehPosicaoValida(this.Elements, p);
     }
     
+    public boolean movimentoInimigo(Posicao p){
+        return cj.movimentoInimigo(this.Elements, p);
+    }
+    
     public boolean ehInimigo(Posicao p){
         return cj.ehInimigo(this.Elements, p);
     }
@@ -160,7 +166,7 @@ public abstract class Fase extends Tela{
     }
     
     public void verificaVida(){
-        switch(this.vidas){
+        switch(lolo.vidas){
             case 0:
                 this.addElement(new Icone(3,13, "Icons/num0.png"));
                 break;
@@ -173,17 +179,12 @@ public abstract class Fase extends Tela{
             case 3:
                 this.addElement(new Icone(3,13, "Icons/num3.png"));
                 break;
-            case 4:
-               this.addElement(new Icone(3,13, "Icons/num4.png"));
-               break;
-            case 5:
-               this.addElement(new Icone(3,13, "Icons/num5.png"));
-               break;
         }
     }
-    public void leituraCoracao(ArrayList<Personagem> elemFase){
+    public void leituraLolo(ArrayList<Personagem> elemFase){
         if(coracoes == 0){
             bau.abrirBau();
+            this.faseTerminou = true;
             this.coracoes--;
             if(bau.bauAberto()){
                 bau.setImage("BauAberto.png");
@@ -205,8 +206,12 @@ public abstract class Fase extends Tela{
         for(int i = 1; i < elemFase.size(); i++){
             auxPersonagem = elemFase.get(i);
             if(hero.getPosicao().igual(auxPersonagem.getPosicao()))
-                if(auxPersonagem.getTipo() == 1)
+                if(auxPersonagem instanceof Coracao)
                     this.coracoes--;
+            if(hero.getPosicao().igual(auxPersonagem.getPosicao()))
+                if(auxPersonagem.getTipo() == 2)
+                    lolo.vidas--;
+                
         }
     }
     
@@ -227,7 +232,7 @@ public abstract class Fase extends Tela{
         createPassavel();
         if (!this.Elements.isEmpty()) {
             this.cj.desenhaTudo(Elements);
-            this.leituraCoracao(Elements);
+            this.leituraLolo(Elements);
             this.cj.processaTudo(Elements);
         }
 
@@ -271,6 +276,7 @@ public abstract class Fase extends Tela{
                    poderes--;
                 }
             }else if(e.getKeyCode() == KeyEvent.VK_R){
+                lolo.vidas--;
                 this.Terminador.terminaFase();
                 return;
             }

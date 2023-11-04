@@ -39,6 +39,17 @@ public class ControleDeJogo {
         return true;
     }
     
+    public boolean movimentoInimigo(ArrayList<Personagem> umaFase, Posicao p){
+        Personagem pIesimoPersonagem;
+        for(int i = 1; i < umaFase.size(); i++){
+            pIesimoPersonagem = umaFase.get(i);            
+            if(pIesimoPersonagem instanceof Coracao || pIesimoPersonagem instanceof BlocoEmpurravel || !pIesimoPersonagem.isbTransponivel())
+                if(pIesimoPersonagem.getPosicao().igual(p))
+                    return false;
+        }        
+        return true;
+    }
+    
     public boolean ehInimigo(ArrayList<Personagem> umaFase, Posicao p){
         Personagem pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){

@@ -71,7 +71,6 @@ public class Level_3 extends Fase{
         this.addElement(new Arbusto(6,6));
         this.addElement(new Arbusto(5,1));
         this.addElement(new Arbusto(5,9));
-        this.addElement(new Arbusto(5,10));
         this.addElement(new Arbusto(9,9));
         this.addElement(new Arbusto(12,9));
         this.addElement(new Arbusto(10,5));
@@ -105,7 +104,6 @@ public class Level_3 extends Fase{
      
         //Tatu
         this.addElement(new Tatu(2,1));
-        this.addElement(new Tatu(2,3));
         
         //Bloco Empurravel
         for(int j = 1; j <= 3; j++){
