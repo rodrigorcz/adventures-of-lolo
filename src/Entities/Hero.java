@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ public class Hero extends Personagem implements Serializable{
     private int delay;
     private int orientacao;
     private int direcao;
+    private ArrayList<Personagem> Element;
     
     public Hero(int Linha, int Coluna) {
         super("LoloBaixo.png", new Posicao(Linha, Coluna));

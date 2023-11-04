@@ -24,6 +24,7 @@ public abstract class Personagem implements Serializable {
     protected boolean ehEmpurravel;
     protected boolean ehSolido;
     protected int tipoElem;
+    private int direcao;
 
     protected Personagem(String sNomeImagePNG, Posicao pPosicao) {
         this.pPosicao = pPosicao;
@@ -113,5 +114,9 @@ public abstract class Personagem implements Serializable {
     
     public boolean seMove(){
         return (new Random().nextInt(0, 99) >= 90);
+    }
+    
+    public int getDirecao(){
+        return direcao;
     }
 }

@@ -31,6 +31,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
@@ -69,7 +70,7 @@ public abstract class Fase extends Tela{
         this.addElement(lolo);
         //this.addElement(bloco);
     }
-    
+      
     public abstract void createEntities();
     public abstract void createInteragivel();
     
@@ -276,7 +277,7 @@ public abstract class Fase extends Tela{
             this.count = 0;
         }
         
-        this.verficaEmpurrar();
+        this.verificaEmpurrar();
         //this.paraBloco();
         
         this.setTitle("-> Cell: " + (lolo.getPosicao().getColuna()) + ", "
@@ -295,73 +296,84 @@ public abstract class Fase extends Tela{
                     Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
                 }
     }
-    /*
-    public void verficaEmpurrar(){
-        //BlocoEmpurravel emp;
-
-        if(lolo.getPosicao().igual(bloco.getPosicao())){
-            switch(lolo.getDirecao()){
-                case 0:
-                    bloco.moveDown();
-                    break;
-                case 1:
-                    bloco.moveLeft();
-                    break;
-                case 2:
-                    bloco.moveRight();
-                    break;
-                case 3:
-                    bloco.moveUp();
-                    break;
-            }
-        }
-    }*/
     
-    public void verficaEmpurrar() {
-        for (Personagem blocoAtual : Elements) {
-            if (blocoAtual.ehEmpurravel()) {
-                if (lolo.getPosicao().igual(blocoAtual.getPosicao())) {
-                    switch (lolo.getDirecao()) {
-                        case 1:
-                            blocoAtual.moveDown();
-                            break;
-                        case 2:
-                            blocoAtual.moveRight();
-                            break;
-                        case 3:
-                            blocoAtual.moveUp();
-                            break;
-                        case 4:
-                            blocoAtual.moveLeft();
-                            break;
-                    }
-                    if(!posicaoValidaBloco(blocoAtual)){
-                        blocoAtual.voltaAUltimaPosicao();
-                        lolo.voltaAUltimaPosicao();
-                    }
+    //Essas funções tão com erro ainda, não sei exatamente o pq
+    public void verificaEmpurrar(){
+        Personagem lolo = this.Elements.get(0);
+        
+        List<BlocoEmpurravel> listaEmpurravel = Elements.stream().filter(elem -> elem instanceof BlocoEmpurravel).map(elem -> (BlocoEmpurravel) elem).toList();
+        ArrayList<BlocoEmpurravel> empurravel = new ArrayList(listaEmpurravel);
+        BlocoEmpurravel temp;
+        for(int i = 0; i < empurravel.size(); i++){
+            temp = empurravel.get(i);
+            if(lolo.getPosicao().igual(temp.getPosicao())){
+                switch(lolo.getDirecao()){
+                    case 1:
+                        temp.moveDown();
+                        break;
+                    case 2:
+                        temp.moveRight();
+                        break;
+                    case 3:
+                        temp.moveUp();
+                        break;
+                    case 4:
+                        temp.moveLeft();
+                        break;
+                }
+                if(!posicaoValidaBloco(temp)){
+                    temp.voltaAUltimaPosicao();
+                    lolo.voltaAUltimaPosicao();
                 }
             }
         }
     }
-    
-    public boolean posicaoValidaBloco(Personagem elem){
-        if(elem instanceof Hero){
-            for(Personagem temp : Elements){
-                if(temp.isbTransponivel() && elem != temp){
-                    if(temp.getPosicao().igual(elem.getPosicao()));
-                    return false;
-                }
-            }
-        }
-        else if(elem instanceof BlocoEmpurravel || elem instanceof Caveira || elem instanceof Minhoca){
-            for(Personagem temp : Elements){
-                if(!temp.isbTransponivel() || (temp instanceof Bau) && elem != temp){
-                    if(temp.getPosicao().igual(elem.getPosicao())){
+   
+    public boolean posicaoValidaBloco(Personagem p){
+        Personagem pTemp;
+        if(p instanceof Hero){
+            for(int i = 0; i < Elements.size(); i++){
+                pTemp = Elements.get(i);
+                if(!pTemp.isbTransponivel() && p != pTemp){
+                    if(pTemp.getPosicao().igual(p.getPosicao())){
                         return false;
                     }
                 }
             }
         }
+        else if(p instanceof BlocoEmpurravel || p instanceof Minhoca){
+            for(int i = 0; i < Elements.size(); i++){
+                pTemp = Elements.get(i);
+                if((!pTemp.isbTransponivel() ||
+                        pTemp instanceof Bau ||
+                        pTemp instanceof Arbusto ||
+                        pTemp instanceof Feno) && p != pTemp){
+                    if(pTemp.getPosicao().igual(p.getPosicao())){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
+    //Essa função não tá bem definida,tudo isso veio da net
+    public boolean salvar(String nomeArq) {
+        try {
+            File file = new File(
+                    new java.io.File(".").getCanonicalPath() + File.separator + "fases" + File.separator + nomeArq);
+            file.createNewFile();
+            FileOutputStream fileOS = new FileOutputStream(file);
+            GZIPOutputStream compactador = new GZIPOutputStream(fileOS);
+            ObjectOutputStream serializador = new ObjectOutputStream(compactador);
+            serializador.writeObject(this);
+            serializador.flush();
+            serializador.close();
+        } catch (IOException ex) {
+            System.out.println("Erro ao salvar fase " + nomeArq);
+            return false;
+        }
+
         return true;
     }
     
