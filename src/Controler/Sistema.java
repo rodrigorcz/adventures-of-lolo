@@ -87,7 +87,7 @@ public class Sistema extends javax.swing.JFrame implements MouseListener, KeyLis
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("POO2023-1 - Skooter");
         setAlwaysOnTop(true);
-        setAutoRequestFocus(false);
+        setAutoRequestFocus(true);
         setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

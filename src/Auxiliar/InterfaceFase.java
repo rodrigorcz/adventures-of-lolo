@@ -10,4 +10,5 @@ package Auxiliar;
  */
 public interface InterfaceFase {
     void terminaFase();
+    void terminaInicio();
 }
