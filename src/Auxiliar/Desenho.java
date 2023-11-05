@@ -4,7 +4,7 @@ import Auxiliar.Fase;
 import java.awt.Graphics;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
-import Controler.Tela;
+import Controler.Sistema;
 
 public class Desenho implements Serializable {
     static Fase jCenario;

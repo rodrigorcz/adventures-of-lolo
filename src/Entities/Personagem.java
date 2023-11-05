@@ -1,7 +1,7 @@
 package Entities;
 
 import Auxiliar.*;
-import Controler.Tela;
+import Controler.Sistema;
 
 //Imports externos
 import java.awt.Graphics;

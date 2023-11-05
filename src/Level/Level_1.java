@@ -5,7 +5,7 @@ import Entities.Elements.Bau;
 import Entities.Elements.Coracao;
 import java.util.ArrayList;
 import java.util.List;
-import Controler.Tela;
+import Controler.Sistema;
 import Entities.Hero;
 import Entities.Elemento;
 import Auxiliar.Fase;
@@ -142,9 +142,7 @@ public class Level_1 extends Fase{
         }
         
         this.addElement(new Icone(2, 13, "Icons/IconLolo.png"));
-        this.addElement(new Icone(3,13, "Icons/num5.png"));
         this.addElement(new Icone(6,13, "Icons/IconPoder.png"));
-        this.addElement(new Icone(7,13, "Icons/num3.png"));
-        
+
     }
 }

@@ -39,22 +39,33 @@ public class ControleDeJogo {
         return true;
     }
     
-    public boolean movimentoInimigo(ArrayList<Elemento> umaFase, Posicao p){
+    public boolean ehPosicaoValidaTiro(ArrayList<Elemento> umaFase, Posicao p){
         Elemento pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
             pIesimoPersonagem = umaFase.get(i);            
-            if(pIesimoPersonagem instanceof Coracao || pIesimoPersonagem instanceof BlocoEmpurravel || !pIesimoPersonagem.ehTransponivel())
+            if(!pIesimoPersonagem.ehTransponivel()|| pIesimoPersonagem instanceof Inimigo)
                 if(pIesimoPersonagem.getPosicao().igual(p))
                     return false;
         }        
         return true;
     }
     
-    public boolean ehInimigo(ArrayList<Elemento> umaFase, Posicao p){
+    public boolean movimentoInimigo(ArrayList<Elemento> umaFase, Posicao p){
         Elemento pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
             pIesimoPersonagem = umaFase.get(i);            
-            if(pIesimoPersonagem.getTipo() == 2 || pIesimoPersonagem instanceof Ovo)
+            if(pIesimoPersonagem instanceof Coracao || pIesimoPersonagem instanceof BlocoEmpurravel|| !pIesimoPersonagem.ehTransponivel())
+                if(pIesimoPersonagem.getPosicao().igual(p))
+                    return false;
+        }        
+        return true;
+    }
+
+    public boolean transformaInimigo(ArrayList<Elemento> umaFase, Posicao p){
+        Elemento pIesimoPersonagem;
+        for(int i = 1; i < umaFase.size(); i++){
+            pIesimoPersonagem = umaFase.get(i);            
+            if(pIesimoPersonagem instanceof Inimigo || pIesimoPersonagem instanceof Ovo)
                 if(pIesimoPersonagem.getPosicao().igual(p)){
                     if(pIesimoPersonagem instanceof Ovo){
                         umaFase.remove(pIesimoPersonagem);

@@ -35,12 +35,26 @@ public class Poder extends Personagem{
             }
         }
         
-        if(Desenho.acessoATelaDoJogo().ehInimigo(this.getPosicao())){
+        if(Desenho.acessoATelaDoJogo().transformaInimigo(this.getPosicao())){
             Desenho.acessoATelaDoJogo().removePersonagem(this);
-
         }
-        
     }
+    
+    @Override
+    public boolean setPosicao(int linha, int coluna){
+        if(this.atualPosicao.setPosicao(linha, coluna)){
+            if(Desenho.acessoATelaDoJogo().transformaInimigo(this.getPosicao())){
+                Desenho.acessoATelaDoJogo().removePersonagem(this);
+                return false;
+            }
+            if (!Desenho.acessoATelaDoJogo().ehPosicaoValidaTiro(this.getPosicao())) {
+                Desenho.acessoATelaDoJogo().removePersonagem(this);
+                return false;
+            } 
+            return true;
+        }
+        return false;       
+    } 
     public boolean moveDown(){
         return super.moveDown("Poder.png");
     }
@@ -59,7 +73,7 @@ public class Poder extends Personagem{
     
     @Override
     public boolean validaPosicao(){
-        if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
+        if (!Desenho.acessoATelaDoJogo().ehPosicaoValidaTiro(this.getPosicao())) {
             return false;
         }
         return true;       

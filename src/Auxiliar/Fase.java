@@ -3,7 +3,7 @@ package Auxiliar;
 import Entities.*;
 import Entities.Elements.*;
 import Entities.Enemy.*;
-import Controler.Tela;
+import Controler.Sistema;
 import Controler.ControleDeJogo;
 import Auxiliar.*;
 import Obstacles.*;
@@ -35,7 +35,7 @@ import javax.swing.JButton;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
-public abstract class Fase extends Tela{
+public abstract class Fase extends Sistema{
     protected ArrayList<Elemento> Elements;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
@@ -127,8 +127,12 @@ public abstract class Fase extends Tela{
         return cj.movimentoInimigo(this.Elements, p);
     }
     
-    public boolean ehInimigo(Posicao p){
-        return cj.ehInimigo(this.Elements, p);
+    public boolean ehPosicaoValidaTiro(Posicao p){
+        return cj.ehPosicaoValidaTiro(this.Elements, p);
+    }
+    
+    public boolean transformaInimigo(Posicao p){
+        return cj.transformaInimigo(this.Elements, p);
     }
     
     public void removePersonagem(Personagem e1) {
@@ -293,7 +297,7 @@ public abstract class Fase extends Tela{
                             j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
 
                 } catch (IOException ex) {
-                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Sistema.class.getName()).log(Level.SEVERE, null, ex);
                 }
     }
     
@@ -390,13 +394,13 @@ public abstract class Fase extends Tela{
         repaint();
     }
     
-        // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("POO2023-1 - Skooter");
         setAlwaysOnTop(true);
-        setAutoRequestFocus(false);
+        setAutoRequestFocus(true);
         setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

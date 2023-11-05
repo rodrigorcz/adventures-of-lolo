@@ -28,9 +28,12 @@ public class VideoGame implements InterfaceFase{
         this.getFase().stopFase();
         this.nextFase();
     }
-    
+
+   
     public void nextFase() {
-        this.indexLevel = this.indexLevel + 1;
+        if(++indexLevel >= fase.size()){
+            System.exit(0);
+        }
         this.startGame();
     }
     
@@ -38,4 +41,5 @@ public class VideoGame implements InterfaceFase{
         Fase fase = this.getFase();
         java.awt.EventQueue.invokeLater(fase::start);
     }
+    
 }

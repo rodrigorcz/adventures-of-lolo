@@ -3,7 +3,7 @@ package Entities;
 
 import Auxiliar.*;
 import Controler.ControleDeJogo;
-import Controler.Tela;
+import Controler.Sistema;
 import Entities.Elements.Poder;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -44,29 +44,6 @@ public class Hero extends Personagem{
     }
     
     //Metodo voltados para movimentação do LOLO
-    public void voltaAUltimaPosicao(){
-        this.atualPosicao.volta();
-    }
-    
-    
-    public boolean setPosicao(int linha, int coluna){
-        if(this.atualPosicao.setPosicao(linha, coluna)){
-            if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
-                this.voltaAUltimaPosicao();
-            }
-            return true;
-        }
-        return false;       
-    }
-
-    public boolean validaPosicao(){
-        if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
-            this.voltaAUltimaPosicao();
-            return false;
-        }
-        return true;       
-    }
-    
     public boolean moveUp() {
         direcao = 3;
         if(super.moveUp())

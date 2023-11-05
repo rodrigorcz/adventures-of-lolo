@@ -25,7 +25,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import javax.swing.JButton;
 
-public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
+public class Sistema extends javax.swing.JFrame implements MouseListener, KeyListener {
 
     TimerTask task;
     public int contador;

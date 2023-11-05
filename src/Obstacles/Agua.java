@@ -8,7 +8,6 @@ public class Agua extends Elemento{
     private int delay;
     public Agua(int Linha, int Coluna){
         super("Agua1.png", new Posicao(Linha, Coluna));
-        this.ehTransponivel = false;
         this.delay = 0;
     }
     

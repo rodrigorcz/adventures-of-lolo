@@ -1,7 +1,7 @@
 package Entities;
 
 import Auxiliar.*;
-import Controler.Tela;
+import Controler.Sistema;
 
 //Imports Externos
 import java.awt.Graphics;
@@ -47,7 +47,7 @@ public abstract class Elemento implements Serializable {
             }
     }
 
-    //Funções auxiliares
+    //----------------Funções auxiliares--------------------
     public void autoDesenho(){
         Desenho.desenhar(this.iImage, this.atualPosicao.getColuna(), this.atualPosicao.getLinha());        
     }
@@ -56,7 +56,7 @@ public abstract class Elemento implements Serializable {
         return atualPosicao.setPosicao(linha, coluna);
     }
 
-    // Gets & Sets
+    //-----------------Gets & Sets--------------------------
     public int getTipo(){
         return tipoElem;
     }
@@ -77,7 +77,7 @@ public abstract class Elemento implements Serializable {
         this.ehTransponivel = ehTransponivel;
     }
 
-    //Movimentação 
+    //--------------Movimentação------------------------
     public boolean moveUp() {
         return this.atualPosicao.moveUp();
     }

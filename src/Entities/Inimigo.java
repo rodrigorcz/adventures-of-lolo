@@ -1,7 +1,7 @@
 package Entities;
 
 import Auxiliar.*;
-import Controler.Tela;
+import Controler.Sistema;
 
 //Imports Externos
 import java.awt.Graphics;
@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 public class Inimigo extends Personagem{
     public Inimigo(String nomeImagem, Posicao posicao){
         super(nomeImagem, posicao);
-        this.ehTransponivel = false;
+        this.ehTransponivel = true;
         this.ehMortal = false;
         this.tipoElem = 2;
     }

@@ -7,7 +7,6 @@ public class Main {
             public void run() {
                 VideoGame v1 = new VideoGame();
                 v1.startGame();
-
             }
         });
     }
