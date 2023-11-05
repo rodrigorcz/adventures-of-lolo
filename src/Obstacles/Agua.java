@@ -2,11 +2,9 @@ package Obstacles;
 
 import Auxiliar.Consts;
 import Auxiliar.Posicao;
-import Entities.Personagem;
-import java.io.Serializable;
+import Entities.Elemento;
 
-
-public class Agua extends Personagem implements Serializable{
+public class Agua extends Elemento{
     private int delay;
     public Agua(int Linha, int Coluna){
         super("Agua1.png", new Posicao(Linha, Coluna));

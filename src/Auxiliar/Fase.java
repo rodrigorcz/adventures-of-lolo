@@ -1,20 +1,14 @@
 package Auxiliar;
 
-import Entities.Personagem;
-import Entities.Enemy.Caveira;
-import Entities.Hero;
-import Entities.Elemento;
+import Entities.*;
+import Entities.Elements.*;
+import Entities.Enemy.*;
 import Controler.Tela;
-import Auxiliar.Consts;
-import Auxiliar.InterfaceFase;
-import Entities.Enemy.Minhoca;
-import Auxiliar.Consts;
-import Auxiliar.Desenho;
-import Entities.Enemy.ZigueZague;
-import Obstacles.*;
-import Auxiliar.Posicao;
 import Controler.ControleDeJogo;
-import Icons.Icone;
+import Auxiliar.*;
+import Obstacles.*;
+import Icons.*;
+
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -42,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 public abstract class Fase extends Tela{
-    protected ArrayList<Personagem> Elements;
+    protected ArrayList<Elemento> Elements;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
     private InterfaceFase Terminador;
@@ -50,7 +44,7 @@ public abstract class Fase extends Tela{
     private boolean faseTerminou;
     
     //Variaveis inerentes de cada fase
-    protected Hero lolo;
+    public Hero lolo;
     protected BlocoEmpurravel bloco;
     protected Bau bau;
     protected Porta porta;
@@ -79,12 +73,12 @@ public abstract class Fase extends Tela{
         this.go();
     }
     
-    public void addElement(Personagem e1){
-        this.Elements.add(e1);
+    public void addElement(Elemento e){
+        this.Elements.add(e);
     }
     
-    public void removeElement(Personagem el){
-        this.Elements.remove(el);
+    public void removeElement(Elemento e){
+        this.Elements.remove(e);
     }
     
     public boolean faseTerminou(){
@@ -181,7 +175,7 @@ public abstract class Fase extends Tela{
                 break;
         }
     }
-    public void leituraLolo(ArrayList<Personagem> elemFase){
+    public void leituraLolo(ArrayList<Elemento> elemFase){
         if(coracoes == 0){
             bau.abrirBau();
             this.faseTerminou = true;
@@ -195,7 +189,7 @@ public abstract class Fase extends Tela{
         verificaVida();
         
         Hero hero = (Hero)elemFase.get(0);
-        Personagem auxPersonagem;
+        Elemento auxElemento;
         
         if(hero.getPosicao().igual(bau.getPosicao())){
             bau.setImage("BauVazio.png");
@@ -204,12 +198,12 @@ public abstract class Fase extends Tela{
         }
         
         for(int i = 1; i < elemFase.size(); i++){
-            auxPersonagem = elemFase.get(i);
-            if(hero.getPosicao().igual(auxPersonagem.getPosicao()))
-                if(auxPersonagem instanceof Coracao)
+            auxElemento = elemFase.get(i);
+            if(hero.getPosicao().igual(auxElemento.getPosicao()))
+                if(auxElemento instanceof Coracao)
                     this.coracoes--;
-            if(hero.getPosicao().igual(auxPersonagem.getPosicao()))
-                if(auxPersonagem.getTipo() == 2)
+            if(hero.getPosicao().igual(auxElemento.getPosicao()))
+                if(auxElemento.getTipo() == 2)
                     lolo.vidas--;
                 
         }
@@ -305,7 +299,7 @@ public abstract class Fase extends Tela{
     
     //Essas funções tão com erro ainda, não sei exatamente o pq
     public void verificaEmpurrar(){
-        Personagem lolo = this.Elements.get(0);
+        Hero lolo = (Hero)Elements.get(0);
         
         List<BlocoEmpurravel> listaEmpurravel = Elements.stream().filter(elem -> elem instanceof BlocoEmpurravel).map(elem -> (BlocoEmpurravel) elem).toList();
         ArrayList<BlocoEmpurravel> empurravel = new ArrayList(listaEmpurravel);
@@ -335,12 +329,12 @@ public abstract class Fase extends Tela{
         }
     }
    
-    public boolean posicaoValidaBloco(Personagem p){
-        Personagem pTemp;
+    public boolean posicaoValidaBloco(Elemento p){
+        Elemento pTemp;
         if(p instanceof Hero){
             for(int i = 0; i < Elements.size(); i++){
                 pTemp = Elements.get(i);
-                if(!pTemp.isbTransponivel() && p != pTemp){
+                if(!pTemp.ehTransponivel() && p != pTemp){
                     if(pTemp.getPosicao().igual(p.getPosicao())){
                         return false;
                     }
@@ -350,7 +344,7 @@ public abstract class Fase extends Tela{
         else if(p instanceof BlocoEmpurravel || p instanceof Minhoca){
             for(int i = 0; i < Elements.size(); i++){
                 pTemp = Elements.get(i);
-                if((!pTemp.isbTransponivel() ||
+                if((!pTemp.ehTransponivel() ||
                         pTemp instanceof Bau ||
                         pTemp instanceof Arbusto ||
                         pTemp instanceof Feno) && p != pTemp){

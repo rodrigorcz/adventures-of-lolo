@@ -1,5 +1,8 @@
 package Level;
 
+import Entities.Elements.Porta;
+import Entities.Elements.Bau;
+import Entities.Elements.Coracao;
 import Entities.Enemy.Minhoca;
 import Icons.Icone;
 import Entities.Enemy.*;

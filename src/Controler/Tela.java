@@ -1,14 +1,6 @@
 package Controler;
 
-import Entities.Personagem;
-import Entities.Enemy.Caveira;
-import Entities.Hero;
-import Entities.Enemy.Minhoca;
-import Auxiliar.Consts;
-import Auxiliar.Desenho;
-import Entities.Enemy.ZigueZague;
-import Obstacles.Parede;
-import Auxiliar.Posicao;
+import Auxiliar.*;
 
 import java.awt.FlowLayout;
 import java.awt.Graphics;

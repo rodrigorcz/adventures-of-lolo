@@ -1,5 +1,8 @@
 package Level;
 
+import Entities.Elements.Porta;
+import Entities.Elements.Bau;
+import Entities.Elements.Coracao;
 import java.util.ArrayList;
 import java.util.List;
 import Controler.Tela;
@@ -9,7 +12,6 @@ import Auxiliar.Fase;
 import Auxiliar.InterfaceFase;
 import Entities.Enemy.Minhoca;
 import Entities.Enemy.Caveira;
-import Entities.Enemy.ZigueZague;
 import Obstacles.*;
 import Controler.ControleDeJogo;
 import Icons.Icone;

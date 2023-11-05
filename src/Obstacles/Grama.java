@@ -1,20 +1,11 @@
 package Obstacles;
 
 import Auxiliar.*;
-import Controler.Tela;
-import Entities.*;
-import java.awt.Graphics;
-import java.io.Serializable;
+import Entities.Elemento;
 
-/**
- *
- * @author marcussilva
- */
-public class Grama extends Personagem implements Serializable{
-    
+public class Grama extends Elemento{
     public Grama(int Linha, int Coluna){
         super("gramanovo.png", new Posicao(Linha, Coluna));
         this.ehTransponivel = true;
-        this.ehMortal = false;
     }
 }

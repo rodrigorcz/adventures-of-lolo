@@ -1,14 +1,10 @@
 package Entities.Enemy;
 
 import Auxiliar.*;
-import Controler.Tela;
-import Entities.Elements.Fogo;
-import Entities.Personagem;
-import java.awt.Graphics;
-import java.io.Serializable;
+import Entities.Inimigo;
 import java.util.Random;
 
-public class Caveira extends Personagem implements Serializable{
+public class Caveira extends Inimigo{
 
     private int linha;
     private int coluna;
@@ -21,66 +17,25 @@ public class Caveira extends Personagem implements Serializable{
         this.linha = Linha;
         this.coluna = Coluna;
         this.ehTransponivel = false;
-        this.tipoElem = 2;
-        this.tipoElem = 2;
-        this.orientacao = 1;
+        this.orientacao = 4;
         this.countTime = 0;
         this.moveCount = 0;
     }
     
-    public boolean setPosicao(int linha, int coluna){
-        if(this.pPosicao.setPosicao(linha, coluna)){
-            if (!Desenho.acessoATelaDoJogo().movimentoInimigo(this.getPosicao())) {
-                this.voltaAUltimaPosicao();
-                return false;
-            } 
-            return true;
-        }
-        return false;       
+    public boolean moveDown(){
+        return super.moveDown("caveiraB.png");
     }
     
-    public boolean moveUp() {
-        if(super.moveUp()){
-            this.setImage("caveiraC.png");
-            return validaPosicao();
-        }
-        return false;
-    }
-
-    public boolean moveDown() {
-        if(super.moveDown()){
-            this.setImage("caveiraB.png");
-            return validaPosicao();
-        }
-        return false;
-    }
-
-    public boolean moveRight() {
-        if(super.moveRight()){
-            this.setImage("caveiraD.png");
-            return validaPosicao();  
-        }
-        return false;
-    }
-
-    public boolean moveLeft() {
-        if(super.moveLeft()){
-            this.setImage("caveiraE.png");
-            return validaPosicao();
-        }
-        return false;
-    }   
-    
-    private boolean validaPosicao(){
-        if (!Desenho.acessoATelaDoJogo().movimentoInimigo(this.getPosicao())) {
-            this.voltaAUltimaPosicao();
-            return false;
-        }
-        return true;       
+    public boolean moveUp(){
+        return super.moveUp("caveiraC.png");
     }
     
-    public void voltaAUltimaPosicao(){
-        this.pPosicao.volta();
+    public boolean moveLeft(){
+        return super.moveLeft("caveiraE.png");
+    }
+    
+    public boolean moveRight(){
+        return super.moveRight("caveiraD.png");
     }
     
     public void autoDesenho(){

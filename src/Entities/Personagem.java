@@ -1,9 +1,9 @@
 package Entities;
 
-import Auxiliar.Consts;
-import Auxiliar.Desenho;
-import Auxiliar.Posicao;
+import Auxiliar.*;
 import Controler.Tela;
+
+//Imports externos
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -15,108 +15,81 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public abstract class Personagem implements Serializable {
+/*
+ *  Personagem é um Elemento que pode:
+ *      - Mover em direções específicas  
+ *      - Por padrão sao mortais
+ */
 
-    protected ImageIcon iImage;
-    protected Posicao pPosicao;
-    protected boolean ehTransponivel; /*Pode passar por cima?*/
-    protected boolean ehMortal;       /*Se encostar, morre?*/
-    protected boolean ehEmpurravel;
-    protected boolean ehSolido;
-    protected int tipoElem;
+public abstract class Personagem extends Elemento {  
     private int direcao;
 
-    protected Personagem(String sNomeImagePNG, Posicao pPosicao) {
-        this.pPosicao = pPosicao;
-        this.ehSolido = true;
+    protected Personagem(String nomeImagem, Posicao posicao) {
+        super(nomeImagem, posicao);
         this.ehTransponivel = true;
-        this.ehMortal = false;
-        this.ehEmpurravel = false;
-        setImage(sNomeImagePNG);
-        this.tipoElem = 0;
+        this.ehMortal = true;
     }
 
-    public Posicao getPosicao() {
-        /*TODO: Retirar este método para que objetos externos nao possam operar
-         diretamente sobre a posição do Personagem*/
-        return pPosicao;
-    }
-
-    public void setImage(String newImg){
-            try {
-                iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + newImg);
-                iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + newImg);Image img = iImage.getImage();
-                BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
-                Graphics g = bi.createGraphics();
-                g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-                iImage = new ImageIcon(bi);
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-    }
-    public boolean isbTransponivel() {
-        return ehTransponivel;
-    }
+    //Funções auxiliares
+    @Override
+    public boolean setPosicao(int linha, int coluna){
+        if(this.atualPosicao.setPosicao(linha, coluna)){
+            if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
+                this.voltaAUltimaPosicao();
+                return false;
+            } 
+            return true;
+        }
+        return false;       
+    }  
     
-    public boolean notTransponivel(){
-        ehTransponivel = false;
-        boolean verify = ehTransponivel;
-        return verify;
-    }
-    
-    public boolean ehSolido(){
-        return ehSolido;
-    }
-    
-    public boolean ehEmpurravel(){
-        return ehEmpurravel;
-    }
-    
-    public int getTipo(){
-        return tipoElem;
-    }
-    
-    public boolean isbMortal(){
-        return ehMortal;
+    public boolean validaPosicao(){
+        if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
+            this.voltaAUltimaPosicao();
+            return false;
+        }
+        return true;       
     }
     
     public void voltaAUltimaPosicao(){
-    this.pPosicao.volta();
+        this.atualPosicao.volta();
     }
     
-    public void setbTransponivel(boolean ehTransponivel) {
-        this.ehTransponivel = ehTransponivel;
-    }
-
-    public void autoDesenho(){
-        Desenho.desenhar(this.iImage, this.pPosicao.getColuna(), this.pPosicao.getLinha());        
-    }
-
-    public boolean setPosicao(int linha, int coluna) {
-        return pPosicao.setPosicao(linha, coluna);
-    }
-
-    public boolean moveUp() {
-        return this.pPosicao.moveUp();
-    }
-
-    public boolean moveDown() {
-        return this.pPosicao.moveDown();
-    }
-
-    public boolean moveRight() {
-        return this.pPosicao.moveRight();
-    }
-
-    public boolean moveLeft() {
-        return this.pPosicao.moveLeft();
-    }
-    
-    public boolean seMove(){
-        return (new Random().nextInt(0, 99) >= 90);
-    }
-    
+    //Gets e Sets
     public int getDirecao(){
         return direcao;
     }
+
+    //Movimentação do Personagem
+    public boolean moveUp(String imgCima) {
+        if(super.moveUp()){
+            this.setImage(imgCima);
+            return validaPosicao();
+        }
+        return false;
+    }
+
+    public boolean moveDown(String imgBaixo) {
+        if(super.moveDown()){
+            this.setImage(imgBaixo);
+            return validaPosicao();
+        }
+        return false;
+    }
+
+    public boolean moveRight(String imgDireita) {
+        if(super.moveRight()){
+            this.setImage(imgDireita);
+            return validaPosicao();  
+        }
+        return false;
+    }
+
+    public boolean moveLeft(String imgEsquerda) {
+        if(super.moveLeft()){
+            this.setImage(imgEsquerda);
+            return validaPosicao();
+        }
+        return false;
+    } 
 }

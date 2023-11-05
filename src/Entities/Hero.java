@@ -16,26 +16,41 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Hero extends Personagem implements Serializable{
-    private int delay;
+public class Hero extends Personagem{
     private int orientacao;
     private int direcao;
     public int vidas;
-    private ArrayList<Personagem> Element;
     
     public Hero(int Linha, int Coluna) {
         super("LoloBaixo.png", new Posicao(Linha, Coluna));
-        this.delay = 0;
         this.vidas = 3;
     }
 
+    public void atirar(){
+        Poder f = new Poder();
+        this.orientacao = this.direcao;
+        f.orientacaoPoder = orientacao;
+        
+        if(orientacao == 1)
+           f.setPosicao(atualPosicao.getLinha()+1,atualPosicao.getColuna());
+        if(orientacao == 2)
+            f.setPosicao(atualPosicao.getLinha(),atualPosicao.getColuna()+1);
+        if(orientacao == 3)
+            f.setPosicao(atualPosicao.getLinha()-1,atualPosicao.getColuna());
+        if(orientacao == 4)
+            f.setPosicao(atualPosicao.getLinha(),atualPosicao.getColuna()-1);
+        
+        Desenho.acessoATelaDoJogo().addElement(f); 
+    }
+    
+    //Metodo voltados para movimentação do LOLO
     public void voltaAUltimaPosicao(){
-        this.pPosicao.volta();
+        this.atualPosicao.volta();
     }
     
     
     public boolean setPosicao(int linha, int coluna){
-        if(this.pPosicao.setPosicao(linha, coluna)){
+        if(this.atualPosicao.setPosicao(linha, coluna)){
             if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
                 this.voltaAUltimaPosicao();
             }
@@ -44,30 +59,12 @@ public class Hero extends Personagem implements Serializable{
         return false;       
     }
 
-    /*TO-DO: este metodo pode ser interessante a todos os personagens que se movem*/
-    private boolean validaPosicao(){
+    public boolean validaPosicao(){
         if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
             this.voltaAUltimaPosicao();
             return false;
         }
         return true;       
-    }
-    
-    public void atirar(){
-        Poder f = new Poder();
-        this.orientacao = this.direcao;
-        f.orientacaoPoder = orientacao;
-        
-        if(orientacao == 1)
-           f.setPosicao(pPosicao.getLinha()+1,pPosicao.getColuna());
-        if(orientacao == 2)
-            f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()+1);
-        if(orientacao == 3)
-            f.setPosicao(pPosicao.getLinha()-1,pPosicao.getColuna());
-        if(orientacao == 4)
-            f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()-1);
-        
-        Desenho.acessoATelaDoJogo().addElement(f); 
     }
     
     public boolean moveUp() {

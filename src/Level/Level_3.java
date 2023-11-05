@@ -1,5 +1,9 @@
 package Level;
 
+import Entities.Elements.Porta;
+import Entities.Elements.Bau;
+import Entities.Elements.Coracao;
+import Entities.Elements.BlocoEmpurravel;
 import Entities.Enemy.*;
 import Obstacles.*;
 import Auxiliar.*;

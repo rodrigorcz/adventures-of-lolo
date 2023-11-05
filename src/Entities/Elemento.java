@@ -2,6 +2,8 @@ package Entities;
 
 import Auxiliar.*;
 import Controler.Tela;
+
+//Imports Externos
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -15,64 +17,80 @@ import javax.swing.JPanel;
 public abstract class Elemento implements Serializable {
 
     protected ImageIcon iImage;
-    protected Posicao pPosicao;
-    protected boolean bTransponivel; 
-    protected boolean bMortal; 
+    protected Posicao atualPosicao;
+    protected boolean ehTransponivel; 
+    protected boolean ehMortal;
+    protected boolean ehEmpurravel;
     protected int tipoElem;
 
-
-    protected Elemento(String sNomeImagePNG) {
-        this.pPosicao = new Posicao(1, 1);
-        this.bTransponivel = true;
-        this.bMortal = false;
-        
-        try {
-            iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
-            Image img = iImage.getImage();
-            BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
-            Graphics g = bi.createGraphics();
-            g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-            iImage = new ImageIcon(bi);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+    //Construtor do Elemento
+    protected Elemento(String nomeImagem, Posicao posicaoInicial) {
+        this.atualPosicao = posicaoInicial;
+        this.ehTransponivel = false;
+        this.ehMortal = false;
+        this.ehEmpurravel = false;
+        this.tipoElem = 0;
+        setImage(nomeImagem);
+    }
+    
+    //Função para mudar a Imagem do Elemento
+    public void setImage(String newImg){
+            try {
+                iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + newImg);
+                iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + newImg);Image img = iImage.getImage();
+                BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
+                Graphics g = bi.createGraphics();
+                g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+                iImage = new ImageIcon(bi);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
     }
 
-    public Posicao getPosicao() {
-        /*TODO: Retirar este método para que objetos externos nao possam operar
-         diretamente sobre a posição do Personagem*/
-        return pPosicao;
-    }
-
-    public boolean isbTransponivel() {
-        return bTransponivel;
-    }
-
-    public void setbTransponivel(boolean bTransponivel) {
-        this.bTransponivel = bTransponivel;
-    }
-
+    //Funções auxiliares
     public void autoDesenho(){
-        Desenho.desenhar(this.iImage, this.pPosicao.getColuna(), this.pPosicao.getLinha());        
+        Desenho.desenhar(this.iImage, this.atualPosicao.getColuna(), this.atualPosicao.getLinha());        
     }
 
     public boolean setPosicao(int linha, int coluna) {
-        return pPosicao.setPosicao(linha, coluna);
+        return atualPosicao.setPosicao(linha, coluna);
     }
 
+    // Gets & Sets
+    public int getTipo(){
+        return tipoElem;
+    }
+
+    public Posicao getPosicao() {
+        return atualPosicao;
+    }
+
+    public boolean ehTransponivel() {
+        return ehTransponivel;
+    }
+
+    public boolean ehMortal(){
+        return ehMortal;
+    }
+
+    public void setTransponivel(boolean ehTransponivel) {
+        this.ehTransponivel = ehTransponivel;
+    }
+
+    //Movimentação 
     public boolean moveUp() {
-        return this.pPosicao.moveUp();
+        return this.atualPosicao.moveUp();
     }
 
     public boolean moveDown() {
-        return this.pPosicao.moveDown();
+        return this.atualPosicao.moveDown();
     }
 
     public boolean moveRight() {
-        return this.pPosicao.moveRight();
+        return this.atualPosicao.moveRight();
     }
 
     public boolean moveLeft() {
-        return this.pPosicao.moveLeft();
+        return this.atualPosicao.moveLeft();
     }
 }

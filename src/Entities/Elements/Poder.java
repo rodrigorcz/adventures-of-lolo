@@ -1,23 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entities.Elements;
 
-import Auxiliar.Desenho;
-import Auxiliar.Posicao;
+import Auxiliar.*;
 import Entities.Personagem;
-import java.io.Serializable;
 
-/**
- *
- * @author rodrigo
- */
-public class Poder extends Personagem implements Serializable{
+public class Poder extends Personagem{
     public int orientacaoPoder;
+    
     public Poder() {
         super("Poder.png", new Posicao(1, 1));
-        this.ehMortal = true;
     }
     
     @Override
@@ -51,39 +41,28 @@ public class Poder extends Personagem implements Serializable{
         }
         
     }
+    public boolean moveDown(){
+        return super.moveDown("Poder.png");
+    }
     
-    public boolean moveUp() {
-        if(super.moveUp())
-            return validaPosicao();
-        return false;
+    public boolean moveUp(){
+        return super.moveUp("Poder.png");
     }
-
-    public boolean moveDown() {
-        if(super.moveDown())
-            return validaPosicao();
-        return false;
-    }
-
-    public boolean moveRight() {
-        if(super.moveRight())
-            return validaPosicao();
-        return false;
-    }
-
-    public boolean moveLeft() {
-        if(super.moveLeft())
-            return validaPosicao();
-        return false;
-    }   
     
-    private boolean validaPosicao(){
+    public boolean moveLeft(){
+        return super.moveLeft("Poder.png");
+    }
+    
+    public boolean moveRight(){
+        return super.moveRight("Poder.png");
+    }
+    
+    @Override
+    public boolean validaPosicao(){
         if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
             return false;
         }
         return true;       
     }
     
-     public void voltaAUltimaPosicao(){
-        this.pPosicao.volta();
-    }
 }

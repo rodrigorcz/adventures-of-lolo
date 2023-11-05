@@ -1,83 +1,39 @@
 package Entities.Enemy;
 
 import Auxiliar.*;
-import Entities.Personagem;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.io.IOException;
-import java.io.Serializable;
+import Entities.*;
 import java.util.Random;
 
-public class BichoVerde extends Personagem  implements Serializable{
+public class BichoVerde extends Inimigo{
     private int countTime;
     private int moveCount;
     private int orientacao;
+    
     public BichoVerde(int Linha, int Coluna) {
         super("verdeB.png", new Posicao(Linha, Coluna));
         this.ehTransponivel = true;
-        this.tipoElem = 2;
         
         this.orientacao = 1;
         this.countTime = 0;
         this.moveCount = 0;
     }
     
-    public boolean setPosicao(int linha, int coluna){
-        if(this.pPosicao.setPosicao(linha, coluna)){
-            if (!Desenho.acessoATelaDoJogo().movimentoInimigo(this.getPosicao())) {
-                this.voltaAUltimaPosicao();
-                return false;
-            } 
-            return true;
-        }
-        return false;       
+    public boolean moveDown(){
+        return super.moveDown("verdeB.png");
     }
     
-    public boolean moveUp() {
-        if(super.moveUp()){
-            this.setImage("verdeC.png");
-            return validaPosicao();
-        }
-        return false;
+    public boolean moveUp(){
+        return super.moveUp("verdeC.png");
+    }
+    
+    public boolean moveLeft(){
+        return super.moveLeft("verdeE.png");
+    }
+    
+    public boolean moveRight(){
+        return super.moveRight("verdeD.png");
     }
 
-    public boolean moveDown() {
-        if(super.moveDown()){
-            this.setImage("verdeB.png");
-            return validaPosicao();
-        }
-        return false;
-    }
-
-    public boolean moveRight() {
-        if(super.moveRight()){
-            this.setImage("verdeD.png");
-            return validaPosicao();  
-        }
-        return false;
-    }
-
-    public boolean moveLeft() {
-        if(super.moveLeft()){
-            this.setImage("verdeE.png");
-            return validaPosicao();
-        }
-        return false;
-    }   
-    
-    private boolean validaPosicao(){
-        if (!Desenho.acessoATelaDoJogo().movimentoInimigo(this.getPosicao())) {
-            this.voltaAUltimaPosicao();
-            return false;
-        }
-        return true;       
-    }
-    
-    public void voltaAUltimaPosicao(){
-        this.pPosicao.volta();
-    }
-    
     public void autoDesenho(){
         super.autoDesenho();
             this.countTime++;
