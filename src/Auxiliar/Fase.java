@@ -211,6 +211,7 @@ public abstract class Fase extends Sistema{
         
         if(hero.getPosicao().igual(bau.getPosicao())){
             bau.setImage("BauVazio.png");
+            elemFase.remove(bau);
             porta.setImage("PortaAb.png");
             eliminarInimigos(elemFase);
             porta.abrirPorta();

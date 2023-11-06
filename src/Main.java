@@ -6,8 +6,8 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 VideoGame v1 = new VideoGame();
-                //v1.iniciarTela();
-                v1.startGame();
+                v1.iniciarTela();
+                //v1.startGame();
             }
         });
     }
