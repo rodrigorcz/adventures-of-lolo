@@ -146,19 +146,19 @@ public abstract class Fase extends Sistema{
     public void verificaPoder(){
         switch(this.poderes){
             case 0:
-                this.addElement(new Icone(7,13, "Icons/num0.png"));
+                this.addElement(new Icone(6,13, "Icons/num0.png"));
                 break;
             case 1:
-                this.addElement(new Icone(7,13, "Icons/num1.png"));
+                this.addElement(new Icone(6,13, "Icons/num1.png"));
                 break;
             case 2:
-                this.addElement(new Icone(7,13, "Icons/num2.png"));
+                this.addElement(new Icone(6,13, "Icons/num2.png"));
                 break;
             case 3:
-                this.addElement(new Icone(7,13, "Icons/num3.png"));
+                this.addElement(new Icone(6,13, "Icons/num3.png"));
                 break;
             case 4:
-               this.addElement(new Icone(7,13, "Icons/num4.png"));
+               this.addElement(new Icone(6,13, "Icons/num4.png"));
                break;
         }
     }
@@ -166,19 +166,33 @@ public abstract class Fase extends Sistema{
     public void verificaVida(){
         switch(lolo.vidas){
             case 0:
-                this.addElement(new Icone(3,13, "Icons/num0.png"));
+                this.addElement(new Icone(2,13, "Icons/num0.png"));
                 break;
             case 1:
-                this.addElement(new Icone(3,13, "Icons/num1.png"));
+                this.addElement(new Icone(2,13, "Icons/num1.png"));
                 break;
             case 2:
-                this.addElement(new Icone(3,13, "Icons/num2.png"));
+                this.addElement(new Icone(2,13, "Icons/num2.png"));
                 break;
             case 3:
-                this.addElement(new Icone(3,13, "Icons/num3.png"));
+                this.addElement(new Icone(2,13, "Icons/num3.png"));
                 break;
         }
     }
+    
+    public void eliminarInimigos(ArrayList<Elemento> umaFase){
+        Elemento pIesimoPersonagem;
+        for(int i = 1; i < umaFase.size(); i++){
+            pIesimoPersonagem = umaFase.get(i);            
+            if(pIesimoPersonagem instanceof Inimigo){
+                Explosao e = new Explosao(pIesimoPersonagem.getPosicao().getLinha(),pIesimoPersonagem.getPosicao().getColuna());
+                umaFase.remove(pIesimoPersonagem);
+                umaFase.add(e);
+            }       
+        }        
+    }
+    
+            
     public void leituraLolo(ArrayList<Elemento> elemFase){
         if(coracoes == 0){
             bau.abrirBau();
@@ -198,6 +212,7 @@ public abstract class Fase extends Sistema{
         if(hero.getPosicao().igual(bau.getPosicao())){
             bau.setImage("BauVazio.png");
             porta.setImage("PortaAb.png");
+            eliminarInimigos(elemFase);
             porta.abrirPorta();
         }
         

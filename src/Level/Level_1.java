@@ -1,8 +1,6 @@
 package Level;
 
-import Entities.Elements.Porta;
-import Entities.Elements.Bau;
-import Entities.Elements.Coracao;
+import Entities.Elements.*;
 import java.util.ArrayList;
 import java.util.List;
 import Controler.Sistema;
@@ -141,8 +139,10 @@ public class Level_1 extends Fase{
             this.addElement(new Icone(i,13, "Icons/TelaPreta.png"));  
         }
         
-        this.addElement(new Icone(2, 13, "Icons/IconLolo.png"));
-        this.addElement(new Icone(6,13, "Icons/IconPoder.png"));
-
+        this.addElement(new Icone(1, 13, "Icons/IconLolo.png"));
+        this.addElement(new Icone(5,13, "Icons/IconPoder.png"));
+        
+        this.addElement(new Icone(11, 13, "Icons/save.png"));
+        this.addElement(new Icone(12, 13, "Icons/letraS.png"));
     }
 }

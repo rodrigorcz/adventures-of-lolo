@@ -77,8 +77,11 @@ public class Level_4 extends Fase{
         
         this.addElement(new BichoVerde(3,8));
         
-        this.addElement(new Icone(2, 13, "Icons/IconLolo.png"));
-        this.addElement(new Icone(6,13, "Icons/IconPoder.png"));
+        this.addElement(new Icone(1, 13, "Icons/IconLolo.png"));
+        this.addElement(new Icone(5,13, "Icons/IconPoder.png"));
+        
+        this.addElement(new Icone(11, 13, "Icons/save.png"));
+        this.addElement(new Icone(12, 13, "Icons/letraS.png"));
 
     }
 }

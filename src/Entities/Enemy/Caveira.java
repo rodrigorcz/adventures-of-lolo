@@ -43,26 +43,26 @@ public class Caveira extends Inimigo{
         if(Desenho.acessoATelaDoJogo().faseTerminou()){
             this.ehTransponivel = true;
             this.countTime++;
-            if(this.countTime == Consts.TIMER-1){
+            if(this.countTime == Consts.TIMER-4){
                 if(orientacao == 1){
                     if(!this.moveDown())
-                        orientacao = 2;
+                        orientacao = 4;
                 }
 
                 if(orientacao == 2){
                     if(!this.moveRight())
-                        orientacao = 3;
+                        orientacao = 1;
 
                 }
 
                 if(orientacao == 3){
                     if(!this.moveUp())
-                        orientacao = 4;
+                        orientacao = 2;
                 }
 
                 if(orientacao == 4){
                     if(!this.moveLeft())
-                        orientacao = 1;
+                        orientacao = 3;
                 }
                 this.moveCount++;
                 this.countTime = 0;

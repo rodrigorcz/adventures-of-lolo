@@ -135,8 +135,10 @@ public class Level_2 extends Fase{
             this.addElement(new Icone(i,13, "Icons/TelaPreta.png"));  
         }
         
-        this.addElement(new Icone(2, 13, "Icons/IconLolo.png"));
-        this.addElement(new Icone(6,13, "Icons/IconPoder.png"));
-
+        this.addElement(new Icone(1, 13, "Icons/IconLolo.png"));
+        this.addElement(new Icone(5,13, "Icons/IconPoder.png"));
+        
+        this.addElement(new Icone(11, 13, "Icons/save.png"));
+        this.addElement(new Icone(12, 13, "Icons/letraS.png"));
     }
 }
