@@ -17,6 +17,7 @@ public class VideoGame implements InterfaceFase{
         this.fase.add(new Level_2(this));
         this.fase.add(new Level_3(this));
         this.fase.add(new Level_4(this));
+        this.fase.add(new Level_5(this));
         
         this.indexLevel = 0;
     }
