@@ -6,6 +6,7 @@ import Entities.Enemy.*;
 import Controler.Sistema;
 import Controler.ControleDeJogo;
 import Auxiliar.*;
+import Controler.VideoGame;
 import Obstacles.*;
 import Icons.*;
 
@@ -52,11 +53,12 @@ public abstract class Fase extends Sistema{
     protected int coracoes;
     protected int poderes;
     protected int empurra = 0;
+    protected VideoGame fase;
     
     public Fase(InterfaceFase Terminador){
         this.Elements = new ArrayList<>(195);
         this.Terminador = Terminador;
-
+        
         this.poderes = 3;
         this.faseTerminou = false;
         lolo = new Hero(9,7);
@@ -293,6 +295,11 @@ public abstract class Fase extends Sistema{
                 lolo.vidas--;
                 this.Terminador.terminaFase();
                 return;
+            }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                if(fase instanceof VideoGame){
+                    fase.getFase().save("faseAtual.level");
+                    this.Terminador.terminaFase();
+                }
             }
             this.count = 0;
         }
@@ -378,7 +385,7 @@ public abstract class Fase extends Sistema{
     }
     
     //Essa função não tá bem definida,tudo isso veio da net
-    public boolean salvar(String nomeArq) {
+    public boolean save(String nomeArq) {
         try {
             File file = new File(
                     new java.io.File(".").getCanonicalPath() + File.separator + "fases" + File.separator + nomeArq);

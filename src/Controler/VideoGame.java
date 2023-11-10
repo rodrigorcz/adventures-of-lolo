@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import Level.*;
 import Auxiliar.*;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.zip.GZIPOutputStream;
 
 public class VideoGame implements InterfaceFase{
     private final ArrayList<Fase> fase;
@@ -23,11 +29,11 @@ public class VideoGame implements InterfaceFase{
     }
     
     public Fase getFase(){
-        return this.fase.get(this.indexLevel);
+      return this.fase.get(this.indexLevel);
     }
-    
+
     @Override
-    public void terminaFase(){
+    public void terminaFase() {
         this.getFase().stopFase();
         this.nextFase();
     }
