@@ -186,7 +186,7 @@ public abstract class Fase extends Sistema{
         Elemento pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
             pIesimoPersonagem = umaFase.get(i);            
-            if(pIesimoPersonagem instanceof Inimigo){
+            if(pIesimoPersonagem instanceof Inimigo || pIesimoPersonagem instanceof Ovo){
                 Explosao e = new Explosao(pIesimoPersonagem.getPosicao().getLinha(),pIesimoPersonagem.getPosicao().getColuna());
                 umaFase.remove(pIesimoPersonagem);
                 umaFase.add(e);
@@ -202,7 +202,6 @@ public abstract class Fase extends Sistema{
             this.coracoes--;
             if(bau.bauAberto()){
                 bau.setImage("BauAberto.png");
-                bau.bauEstado(false);
             }
         }
         verificaPoder();
@@ -211,9 +210,8 @@ public abstract class Fase extends Sistema{
         Hero hero = (Hero)elemFase.get(0);
         Elemento auxElemento;
         
-        if(hero.getPosicao().igual(bau.getPosicao())){
+        if(hero.getPosicao().igual(bau.getPosicao()) && bau.bauAberto()){
             bau.setImage("BauVazio.png");
-            elemFase.remove(bau);
             porta.setImage("PortaAb.png");
             eliminarInimigos(elemFase);
             porta.abrirPorta();
@@ -328,9 +326,9 @@ public abstract class Fase extends Sistema{
     public void verificaEmpurrar(){
         Hero lolo = (Hero)Elements.get(0);
         
-        List<BlocoEmpurravel> listaEmpurravel = Elements.stream().filter(elem -> elem instanceof BlocoEmpurravel).map(elem -> (BlocoEmpurravel) elem).toList();
-        ArrayList<BlocoEmpurravel> empurravel = new ArrayList(listaEmpurravel);
-        BlocoEmpurravel temp;
+        List<Empurravel> listaEmpurravel = Elements.stream().filter(elem -> elem instanceof Empurravel).map(elem -> (Empurravel) elem).toList();
+        ArrayList<Empurravel> empurravel = new ArrayList(listaEmpurravel);
+        Empurravel temp;
         for(int i = 0; i < empurravel.size(); i++){
             temp = empurravel.get(i);
             if(lolo.getPosicao().igual(temp.getPosicao())){
