@@ -366,13 +366,12 @@ public abstract class Fase extends Sistema{
                 }
             }
         }
-        else if(p instanceof BlocoEmpurravel || p instanceof Minhoca){
+        else if(p instanceof Empurravel || p instanceof Inimigo){
             for(int i = 0; i < Elements.size(); i++){
                 pTemp = Elements.get(i);
                 if((!pTemp.ehTransponivel() ||
-                        pTemp instanceof Bau ||
-                        pTemp instanceof Arbusto ||
-                        pTemp instanceof Feno) && p != pTemp){
+                        pTemp instanceof Bau 
+                        ) && p != pTemp){
                     if(pTemp.getPosicao().igual(p.getPosicao())){
                         return false;
                     }
@@ -440,27 +439,4 @@ public abstract class Fase extends Sistema{
     // Variables declaration - do not modify                     
     // End of variables declaration                   
 
-    public void mouseMoved(MouseEvent e) {
-    }
-
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    public void mouseExited(MouseEvent e) {
-    }
-
-    public void mouseDragged(MouseEvent e) {
-    }
-
-    public void keyTyped(KeyEvent e) {
-    }
-
-    public void keyReleased(KeyEvent e) {
-    }
 }
