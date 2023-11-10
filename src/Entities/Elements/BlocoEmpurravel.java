@@ -3,10 +3,9 @@ package Entities.Elements;
 import Auxiliar.*;
 import Entities.*;
 
-public class BlocoEmpurravel extends Personagem{
+public class BlocoEmpurravel extends Empurravel{
     public BlocoEmpurravel(int Linha, int Coluna){
-        super("bloco_empurravel.png", new Posicao(Linha, Coluna));
-        this.ehEmpurravel = true;
-        this.ehMortal = false;
+        super(Linha, Coluna);
+        this.setImage("bloco_empurravel.png");
     }
 }

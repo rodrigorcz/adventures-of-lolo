@@ -32,7 +32,7 @@ public class TelaInicio extends Sistema{
         this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right,
                 Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
         try {
-            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Iniciov2.png");
+            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Inicio.png");
             JPanel imagePanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {

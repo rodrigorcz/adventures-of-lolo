@@ -8,7 +8,7 @@ public class Bau extends Elemento{
     
     public Bau(int Linha, int Coluna, boolean estaAberto){
         super("BauFechado.png", new Posicao(Linha, Coluna));
-        this.ehTransponivel = false;
+        this.ehTransponivel = true;
         this.estaAberto = false;
     }
     

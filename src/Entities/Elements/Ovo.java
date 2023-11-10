@@ -1,12 +1,11 @@
 package Entities.Elements;
 
 import Auxiliar.*;
-import Entities.Inimigo;
+import Entities.*;
 
-public class Ovo extends Inimigo {
+public class Ovo extends Empurravel {
     public Ovo(int Linha, int Coluna) {
-        super("ovo.png", new Posicao(Linha, Coluna));
-        this.ehEmpurravel = true;
-        this.ehMortal = false;
+        super(Linha, Coluna);
+        this.setImage("ovo.png");
     }
 }
