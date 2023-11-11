@@ -105,7 +105,7 @@ public class Sistema extends javax.swing.JFrame implements MouseListener, KeyLis
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
+    
 }
 
 
