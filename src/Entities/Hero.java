@@ -31,14 +31,7 @@ public class Hero extends Personagem{
         this.orientacao = this.direcao;
         f.orientacaoPoder = orientacao;
         
-        if(orientacao == 1)
-           f.setPosicao(atualPosicao.getLinha()+1,atualPosicao.getColuna());
-        if(orientacao == 2)
-            f.setPosicao(atualPosicao.getLinha(),atualPosicao.getColuna()+1);
-        if(orientacao == 3)
-            f.setPosicao(atualPosicao.getLinha()-1,atualPosicao.getColuna());
-        if(orientacao == 4)
-            f.setPosicao(atualPosicao.getLinha(),atualPosicao.getColuna()-1);
+        f.setPosicao(atualPosicao.getLinha(),atualPosicao.getColuna());
         
         Desenho.acessoATelaDoJogo().addElement(f); 
     }

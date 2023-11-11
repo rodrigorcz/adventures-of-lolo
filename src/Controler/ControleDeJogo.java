@@ -57,7 +57,6 @@ public class ControleDeJogo {
             if(pIesimoPersonagem instanceof Coracao || 
                     pIesimoPersonagem instanceof Empurravel||
                     pIesimoPersonagem instanceof Bau||
-                    pIesimoPersonagem instanceof Inimigo||
                     !pIesimoPersonagem.ehTransponivel())
                 if(pIesimoPersonagem.getPosicao().igual(p))
                     return false;

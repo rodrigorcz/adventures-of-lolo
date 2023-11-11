@@ -108,11 +108,6 @@ public abstract class Fase extends Sistema{
     
     public void stopFase(){
         this.contador = 0;
-        for(int i = 0; i <= 13; i++){
-            for(int j = 0; j<=13;j++)
-                this.addElement(new Icone(i,j, "Icons/TelaPreta.png"));  
-        }
-        
         this.setVisible(false);
         this.Elements.clear();
         this.cancelar();
@@ -222,9 +217,9 @@ public abstract class Fase extends Sistema{
                 if(auxElemento instanceof Coracao)
                     this.coracoes--;
             if(hero.getPosicao().igual(auxElemento.getPosicao()))
-                if(auxElemento.getTipo() == 2)
+                if(auxElemento instanceof Inimigo){
                     lolo.vidas--;
-                
+                }
         }
     }
     
@@ -266,6 +261,10 @@ public abstract class Fase extends Sistema{
         }
     }
     
+    public void reiniciarFase(){
+        stopFase();
+        createFase();
+    }
 
     public void keyPressed(KeyEvent e) {
         if(this.count > 0){
