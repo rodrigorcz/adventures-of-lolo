@@ -3,10 +3,8 @@ package Auxiliar;
 import Entities.*;
 import Entities.Elements.*;
 import Entities.Enemy.*;
-import Controler.Sistema;
-import Controler.ControleDeJogo;
 import Auxiliar.*;
-import Controler.VideoGame;
+import Controler.*;
 import Obstacles.*;
 import Icons.*;
 
@@ -167,6 +165,7 @@ public abstract class Fase extends Sistema{
     public void verificaVida(){
         switch(lolo.vidas){
             case 0:
+                stopFase();
                 this.addElement(new Icone(2,13, "Icons/num0.png"));
                 break;
             case 1:
@@ -269,7 +268,7 @@ public abstract class Fase extends Sistema{
 
     public void keyPressed(KeyEvent e) {
         if(this.count > 0){
-            if (e.getKeyCode() == KeyEvent.VK_C) {
+            if (e.getKeyCode() == KeyEvent.VK_L) {
                 this.Elements.clear();
             } else if (e.getKeyCode() == KeyEvent.VK_UP) {
                 lolo.moveUp();
@@ -283,7 +282,7 @@ public abstract class Fase extends Sistema{
             } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 lolo.setImage("LoloDireita.png");
                 lolo.moveRight();
-            } else if (e.getKeyCode() == KeyEvent.VK_Q){
+            } else if (e.getKeyCode() == KeyEvent.VK_Z){
                 if(poderes > -5){
                    lolo.atirar();
                    poderes--;
@@ -292,7 +291,7 @@ public abstract class Fase extends Sistema{
                 lolo.vidas--;
                 this.Terminador.terminaFase();
                 return;
-            }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            }else if(e.getKeyCode() == KeyEvent.VK_S){
                 if(fase instanceof VideoGame){
                     fase.getFase().save("faseAtual.level");
                     this.Terminador.terminaFase();

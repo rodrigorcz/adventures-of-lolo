@@ -13,25 +13,33 @@ import java.nio.file.Path;
 public class TelaInicio extends Sistema{
     private Graphics g2;
     private InterfaceFase Terminador;
+    private String[] imagens = {"Inicio.png", "comandos.png", "comandos.png", "comandos.png"};
     private int indice;
     
     public TelaInicio(InterfaceFase Terminador){
         this.Terminador = Terminador;
-        indice = 0;
+        this.indice = 0;
     }
     
     public void keyPressed(KeyEvent e) {
-        this.Terminador.terminaInicio();
+        if(this.indice == 1){
+            System.out.println("Os comandos permaneceream na tela para te ajudar!!");
+            this.Terminador.terminaInicio();
+        }
+        indice++;
+        this.stop();
+        this.start();
     }
     
-    public void iniciarTela(){
+    
+    public void iniciarTela(String imagem){
         this.addMouseListener(this);
         this.addKeyListener(this);
 
         this.setSize(Consts.RES * Consts.CELL_SIDE ,
                 Consts.RES * Consts.CELL_SIDE );
         try {
-            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Inicio.png");
+            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + imagem);
             JPanel imagePanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -53,7 +61,7 @@ public class TelaInicio extends Sistema{
         this.setVisible(true);
         this.createBufferStrategy(3);
         this.go();
-        this.iniciarTela();
+        this.iniciarTela(imagens[indice]);
     }
     
     public void stop() {
