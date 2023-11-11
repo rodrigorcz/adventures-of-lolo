@@ -23,7 +23,7 @@ public class TelaInicio extends Sistema{
     
     public void keyPressed(KeyEvent e) {
         if(this.indice == 1){
-            System.out.println("Os comandos permaneceream na tela para te ajudar!!");
+            System.out.println("Uma tela com os comandos ficara disponivel para lhe ajudar!");
             this.Terminador.terminaInicio();
         }
         indice++;

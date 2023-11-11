@@ -44,7 +44,7 @@ public class VideoGame implements InterfaceFase{
    
     public void nextFase() {
         if(++indexLevel >= fase.size()){
-            fim.start();
+            this.iniciarFim(true);
             return;
         }
         this.startGame();
@@ -61,6 +61,10 @@ public class VideoGame implements InterfaceFase{
     
     public void iniciarTela(){
         inicio.start();
+    }
+    
+    public void iniciarFim(boolean venceu){
+        fim.start(venceu);
     }
     
     public void startGame(){

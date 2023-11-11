@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 public class TelaFinal extends Sistema{
     private Graphics g2;
     private InterfaceFase Terminador;
-    private String[] imagens = {"venceuTela.png","fimTela.png", ""};
+    private String[] imagens = {"fimTela.png","venceuTela.png", ""};
     private int indice;
     public boolean usuarioPerdeu;
     
@@ -38,10 +38,11 @@ public class TelaFinal extends Sistema{
         this.Terminador.terminaFim();
     }
     
-    public void terminarTela(){
+    public void terminarTela(boolean i){
         this.addMouseListener(this);
         this.addKeyListener(this);
         
+        usuarioPerdeu = i;
         if(usuarioPerdeu){
             indice = 1;
         }
@@ -64,11 +65,11 @@ public class TelaFinal extends Sistema{
         }
     }
     
-    public void start(){
+    public void start(boolean i){
         this.setVisible(true);
         this.createBufferStrategy(3);
         this.go();
-        this.terminarTela();
+        this.terminarTela(i);
     }
     
     public void stop() {

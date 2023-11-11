@@ -166,6 +166,7 @@ public abstract class Fase extends Sistema{
         switch(lolo.vidas){
             case 0:
                 stopFase();
+                this.Terminador.iniciarFim(false);
                 this.addElement(new Icone(2,13, "Icons/num0.png"));
                 break;
             case 1:
