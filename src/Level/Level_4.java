@@ -99,9 +99,7 @@ public class Level_4 extends Fase{
         //Bicho Verde
         this.addElement(new BichoVerde(3,8));
         this.addElement(new BichoVerde(5,4));
-        this.addElement(new BichoVerde(6,7));
         this.addElement(new BichoVerde(6,10));
-        this.addElement(new BichoVerde(8,5));
         this.addElement(new BichoVerde(11,5));
         this.addElement(new BichoVerde(9,2));
         
