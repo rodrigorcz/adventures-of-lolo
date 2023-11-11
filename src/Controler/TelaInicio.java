@@ -13,30 +13,28 @@ import java.nio.file.Path;
 public class TelaInicio extends Sistema{
     private Graphics g2;
     private InterfaceFase Terminador;
+    private int indice;
     
     public TelaInicio(InterfaceFase Terminador){
         this.Terminador = Terminador;
+        indice = 0;
     }
     
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.stop();
-            this.Terminador.terminaInicio();
-        }
+        this.Terminador.terminaInicio();
     }
     
     public void iniciarTela(){
         this.addMouseListener(this);
         this.addKeyListener(this);
 
-        this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right,
-                Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
+        this.setSize(Consts.RES * Consts.CELL_SIDE ,
+                Consts.RES * Consts.CELL_SIDE );
         try {
             Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Inicio.png");
             JPanel imagePanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
                 g.drawImage(newImage, 0, 0,this);
             }
         };
@@ -44,10 +42,13 @@ public class TelaInicio extends Sistema{
         this.setContentPane(imagePanel);
             
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
     
+    public void mudarTela(){
+        
+    }
     public void start(){
         this.setVisible(true);
         this.createBufferStrategy(3);

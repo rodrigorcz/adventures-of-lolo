@@ -95,8 +95,7 @@ public abstract class Fase extends Sistema{
         this.addMouseListener(this);
         this.addKeyListener(this);
         
-        this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right,
-                Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
+        this.setSize(Consts.RES * Consts.CELL_SIDE, Consts.RES * Consts.CELL_SIDE);
 
         Desenho.setCenario(this);
     }
