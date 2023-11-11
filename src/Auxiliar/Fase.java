@@ -3,10 +3,8 @@ package Auxiliar;
 import Entities.*;
 import Entities.Elements.*;
 import Entities.Enemy.*;
-import Controler.Sistema;
-import Controler.ControleDeJogo;
 import Auxiliar.*;
-import Controler.VideoGame;
+import Controler.*;
 import Obstacles.*;
 import Icons.*;
 import Save.SaveLoad;
@@ -100,8 +98,7 @@ public abstract class Fase extends Sistema{
         this.addMouseListener(this);
         this.addKeyListener(this);
         
-        this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right,
-                Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
+        this.setSize(Consts.RES * Consts.CELL_SIDE, Consts.RES * Consts.CELL_SIDE);
 
         Desenho.setCenario(this);
     }
@@ -116,11 +113,6 @@ public abstract class Fase extends Sistema{
     
     public void stopFase(){
         this.contador = 0;
-        for(int i = 0; i <= 13; i++){
-            for(int j = 0; j<=13;j++)
-                this.addElement(new Icone(i,j, "Icons/TelaPreta.png"));  
-        }
-        
         this.setVisible(false);
         this.Elements.clear();
         this.cancelar();
@@ -173,6 +165,8 @@ public abstract class Fase extends Sistema{
     public void verificaVida(){
         switch(lolo.vidas){
             case 0:
+                stopFase();
+                this.Terminador.iniciarFim(false);
                 this.addElement(new Icone(2,13, "Icons/num0.png"));
                 break;
             case 1:
@@ -191,7 +185,7 @@ public abstract class Fase extends Sistema{
         Elemento pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
             pIesimoPersonagem = umaFase.get(i);            
-            if(pIesimoPersonagem instanceof Inimigo){
+            if(pIesimoPersonagem instanceof Inimigo || pIesimoPersonagem instanceof Ovo){
                 Explosao e = new Explosao(pIesimoPersonagem.getPosicao().getLinha(),pIesimoPersonagem.getPosicao().getColuna());
                 umaFase.remove(pIesimoPersonagem);
                 umaFase.add(e);
@@ -207,7 +201,6 @@ public abstract class Fase extends Sistema{
             this.coracoes--;
             if(bau.bauAberto()){
                 bau.setImage("BauAberto.png");
-                bau.bauEstado(false);
             }
         }
         verificaPoder();
@@ -216,9 +209,8 @@ public abstract class Fase extends Sistema{
         Hero hero = (Hero)elemFase.get(0);
         Elemento auxElemento;
         
-        if(hero.getPosicao().igual(bau.getPosicao())){
+        if(hero.getPosicao().igual(bau.getPosicao()) && bau.bauAberto()){
             bau.setImage("BauVazio.png");
-            elemFase.remove(bau);
             porta.setImage("PortaAb.png");
             eliminarInimigos(elemFase);
             porta.abrirPorta();
@@ -230,9 +222,9 @@ public abstract class Fase extends Sistema{
                 if(auxElemento instanceof Coracao)
                     this.coracoes--;
             if(hero.getPosicao().igual(auxElemento.getPosicao()))
-                if(auxElemento.getTipo() == 2)
+                if(auxElemento instanceof Inimigo){
                     lolo.vidas--;
-                
+                }
         }
     }
     
@@ -274,10 +266,14 @@ public abstract class Fase extends Sistema{
         }
     }
     
+    public void reiniciarFase(){
+        stopFase();
+        createFase();
+    }
 
     public void keyPressed(KeyEvent e) {
         if(this.count > 0){
-            if (e.getKeyCode() == KeyEvent.VK_C) {
+            if (e.getKeyCode() == KeyEvent.VK_L) {
                 this.Elements.clear();
             } else if (e.getKeyCode() == KeyEvent.VK_UP) {
                 lolo.moveUp();
@@ -291,7 +287,7 @@ public abstract class Fase extends Sistema{
             } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 lolo.setImage("LoloDireita.png");
                 lolo.moveRight();
-            } else if (e.getKeyCode() == KeyEvent.VK_Q){
+            } else if (e.getKeyCode() == KeyEvent.VK_Z){
                 if(poderes > -5){
                    lolo.atirar();
                    poderes--;
@@ -301,10 +297,12 @@ public abstract class Fase extends Sistema{
                 this.Terminador.terminaFase();
                 return;
             }else if(e.getKeyCode() == KeyEvent.VK_S){
+
                 try {
                     this.save();
                 } catch (IOException ex) {
                     Logger.getLogger(Fase.class.getName()).log(Level.SEVERE, null, ex);
+
                 }
             }else if(e.getKeyCode() == KeyEvent.VK_E){
                 this.load();
@@ -336,9 +334,9 @@ public abstract class Fase extends Sistema{
     public void verificaEmpurrar(){
         Hero lolo = (Hero)Elements.get(0);
         
-        List<BlocoEmpurravel> listaEmpurravel = Elements.stream().filter(elem -> elem instanceof BlocoEmpurravel).map(elem -> (BlocoEmpurravel) elem).toList();
-        ArrayList<BlocoEmpurravel> empurravel = new ArrayList(listaEmpurravel);
-        BlocoEmpurravel temp;
+        List<Empurravel> listaEmpurravel = Elements.stream().filter(elem -> elem instanceof Empurravel).map(elem -> (Empurravel) elem).toList();
+        ArrayList<Empurravel> empurravel = new ArrayList(listaEmpurravel);
+        Empurravel temp;
         for(int i = 0; i < empurravel.size(); i++){
             temp = empurravel.get(i);
             if(lolo.getPosicao().igual(temp.getPosicao())){
@@ -376,13 +374,12 @@ public abstract class Fase extends Sistema{
                 }
             }
         }
-        else if(p instanceof BlocoEmpurravel || p instanceof Minhoca){
+        else if(p instanceof Empurravel || p instanceof Inimigo){
             for(int i = 0; i < Elements.size(); i++){
                 pTemp = Elements.get(i);
                 if((!pTemp.ehTransponivel() ||
-                        pTemp instanceof Bau ||
-                        pTemp instanceof Arbusto ||
-                        pTemp instanceof Feno) && p != pTemp){
+                        pTemp instanceof Bau 
+                        ) && p != pTemp){
                     if(pTemp.getPosicao().igual(p.getPosicao())){
                         return false;
                     }
@@ -478,27 +475,4 @@ public abstract class Fase extends Sistema{
     // Variables declaration - do not modify                     
     // End of variables declaration                   
 
-    public void mouseMoved(MouseEvent e) {
-    }
-
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    public void mouseExited(MouseEvent e) {
-    }
-
-    public void mouseDragged(MouseEvent e) {
-    }
-
-    public void keyTyped(KeyEvent e) {
-    }
-
-    public void keyReleased(KeyEvent e) {
-    }
 }

@@ -6,7 +6,7 @@ import Entities.Elements.Ovo;
 import Obstacles.*;
 import Auxiliar.*;
 import Entities.*;
-import Entities.Elements.Poder;
+import Entities.Elements.*;
 import java.util.ArrayList;
 
 public class ControleDeJogo {
@@ -54,7 +54,10 @@ public class ControleDeJogo {
         Elemento pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
             pIesimoPersonagem = umaFase.get(i);            
-            if(pIesimoPersonagem instanceof Coracao || pIesimoPersonagem instanceof BlocoEmpurravel|| !pIesimoPersonagem.ehTransponivel())
+            if(pIesimoPersonagem instanceof Coracao || 
+                    pIesimoPersonagem instanceof Empurravel||
+                    pIesimoPersonagem instanceof Bau||
+                    !pIesimoPersonagem.ehTransponivel())
                 if(pIesimoPersonagem.getPosicao().igual(p))
                     return false;
         }        

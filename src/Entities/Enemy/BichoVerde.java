@@ -12,8 +12,8 @@ public class BichoVerde extends Inimigo{
     public BichoVerde(int Linha, int Coluna) {
         super("verdeB.png", new Posicao(Linha, Coluna));
         this.ehTransponivel = true;
-        
-        this.orientacao = 1;
+        Random r = new Random();
+        this.orientacao = r.nextInt(4) + 1;;
         this.countTime = 0;
         this.moveCount = 0;
     }
@@ -37,7 +37,7 @@ public class BichoVerde extends Inimigo{
     public void autoDesenho(){
         super.autoDesenho();
             this.countTime++;
-            if(this.countTime == Consts.TIMER-1){
+            if(this.countTime == Consts.TIMER+5){
                 if(orientacao == 1){
                     if(!this.moveDown())
                         orientacao = 2;

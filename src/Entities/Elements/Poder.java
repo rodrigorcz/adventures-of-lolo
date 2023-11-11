@@ -7,7 +7,7 @@ public class Poder extends Personagem{
     public int orientacaoPoder;
     
     public Poder() {
-        super("Poder.png", new Posicao(1, 1));
+        super("", new Posicao(1, 1));
     }
     
     @Override

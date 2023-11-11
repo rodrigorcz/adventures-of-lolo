@@ -80,6 +80,7 @@ public class Level_2 extends Fase{
         }
        
         this.addElement(new Arbusto(2,8));
+        this.addElement(new Arbusto(7,3));
         this.addElement(new Arbusto(3,4));
         this.addElement(new Arbusto(3,6));
         this.addElement(new Arbusto(3,8));

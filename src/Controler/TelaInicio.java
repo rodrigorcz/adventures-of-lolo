@@ -13,30 +13,36 @@ import java.nio.file.Path;
 public class TelaInicio extends Sistema{
     private Graphics g2;
     private InterfaceFase Terminador;
+    private String[] imagens = {"Inicio.png", "comandos.png", "comandos.png", "comandos.png"};
+    private int indice;
     
     public TelaInicio(InterfaceFase Terminador){
         this.Terminador = Terminador;
+        this.indice = 0;
     }
     
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.stop();
+        if(this.indice == 1){
+            System.out.println("Uma tela com os comandos ficara disponivel para lhe ajudar!");
             this.Terminador.terminaInicio();
         }
+        indice++;
+        this.stop();
+        this.start();
     }
     
-    public void iniciarTela(){
+    
+    public void iniciarTela(String imagem){
         this.addMouseListener(this);
         this.addKeyListener(this);
 
-        this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right,
-                Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
+        this.setSize(Consts.RES * Consts.CELL_SIDE ,
+                Consts.RES * Consts.CELL_SIDE );
         try {
-            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "Iniciov2.png");
+            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + imagem);
             JPanel imagePanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
                 g.drawImage(newImage, 0, 0,this);
             }
         };
@@ -44,15 +50,18 @@ public class TelaInicio extends Sistema{
         this.setContentPane(imagePanel);
             
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
     
+    public void mudarTela(){
+        
+    }
     public void start(){
         this.setVisible(true);
         this.createBufferStrategy(3);
         this.go();
-        this.iniciarTela();
+        this.iniciarTela(imagens[indice]);
     }
     
     public void stop() {
