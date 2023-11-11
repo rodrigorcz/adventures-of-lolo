@@ -13,14 +13,17 @@ public class Agua extends Elemento{
     
     @Override
     public void autoDesenho(){
-        if(delay < 5){
+        if(delay < 10){
             this.setImage("Agua1.png");
             delay++;
         }
-        else if(delay < 10){
+        else if(delay < 20){
             this.setImage("Agua2.png"); 
             delay++;
-        } else 
+        }else if(delay < 30){
+            this.setImage("Agua3.png"); 
+            delay++;
+        }else 
             delay = 0;          
 
         super.autoDesenho();
