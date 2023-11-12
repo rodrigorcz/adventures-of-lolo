@@ -40,6 +40,7 @@ public class Hero extends Personagem{
     
     //Metodo voltados para movimentação do LOLO
     public boolean moveUp() {
+        setImage("LoloCima.png");
         direcao = 3;
         if(super.moveUp())
             return validaPosicao();
@@ -47,6 +48,7 @@ public class Hero extends Personagem{
     }
 
     public boolean moveDown() {
+        setImage("LoloBaixo.png");
         direcao = 1;
         if(super.moveDown())
             return validaPosicao();
@@ -54,6 +56,7 @@ public class Hero extends Personagem{
     }
 
     public boolean moveRight() {
+        setImage("LoloDireita.png");
         direcao = 2;
         if(super.moveRight())
             return validaPosicao();
@@ -61,6 +64,7 @@ public class Hero extends Personagem{
     }
 
     public boolean moveLeft() {
+        setImage("LoloEsquerda.png");
         direcao = 4;
         if(super.moveLeft())
             return validaPosicao();

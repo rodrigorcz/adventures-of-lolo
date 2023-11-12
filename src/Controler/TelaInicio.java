@@ -5,10 +5,7 @@ import Auxiliar.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
+
 
 public class TelaInicio extends Sistema{
     private Graphics g2;

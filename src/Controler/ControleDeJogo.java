@@ -8,6 +8,7 @@ import Auxiliar.*;
 import Entities.*;
 import Entities.Elements.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ControleDeJogo {
     public void desenhaTudo(ArrayList<Elemento> e){
@@ -16,18 +17,20 @@ public class ControleDeJogo {
         }
     }
     public void processaTudo(ArrayList<Elemento> umaFase){
-        Hero hero = (Hero)umaFase.get(0);
-        Elemento pIesimoPersonagem;
-        for(int i = 1; i < umaFase.size(); i++){
-            pIesimoPersonagem = umaFase.get(i);
-            if(hero.getPosicao().igual(pIesimoPersonagem.getPosicao()))
-                if(pIesimoPersonagem.ehTransponivel())
-                    if(pIesimoPersonagem.ehMortal() != false)
-                        umaFase.remove(pIesimoPersonagem);
+        if(umaFase.get(0) instanceof Hero){
+            Hero hero = (Hero)umaFase.get(0);
+            Elemento pIesimoPersonagem;
+            for(int i = 1; i < umaFase.size(); i++){
+                pIesimoPersonagem = umaFase.get(i);
+                if(hero.getPosicao().igual(pIesimoPersonagem.getPosicao()))
+                    if(pIesimoPersonagem.ehTransponivel())
+                        if(pIesimoPersonagem.ehMortal() != false)
+                            umaFase.remove(pIesimoPersonagem);
+            }
         }
     }
 
-    /*Retorna true se a posicao p é válida para Hero com relacao a todos os personagens no array*/
+
     public boolean ehPosicaoValida(ArrayList<Elemento> umaFase, Posicao p){
         Elemento pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
@@ -81,5 +84,64 @@ public class ControleDeJogo {
                 }
         } 
         return false;
+    }
+    
+
+    public void verificaEmpurrar(ArrayList<Elemento> Elements){
+        if(!Elements.isEmpty()){
+            Hero lolo = (Hero)Elements.get(0);
+
+            List<Empurravel> listaEmpurravel = Elements.stream().filter(elem -> elem instanceof Empurravel).map(elem -> (Empurravel) elem).toList();
+            ArrayList<Empurravel> empurravel = new ArrayList(listaEmpurravel);
+            Empurravel temp;
+            for(int i = 0; i < empurravel.size(); i++){
+                temp = empurravel.get(i);
+                if(lolo.getPosicao().igual(temp.getPosicao())){
+                    switch(lolo.getDirecao()){
+                        case 1:
+                            temp.moveDown();
+                            break;
+                        case 2:
+                            temp.moveRight();
+                            break;
+                        case 3:
+                            temp.moveUp();
+                            break;
+                        case 4:
+                            temp.moveLeft();
+                            break;
+                    }
+                    if(!posicaoValidaBloco(temp, Elements)){
+                        temp.voltaAUltimaPosicao();
+                        lolo.voltaAUltimaPosicao();
+                    }
+                }
+            }
+        }
+    }
+   
+    public boolean posicaoValidaBloco(Elemento p, ArrayList<Elemento> Elements){
+        Elemento pTemp;
+        if(p instanceof Hero){
+            for(int i = 0; i < Elements.size(); i++){
+                pTemp = Elements.get(i);
+                if(!pTemp.ehTransponivel() && p != pTemp){
+                    if(pTemp.getPosicao().igual(p.getPosicao())){
+                        return false;
+                    }
+                }
+            }
+        }
+        else if(p instanceof Empurravel || p instanceof Inimigo){
+            for(int i = 0; i < Elements.size(); i++){
+                pTemp = Elements.get(i);
+                if((!pTemp.ehTransponivel() || pTemp instanceof Bau || pTemp instanceof Empurravel || pTemp instanceof Coracao) && p != pTemp){
+                    if(pTemp.getPosicao().igual(p.getPosicao())){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

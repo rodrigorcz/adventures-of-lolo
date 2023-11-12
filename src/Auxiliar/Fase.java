@@ -8,15 +8,11 @@ import Controler.*;
 import Obstacles.*;
 import Save.SaveLoad;
 
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -25,16 +21,10 @@ import java.io.ObjectOutput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Logger;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
-import javax.swing.JButton;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
+
+
 
 public abstract class Fase extends Sistema{
     protected ArrayList<Elemento> Elements;
@@ -61,7 +51,7 @@ public abstract class Fase extends Sistema{
         this.Terminador = Terminador;
         
         this.faseTerminou = false;
-        lolo = new Hero(9,7);
+        lolo = new Hero(7,7);
         this.addElement(lolo);
     }
       
@@ -109,7 +99,6 @@ public abstract class Fase extends Sistema{
     }
     
     public void stopFase(){
-        this.contador = 0;
         this.setVisible(false);
         this.Elements.clear();
         this.cancelar();
@@ -202,30 +191,32 @@ public abstract class Fase extends Sistema{
         }
         verificaPoder();
         verificaVida();
-        
-        Hero hero = (Hero)elemFase.get(0);
-        Elemento auxElemento;
-        
-        if(hero.getPosicao().igual(bau.getPosicao()) && bau.bauAberto()){
-            bau.setImage("BauVazio.png");
-            porta.setImage("PortaAb.png");
-            eliminarInimigos(elemFase);
-            porta.abrirPorta();
-        }
-        
-        for(int i = 1; i < elemFase.size(); i++){
-            auxElemento = elemFase.get(i);
-            if(hero.getPosicao().igual(auxElemento.getPosicao()))
-                if(auxElemento instanceof Coracao){
-                    this.coracoes--;
-                    if(++countPoder > 1){
-                        lolo.poderes++;
-                        countPoder = 0;
+       
+        if(elemFase.get(0) instanceof Hero){
+                Hero hero = (Hero)elemFase.get(0);
+                Elemento auxElemento;
+
+            if(hero.getPosicao().igual(bau.getPosicao()) && bau.bauAberto()){
+                bau.setImage("BauVazio.png");
+                porta.setImage("PortaAb.png");
+                eliminarInimigos(elemFase);
+                porta.abrirPorta();
+            }
+
+            for(int i = 1; i < elemFase.size(); i++){
+                auxElemento = elemFase.get(i);
+                if(hero.getPosicao().igual(auxElemento.getPosicao()))
+                    if(auxElemento instanceof Coracao){
+                        this.coracoes--;
+                        if(++countPoder > 1){
+                            lolo.poderes++;
+                            countPoder = 0;
+                        }
                     }
-                }
-            if(hero.getPosicao().igual(auxElemento.getPosicao()))
-                if(auxElemento instanceof Inimigo){
-                    lolo.vidas--;
+                if(hero.getPosicao().igual(auxElemento.getPosicao()))
+                    if(auxElemento instanceof Inimigo){
+                        reiniciarFase();
+                    }
                 }
         }
     }
@@ -269,51 +260,61 @@ public abstract class Fase extends Sistema{
     }
     
     public void reiniciarFase(){
-        stopFase();
+        this.faseTerminou = false;
+        int tmp = lolo.vidas - 1;
+        Elements.clear();
+
+        Hero lolo2 = new Hero(7,7);
+        lolo2.vidas = tmp;
+        lolo = lolo2;
+        this.addElement(lolo);
+        
         createFase();
     }
 
     public void keyPressed(KeyEvent e) {
         if(this.count > 0){
-            if (e.getKeyCode() == KeyEvent.VK_L) {
-                this.Elements.clear();
-            } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-                lolo.moveUp();
-                lolo.setImage("LoloCima.png");
-            } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                lolo.moveDown();
-                lolo.setImage("LoloBaixo.png");
-            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                lolo.moveLeft();
-                lolo.setImage("LoloEsquerda.png");
-            } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                lolo.setImage("LoloDireita.png");
-                lolo.moveRight();
-            } else if (e.getKeyCode() == KeyEvent.VK_Z){
-                if(lolo.poderes > 0){
-                   lolo.atirar();
-                   lolo.poderes--;
-                }
-            }else if(e.getKeyCode() == KeyEvent.VK_R){
-                lolo.vidas--;
-                this.Terminador.terminaFase();
-                return;
-            }else if(e.getKeyCode() == KeyEvent.VK_S){
-
-                try {
-                    this.save();
-                } catch (IOException ex) {
-                    Logger.getLogger(Fase.class.getName()).log(Level.SEVERE, null, ex);
-
-                }
-            }else if(e.getKeyCode() == KeyEvent.VK_E){
-                this.load();
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_UP:
+                    lolo.moveUp();
+                    break;
+                case KeyEvent.VK_DOWN:
+                    lolo.moveDown();
+                    break;
+                case KeyEvent.VK_LEFT:
+                    lolo.moveLeft();
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    lolo.moveRight();
+                    break;
+                case KeyEvent.VK_Z:
+                    if(lolo.poderes > 0){
+                        lolo.atirar();
+                        lolo.poderes--;
+                    }   break;
+                case KeyEvent.VK_P:
+                    lolo.vidas--;
+                    this.Terminador.terminaFase();
+                    break;
+                case KeyEvent.VK_S:
+                    try {
+                        this.save();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Fase.class.getName()).log(Level.SEVERE, null, ex);
+                    }   break;
+                case KeyEvent.VK_E:
+                    this.load();
+                    break;
+                case KeyEvent.VK_R:
+                    reiniciarFase();
+                    break;
+                default:
+                    break;
             }
             this.count = 0;
         }
         
-        this.verificaEmpurrar();
-        //this.paraBloco();
+        cj.verificaEmpurrar(Elements);
         
         this.setTitle("-> Cell: " + (lolo.getPosicao().getColuna()) + ", "
                 + (lolo.getPosicao().getLinha()));
@@ -324,72 +325,12 @@ public abstract class Fase extends Sistema{
     public void paintPassavel(int i, int j, String Imagem){
         try{
             Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + Imagem);
-            g2.drawImage(newImage,
-                            j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-
-                } catch (IOException ex) {
-                    Logger.getLogger(Sistema.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            g2.drawImage(newImage,j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+        } catch (IOException ex) {
+            Logger.getLogger(Sistema.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
     
-    //Essas funções tão com erro ainda, não sei exatamente o pq
-    public void verificaEmpurrar(){
-        Hero lolo = (Hero)Elements.get(0);
-        
-        List<Empurravel> listaEmpurravel = Elements.stream().filter(elem -> elem instanceof Empurravel).map(elem -> (Empurravel) elem).toList();
-        ArrayList<Empurravel> empurravel = new ArrayList(listaEmpurravel);
-        Empurravel temp;
-        for(int i = 0; i < empurravel.size(); i++){
-            temp = empurravel.get(i);
-            if(lolo.getPosicao().igual(temp.getPosicao())){
-                switch(lolo.getDirecao()){
-                    case 1:
-                        temp.moveDown();
-                        break;
-                    case 2:
-                        temp.moveRight();
-                        break;
-                    case 3:
-                        temp.moveUp();
-                        break;
-                    case 4:
-                        temp.moveLeft();
-                        break;
-                }
-                if(!posicaoValidaBloco(temp)){
-                    temp.voltaAUltimaPosicao();
-                    lolo.voltaAUltimaPosicao();
-                }
-            }
-        }
-    }
-   
-    public boolean posicaoValidaBloco(Elemento p){
-        Elemento pTemp;
-        if(p instanceof Hero){
-            for(int i = 0; i < Elements.size(); i++){
-                pTemp = Elements.get(i);
-                if(!pTemp.ehTransponivel() && p != pTemp){
-                    if(pTemp.getPosicao().igual(p.getPosicao())){
-                        return false;
-                    }
-                }
-            }
-        }
-        else if(p instanceof Empurravel || p instanceof Inimigo){
-            for(int i = 0; i < Elements.size(); i++){
-                pTemp = Elements.get(i);
-                if((!pTemp.ehTransponivel() ||
-                        pTemp instanceof Bau 
-                        ) && p != pTemp){
-                    if(pTemp.getPosicao().igual(p.getPosicao())){
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
     
     public void fileRegister(ObjectOutput out) throws IOException{
         out.writeObject(this.Elements);
@@ -456,10 +397,9 @@ public abstract class Fase extends Sistema{
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("POO2023-1 - Skooter");
-        setAlwaysOnTop(true);
+        setTitle("POO2023-1 - Adventures of Lolo 2");
         setAutoRequestFocus(true);
-        setResizable(false);
+        setResizable(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

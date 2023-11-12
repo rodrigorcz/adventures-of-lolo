@@ -12,6 +12,7 @@ import Entities.Elements.Icone;
 import Entities.Enemy.*;
 import Obstacles.*;
 import Auxiliar.*;
+import Entities.Hero;
 /**
  *
  * @author rodrigo
@@ -27,7 +28,23 @@ public class Level_2 extends Fase{
         super.createFase();
         super.start();
         lolo.setPosicao(12,11);
+        lolo.poderes = 1;
     }
+    
+    @Override
+    public void reiniciarFase(){
+        int tmp = lolo.vidas - 1;
+        Elements.clear();
+
+        Hero lolo2 = new Hero(12,11);
+        lolo2.vidas = tmp;
+        lolo2.poderes = 1;
+        lolo = lolo2;
+        this.addElement(lolo);
+        
+        createFase();
+    }
+    
     public void createPassavel(){
 
     }

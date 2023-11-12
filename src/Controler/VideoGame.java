@@ -1,16 +1,10 @@
 package Controler;
 
 import java.util.ArrayList;
-import java.util.List;
+
 import Level.*;
 import Auxiliar.*;
 import Save.SaveData;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.zip.GZIPOutputStream;
 
 public class VideoGame implements ObserverJogo{
     private ArrayList<Fase> fase;

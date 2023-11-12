@@ -1,3 +1,4 @@
+
 package Level;
 
 import Entities.Elements.*;
@@ -24,6 +25,20 @@ public class Level_1 extends Fase{
     public void start(){
         super.createFase();
         super.start();
+        lolo.setPosicao(9,7);
+    }
+    
+    @Override
+    public void reiniciarFase(){
+        int tmp = lolo.vidas - 1;
+        Elements.clear();
+
+        Hero lolo2 = new Hero(9,7);
+        lolo2.vidas = tmp;
+        lolo = lolo2;
+        this.addElement(lolo);
+        
+        createFase();
     }
     
     public void createInteragivel(){

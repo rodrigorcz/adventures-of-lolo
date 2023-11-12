@@ -8,6 +8,7 @@ import Entities.Enemy.*;
 import Obstacles.*;
 import Auxiliar.*;
 import Entities.Elements.Icone;
+import Entities.Hero;
 /**
  *
  * @author marcussilva
@@ -21,10 +22,24 @@ public class Level_3 extends Fase{
     public void start(){
         super.createFase();
         super.start();
+        lolo.setPosicao(6,7);
     }
-    public void createPassavel(){
+    
+    @Override
+    public void reiniciarFase(){
+        int tmp = lolo.vidas - 1;
+        Elements.clear();
 
+        Hero lolo2 = new Hero(6,7);
+        lolo2.vidas = tmp;
+        lolo = lolo2;
+        this.addElement(lolo);
+        
+        createFase();
     }
+    
+    public void createPassavel(){}
+    
     @Override
     public void createInteragivel() {
         this.addElement(new Coracao(4,4));

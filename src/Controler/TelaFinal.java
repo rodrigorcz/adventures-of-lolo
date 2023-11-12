@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controler;
 
 import Auxiliar.Consts;
@@ -12,10 +8,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import Auxiliar.ObserverJogo;
 
-/**
- *
- * @author rodrigo
- */
+
 public class TelaFinal extends Sistema{
     private Graphics g2;
     private ObserverJogo Terminador;

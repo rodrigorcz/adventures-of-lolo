@@ -7,8 +7,9 @@ public class Main {
         System.out.println("Comandos:\n"
         + "Aperte S para salvar o jogo.\n"
         + "Aperte E para carregar o jogo salvo.\n"
-        + "Aperte Z para lançar para atirar o poder\n"
-        + "Aperte R para reiniciar a fase atual\n");
+        + "Aperte Z para atirar o poder\n"
+        + "Aperte R para reiniciar a fase atual\n"
+        + "Caso a fase apresente algum erro, aperte P para pular de fase\n");
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
