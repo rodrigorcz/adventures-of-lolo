@@ -20,10 +20,12 @@ public class Hero extends Personagem{
     private int orientacao;
     private int direcao;
     public int vidas;
+    public int poderes;
     
     public Hero(int Linha, int Coluna) {
         super("LoloBaixo.png", new Posicao(Linha, Coluna));
         this.vidas = 3;
+        this.poderes = 0;
     }
 
     public void atirar(){

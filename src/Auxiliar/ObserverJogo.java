@@ -1,6 +1,6 @@
 package Auxiliar;
 
-public interface InterfaceFase {
+public interface ObserverJogo {
     void terminaFase();
     void terminaInicio();
     void terminaFim();

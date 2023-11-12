@@ -13,6 +13,7 @@ public class Tatu extends Inimigo{
         super("tatu.png", new Posicao(Linha, Coluna));
         this.ehTransponivel = true;
         this.orientacaoTatu = 1;
+        this.tipoElem = 6;
         this.countTime = 0;
         this.moveCount = 0;
     }

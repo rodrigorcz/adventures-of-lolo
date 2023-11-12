@@ -1,7 +1,7 @@
 package Level;
 
 import Entities.Elements.*;
-import Icons.Icone;
+import Entities.Elements.Icone;
 import Entities.Enemy.*;
 import Obstacles.*;
 import Auxiliar.*;
@@ -12,7 +12,7 @@ import Auxiliar.*;
  */
 public class Level_5 extends Fase{
     
-    public Level_5(InterfaceFase Terminador){
+    public Level_5(ObserverJogo Terminador){
         super(Terminador);
     }
     

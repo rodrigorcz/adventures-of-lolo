@@ -17,6 +17,7 @@ public class Caveira extends Inimigo{
         this.linha = Linha;
         this.coluna = Coluna;
         this.ehTransponivel = false;
+        this.tipoElem = 4;
         this.orientacao = 4;
         this.countTime = 0;
         this.moveCount = 0;

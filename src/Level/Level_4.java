@@ -4,14 +4,14 @@ import Entities.Elements.Porta;
 import Entities.Elements.Bau;
 import Entities.Elements.Coracao;
 import Entities.Enemy.Minhoca;
-import Icons.Icone;
+import Entities.Elements.Icone;
 import Entities.Enemy.*;
 import Obstacles.*;
 import Auxiliar.*;
 
 public class Level_4 extends Fase{
     
-    public Level_4(InterfaceFase Terminador){
+    public Level_4(ObserverJogo Terminador){
         super(Terminador);
     }
     

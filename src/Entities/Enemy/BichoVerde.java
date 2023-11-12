@@ -13,6 +13,7 @@ public class BichoVerde extends Inimigo{
         super("verdeB.png", new Posicao(Linha, Coluna));
         this.ehTransponivel = true;
         Random r = new Random();
+        this.tipoElem = 3;
         this.orientacao = r.nextInt(4) + 1;;
         this.countTime = 0;
         this.moveCount = 0;

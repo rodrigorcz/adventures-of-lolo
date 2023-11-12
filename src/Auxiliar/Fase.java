@@ -6,7 +6,6 @@ import Entities.Enemy.*;
 import Auxiliar.*;
 import Controler.*;
 import Obstacles.*;
-import Icons.*;
 import Save.SaveLoad;
 
 import java.awt.FlowLayout;
@@ -41,8 +40,9 @@ public abstract class Fase extends Sistema{
     protected ArrayList<Elemento> Elements;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
-    private InterfaceFase Terminador;
+    private ObserverJogo Terminador;
     private int count = 0;
+    private int countPoder = 0;
     private boolean faseTerminou;
     
     //Variaveis inerentes de cada fase
@@ -52,17 +52,14 @@ public abstract class Fase extends Sistema{
     protected Porta porta;
     protected Fase faseAtual;
     protected int coracoes;
-    protected int poderes;
     protected int empurra = 0;
     protected VideoGame fase;
-    private Fase Fase;
-    private Elemento Elemento;
+
     
-    public Fase(InterfaceFase Terminador){
+    public Fase(ObserverJogo Terminador){
         this.Elements = new ArrayList<>(195);
         this.Terminador = Terminador;
         
-        this.poderes = 3;
         this.faseTerminou = false;
         lolo = new Hero(9,7);
         this.addElement(lolo);
@@ -98,7 +95,7 @@ public abstract class Fase extends Sistema{
         this.addMouseListener(this);
         this.addKeyListener(this);
         
-        this.setSize(Consts.RES * Consts.CELL_SIDE, Consts.RES * Consts.CELL_SIDE);
+        this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right, Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
 
         Desenho.setCenario(this);
     }
@@ -143,7 +140,7 @@ public abstract class Fase extends Sistema{
     }
     
     public void verificaPoder(){
-        switch(this.poderes){
+        switch(lolo.poderes){
             case 0:
                 this.addElement(new Icone(6,13, "Icons/num0.png"));
                 break;
@@ -219,8 +216,13 @@ public abstract class Fase extends Sistema{
         for(int i = 1; i < elemFase.size(); i++){
             auxElemento = elemFase.get(i);
             if(hero.getPosicao().igual(auxElemento.getPosicao()))
-                if(auxElemento instanceof Coracao)
+                if(auxElemento instanceof Coracao){
                     this.coracoes--;
+                    if(++countPoder > 1){
+                        lolo.poderes++;
+                        countPoder = 0;
+                    }
+                }
             if(hero.getPosicao().igual(auxElemento.getPosicao()))
                 if(auxElemento instanceof Inimigo){
                     lolo.vidas--;
@@ -288,9 +290,9 @@ public abstract class Fase extends Sistema{
                 lolo.setImage("LoloDireita.png");
                 lolo.moveRight();
             } else if (e.getKeyCode() == KeyEvent.VK_Z){
-                if(poderes > -5){
+                if(lolo.poderes > 0){
                    lolo.atirar();
-                   poderes--;
+                   lolo.poderes--;
                 }
             }else if(e.getKeyCode() == KeyEvent.VK_R){
                 lolo.vidas--;

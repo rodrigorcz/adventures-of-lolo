@@ -10,7 +10,7 @@ public class Minhoca extends Inimigo{
         super("minhocaD.png", new Posicao(Linha, Coluna));
         this.delay = 0;
         this.ehTransponivel = false;
-        this.tipoElem = 2;
+        this.tipoElem = 5;
     }
     
     @Override

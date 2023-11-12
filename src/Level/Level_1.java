@@ -7,16 +7,16 @@ import Controler.Sistema;
 import Entities.Hero;
 import Entities.Elemento;
 import Auxiliar.Fase;
-import Auxiliar.InterfaceFase;
 import Entities.Enemy.Minhoca;
 import Entities.Enemy.Caveira;
 import Obstacles.*;
 import Controler.ControleDeJogo;
-import Icons.Icone;
+import Entities.Elements.Icone;
+import Auxiliar.ObserverJogo;
 
 public class Level_1 extends Fase{
     
-    public Level_1(InterfaceFase Terminador){
+    public Level_1(ObserverJogo Terminador){
         super(Terminador);
     }
     

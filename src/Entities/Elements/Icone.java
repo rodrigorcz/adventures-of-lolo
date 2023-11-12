@@ -1,4 +1,4 @@
-package Icons;
+package Entities.Elements;
 
 import Entities.Elemento;
 import Auxiliar.*;

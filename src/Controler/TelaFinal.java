@@ -5,12 +5,12 @@
 package Controler;
 
 import Auxiliar.Consts;
-import Auxiliar.InterfaceFase;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
+import Auxiliar.ObserverJogo;
 
 /**
  *
@@ -18,12 +18,12 @@ import javax.swing.JPanel;
  */
 public class TelaFinal extends Sistema{
     private Graphics g2;
-    private InterfaceFase Terminador;
+    private ObserverJogo Terminador;
     private String[] imagens = {"fimTela.png","venceuTela.png", ""};
     private int indice;
     public boolean usuarioPerdeu;
     
-    public TelaFinal(InterfaceFase Terminador, boolean usuarioPerdeu){
+    public TelaFinal(ObserverJogo Terminador, boolean usuarioPerdeu){
         this.Terminador = Terminador;
         this.usuarioPerdeu = usuarioPerdeu;
         this.indice = 0;
@@ -47,8 +47,8 @@ public class TelaFinal extends Sistema{
             indice = 1;
         }
         
-        this.setSize(Consts.RES * Consts.CELL_SIDE ,
-                Consts.RES * Consts.CELL_SIDE );
+        this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right, Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
+
         try {
             Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + imagens[indice]);
             JPanel imagePanel = new JPanel() {

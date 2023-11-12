@@ -8,7 +8,7 @@ import Entities.Elements.Porta;
 import Entities.Elements.Bau;
 import Entities.Elements.Coracao;
 import Entities.Enemy.Minhoca;
-import Icons.Icone;
+import Entities.Elements.Icone;
 import Entities.Enemy.*;
 import Obstacles.*;
 import Auxiliar.*;
@@ -18,7 +18,7 @@ import Auxiliar.*;
  */
 public class Level_2 extends Fase{
     
-    public Level_2(InterfaceFase Terminador){
+    public Level_2(ObserverJogo Terminador){
         super(Terminador);
     }
     

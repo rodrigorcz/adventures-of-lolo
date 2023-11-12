@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.zip.GZIPOutputStream;
 
-public class VideoGame implements InterfaceFase{
+public class VideoGame implements ObserverJogo{
     private ArrayList<Fase> fase;
     private TelaInicio inicio;
     private TelaFinal fim;
@@ -60,6 +60,7 @@ public class VideoGame implements InterfaceFase{
     }
     
     public void terminaInicio(){
+        inicio.stop();
         startGame();
     }
     

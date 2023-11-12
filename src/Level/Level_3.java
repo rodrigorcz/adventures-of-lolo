@@ -7,14 +7,14 @@ import Entities.Elements.BlocoEmpurravel;
 import Entities.Enemy.*;
 import Obstacles.*;
 import Auxiliar.*;
-import Icons.Icone;
+import Entities.Elements.Icone;
 /**
  *
  * @author marcussilva
  */
 public class Level_3 extends Fase{
 
-    public Level_3(InterfaceFase Terminador){
+    public Level_3(ObserverJogo Terminador){
         super(Terminador);
     }
     @Override
