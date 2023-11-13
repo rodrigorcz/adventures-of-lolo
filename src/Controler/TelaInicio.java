@@ -21,18 +21,17 @@ public class TelaInicio extends Sistema{
     }
     
     public void proxImagem(){
-        if(indice == 1){
+        if(indice++ == 1){
             this.stop();
             this.Terminador.terminaInicio();
             return;
         }
-        indice++;
         this.stop();
         this.start();
     }
 
     public void keyPressed(KeyEvent e) {
-        if(indice <= 1){
+        if(indice < 2){
             proxImagem();
         }
     }
