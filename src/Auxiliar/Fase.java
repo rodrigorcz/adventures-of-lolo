@@ -382,7 +382,7 @@ public abstract class Fase extends Sistema{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("POO2023-1 - Adventures of Lolo 2");
         setAutoRequestFocus(true);
-        setResizable(true);
+        setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
