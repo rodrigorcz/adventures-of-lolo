@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 public class TelaInicio extends Sistema{
     private Graphics g2;
     private ObserverJogo Terminador;
-    private String[] imagens = {"Inicio.png", "comandos.png", "comandos.png", "comandos.png"};
+    private String[] imagens = {"Inicio.png", "comandos.png"};
     private int indice;
     private boolean receberEntradas = true;
     
@@ -21,17 +21,18 @@ public class TelaInicio extends Sistema{
     }
     
     public void proxImagem(){
-        if(indice++ == 1){
+        if(indice == 1){
             this.stop();
             this.Terminador.terminaInicio();
             return;
         }
+        indice++;
         this.stop();
         this.start();
     }
 
     public void keyPressed(KeyEvent e) {
-        if(indice < 2){
+        if(indice <= 1){
             proxImagem();
         }
     }
