@@ -1,6 +1,6 @@
 package Controler;
 
-import Auxiliar.Consts;
+import Auxiliar.Constantes;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import Auxiliar.ObserverJogo;
 
-
+// Ultima tela que sera apresentada, com base na vitoria ou derrota
 public class TelaFinal extends Sistema{
     private Graphics g2;
     private ObserverJogo Terminador;
@@ -40,10 +40,10 @@ public class TelaFinal extends Sistema{
             indice = 1;
         }
         
-        this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right, Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
+        this.setSize(Constantes.RES * Constantes.CELL_SIDE + getInsets().left + getInsets().right, Constantes.RES * Constantes.CELL_SIDE + getInsets().top + getInsets().bottom);
 
         try {
-            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + imagens[indice]);
+            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Constantes.PATH + imagens[indice]);
             JPanel imagePanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {

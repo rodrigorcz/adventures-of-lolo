@@ -27,14 +27,11 @@ public class Level_3 extends Fase{
     
     @Override
     public void reiniciarFase(){
-        int tmp = lolo.vidas - 1;
+        lolo.vidas -= 1;
         Elements.clear();
 
-        Hero lolo2 = new Hero(6,7);
-        lolo2.vidas = tmp;
-        lolo = lolo2;
         this.addElement(lolo);
-        
+        lolo.setPosicao(6,7);
         createFase();
     }
     

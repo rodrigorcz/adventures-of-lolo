@@ -38,7 +38,7 @@ public class BichoVerde extends Inimigo{
     public void autoDesenho(){
         super.autoDesenho();
             this.countTime++;
-            if(this.countTime == Consts.TIMER+5){
+            if(this.countTime == Constantes.TIMER+5){
                 if(orientacao == 1){
                     if(!this.moveDown())
                         orientacao = 2;

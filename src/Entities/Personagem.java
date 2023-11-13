@@ -1,19 +1,8 @@
 package Entities;
 
 import Auxiliar.*;
-import Controler.Sistema;
 
-//Imports externos
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.Random;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+
 
 /*
  *  Personagem é um Elemento que pode:

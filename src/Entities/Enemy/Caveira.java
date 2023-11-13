@@ -44,7 +44,7 @@ public class Caveira extends Inimigo{
         if(Desenho.acessoATelaDoJogo().faseTerminou()){
             this.ehTransponivel = true;
             this.countTime++;
-            if(this.countTime == Consts.TIMER-4){
+            if(this.countTime == Constantes.TIMER-4){
                 if(orientacao == 1){
                     if(!this.moveDown())
                         orientacao = 4;

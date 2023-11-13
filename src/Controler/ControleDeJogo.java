@@ -1,7 +1,6 @@
 package Controler;
 
 import Entities.Elements.Coracao;
-import Entities.Elements.BlocoEmpurravel;
 import Entities.Elements.Ovo;
 import Obstacles.*;
 import Auxiliar.*;
@@ -11,26 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControleDeJogo {
+    
+    //Desenha todos os elementos
     public void desenhaTudo(ArrayList<Elemento> e){
         for(int i = 0; i < e.size(); i++){
             e.get(i).autoDesenho();
         }
     }
-    public void processaTudo(ArrayList<Elemento> umaFase){
-        if(umaFase.get(0) instanceof Hero){
-            Hero hero = (Hero)umaFase.get(0);
-            Elemento pIesimoPersonagem;
-            for(int i = 1; i < umaFase.size(); i++){
-                pIesimoPersonagem = umaFase.get(i);
-                if(hero.getPosicao().igual(pIesimoPersonagem.getPosicao()))
-                    if(pIesimoPersonagem.ehTransponivel())
-                        if(pIesimoPersonagem.ehMortal() != false)
-                            umaFase.remove(pIesimoPersonagem);
-            }
-        }
-    }
-
-
+    
+    //Verifica se a posicao que o elemento esta é valida
     public boolean ehPosicaoValida(ArrayList<Elemento> umaFase, Posicao p){
         Elemento pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
@@ -42,6 +30,7 @@ public class ControleDeJogo {
         return true;
     }
     
+    //Verifica se a posicao do tiro é valida
     public boolean ehPosicaoValidaTiro(ArrayList<Elemento> umaFase, Posicao p){
         Elemento pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
@@ -53,6 +42,7 @@ public class ControleDeJogo {
         return true;
     }
     
+    //Verifica se a posicao que o inimigo esta é valida
     public boolean movimentoInimigo(ArrayList<Elemento> umaFase, Posicao p){
         Elemento pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
@@ -67,6 +57,7 @@ public class ControleDeJogo {
         return true;
     }
 
+    //Tranforma os inimigos em Ovo
     public boolean transformaInimigo(ArrayList<Elemento> umaFase, Posicao p){
         Elemento pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
@@ -86,7 +77,7 @@ public class ControleDeJogo {
         return false;
     }
     
-
+    //Mecanica de empurrar os blocos
     public void verificaEmpurrar(ArrayList<Elemento> Elements){
         if(!Elements.isEmpty()){
             Hero lolo = (Hero)Elements.get(0);

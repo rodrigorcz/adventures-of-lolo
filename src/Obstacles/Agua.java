@@ -1,6 +1,5 @@
 package Obstacles;
 
-import Auxiliar.Consts;
 import Auxiliar.Posicao;
 import Entities.Elemento;
 

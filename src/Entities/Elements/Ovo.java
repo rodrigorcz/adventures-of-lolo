@@ -16,7 +16,7 @@ public class Ovo extends Empurravel {
     public void autoDesenho(){       
         
         super.autoDesenho();
-        if(delay > 5*Consts.TIMER){
+        if(delay > 5*Constantes.TIMER){
             this.setImage("ovoQuebrado.png");
             
         }

@@ -1,17 +1,10 @@
-
 package Level;
 
 import Entities.Elements.*;
-import java.util.ArrayList;
-import java.util.List;
-import Controler.Sistema;
 import Entities.Hero;
-import Entities.Elemento;
 import Auxiliar.Fase;
 import Entities.Enemy.Minhoca;
-import Entities.Enemy.Caveira;
 import Obstacles.*;
-import Controler.ControleDeJogo;
 import Entities.Elements.Icone;
 import Auxiliar.ObserverJogo;
 
@@ -30,14 +23,11 @@ public class Level_1 extends Fase{
     
     @Override
     public void reiniciarFase(){
-        int tmp = lolo.vidas - 1;
+        lolo.vidas -= 1;
         Elements.clear();
 
-        Hero lolo2 = new Hero(9,7);
-        lolo2.vidas = tmp;
-        lolo = lolo2;
         this.addElement(lolo);
-        
+        lolo.setPosicao(9,7);
         createFase();
     }
     

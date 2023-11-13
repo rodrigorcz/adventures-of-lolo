@@ -10,7 +10,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Sistema extends javax.swing.JFrame implements MouseListener, KeyListener {
-
+    
+    //Manipulação do tempo do Sistema
     TimerTask task;
     public int contador;
     
@@ -24,7 +25,7 @@ public class Sistema extends javax.swing.JFrame implements MouseListener, KeyLis
             }
         };
         Timer timer = new Timer();
-        timer.schedule(task, 0, Consts.PERIOD);
+        timer.schedule(task, 0, Constantes.PERIOD);
     }
 
     public void cancelar() {

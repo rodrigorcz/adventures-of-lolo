@@ -16,27 +16,27 @@ public class Poder extends Personagem{
         super.autoDesenho();
         if(orientacaoPoder == 1){
             if(!this.moveDown())
-                Desenho.acessoATelaDoJogo().removePersonagem(this);
+                Desenho.acessoATelaDoJogo().removeElement(this);
         }
         
         if(orientacaoPoder == 2){
             if(!this.moveRight())
-                Desenho.acessoATelaDoJogo().removePersonagem(this);
+                Desenho.acessoATelaDoJogo().removeElement(this);
         }
         
         if(orientacaoPoder == 3){
             if(!this.moveUp())
-                Desenho.acessoATelaDoJogo().removePersonagem(this);
+                Desenho.acessoATelaDoJogo().removeElement(this);
         }
 
         if(orientacaoPoder == 4){
             if(!this.moveLeft()){
-                Desenho.acessoATelaDoJogo().removePersonagem(this); 
+                Desenho.acessoATelaDoJogo().removeElement(this); 
             }
         }
         
         if(Desenho.acessoATelaDoJogo().transformaInimigo(this.getPosicao())){
-            Desenho.acessoATelaDoJogo().removePersonagem(this);
+            Desenho.acessoATelaDoJogo().removeElement(this);
         }
     }
     
@@ -44,11 +44,11 @@ public class Poder extends Personagem{
     public boolean setPosicao(int linha, int coluna){
         if(this.atualPosicao.setPosicao(linha, coluna)){
             if(Desenho.acessoATelaDoJogo().transformaInimigo(this.getPosicao())){
-                Desenho.acessoATelaDoJogo().removePersonagem(this);
+                Desenho.acessoATelaDoJogo().removeElement(this);
                 return false;
             }
             if (!Desenho.acessoATelaDoJogo().ehPosicaoValidaTiro(this.getPosicao())) {
-                Desenho.acessoATelaDoJogo().removePersonagem(this);
+                Desenho.acessoATelaDoJogo().removeElement(this);
                 return false;
             } 
             return true;

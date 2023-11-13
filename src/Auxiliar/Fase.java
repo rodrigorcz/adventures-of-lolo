@@ -25,10 +25,10 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 
-
 public abstract class Fase extends Sistema{
-    protected ArrayList<Elemento> Elements;
-    private ControleDeJogo cj = new ControleDeJogo();
+    
+    //Variaveis de Controle e Auxilio
+    private ControleDeJogo controleJogo = new ControleDeJogo();
     private Graphics g2;
     private ObserverJogo Terminador;
     private int count = 0;
@@ -37,12 +37,12 @@ public abstract class Fase extends Sistema{
     
     //Variaveis inerentes de cada fase
     public Hero lolo;
+    public ArrayList<Elemento> Elements;
     protected BlocoEmpurravel bloco;
     protected Bau bau;
     protected Porta porta;
     protected Fase faseAtual;
     protected int coracoes;
-    protected int empurra = 0;
     protected VideoGame fase;
 
     
@@ -54,29 +54,28 @@ public abstract class Fase extends Sistema{
         lolo = new Hero(7,7);
         this.addElement(lolo);
     }
-      
+
+    //Metodos Abstratos
     public abstract void createEntities();
     public abstract void createInteragivel();
+    public abstract void createPassavel();
+    public abstract void reiniciarFase();
     
+    //Controle das tela do jogo
     public void start(){
         this.setVisible(true);
-        this.createBufferStrategy(3);
+        this.createBufferStrategy(3); // Com 2 Buffers o jogo roda melhor, porem pode ter alguns bugs em algumas maquinas
         Desenho.setCenario(this);
         this.go();
     }
     
-    public void addElement(Elemento e){
-        this.Elements.add(e);
+    public void stopFase(){
+        this.setVisible(false);
+        this.Elements.clear();
+        this.cancelar();
     }
-    
-    public void removeElement(Elemento e){
-        this.Elements.remove(e);
-    }
-    
-    public boolean faseTerminou(){
-        return this.faseTerminou;
-    }
-    
+
+    //Cria toda os elementos da fase
     public void createFase(){
         initComponents();
         createEntities();
@@ -85,88 +84,46 @@ public abstract class Fase extends Sistema{
         this.addMouseListener(this);
         this.addKeyListener(this);
         
-        this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right, Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
+        this.setSize(Constantes.RES * Constantes.CELL_SIDE + getInsets().left + getInsets().right, Constantes.RES * Constantes.CELL_SIDE + getInsets().top + getInsets().bottom);
 
         Desenho.setCenario(this);
     }
     
-    public boolean addDelay(int tamanho){
-        this.contador = 0;
-        while(contador<tamanho){
-            return false;
-        }
-            return true;
-    }
-    
-    public void stopFase(){
-        this.setVisible(false);
-        this.Elements.clear();
-        this.cancelar();
-    }
-    
+    //Acesso aos metodos da classe ControleDeJogo
     public boolean ehPosicaoValida(Posicao p){
-        return cj.ehPosicaoValida(this.Elements, p);
+        return controleJogo.ehPosicaoValida(this.Elements, p);
     }
     
     public boolean movimentoInimigo(Posicao p){
-        return cj.movimentoInimigo(this.Elements, p);
+        return controleJogo.movimentoInimigo(this.Elements, p);
     }
     
     public boolean ehPosicaoValidaTiro(Posicao p){
-        return cj.ehPosicaoValidaTiro(this.Elements, p);
+        return controleJogo.ehPosicaoValidaTiro(this.Elements, p);
     }
     
     public boolean transformaInimigo(Posicao p){
-        return cj.transformaInimigo(this.Elements, p);
+        return controleJogo.transformaInimigo(this.Elements, p);
     }
     
-    public void removePersonagem(Personagem e1) {
-        Elements.remove(e1);
-    }
+    //Manipulação de elementos e variaveis
 
+    public void removeElement(Elemento e){
+        Elements.remove(e);
+    }
+    public void addElement(Elemento e){
+        Elements.add(e);
+    }
+    
+    public boolean faseTerminou(){
+        return this.faseTerminou;
+    }
     public Graphics getGraphicsBuffer(){
         return g2;
     }
     
-    public void verificaPoder(){
-        switch(lolo.poderes){
-            case 0:
-                this.addElement(new Icone(6,13, "Icons/num0.png"));
-                break;
-            case 1:
-                this.addElement(new Icone(6,13, "Icons/num1.png"));
-                break;
-            case 2:
-                this.addElement(new Icone(6,13, "Icons/num2.png"));
-                break;
-            case 3:
-                this.addElement(new Icone(6,13, "Icons/num3.png"));
-                break;
-            case 4:
-               this.addElement(new Icone(6,13, "Icons/num4.png"));
-               break;
-        }
-    }
-    
-    public void verificaVida(){
-        switch(lolo.vidas){
-            case 0:
-                stopFase();
-                this.Terminador.iniciarFim(false);
-                this.addElement(new Icone(2,13, "Icons/num0.png"));
-                break;
-            case 1:
-                this.addElement(new Icone(2,13, "Icons/num1.png"));
-                break;
-            case 2:
-                this.addElement(new Icone(2,13, "Icons/num2.png"));
-                break;
-            case 3:
-                this.addElement(new Icone(2,13, "Icons/num3.png"));
-                break;
-        }
-    }
-    
+ 
+    // Elimina todos inimigos da fase, transformando-os em explosoes
     public void eliminarInimigos(ArrayList<Elemento> umaFase){
         Elemento pIesimoPersonagem;
         for(int i = 1; i < umaFase.size(); i++){
@@ -179,7 +136,7 @@ public abstract class Fase extends Sistema{
         }        
     }
     
-            
+    // Manipulação das interações do Lolo
     public void leituraLolo(ArrayList<Elemento> elemFase){
         if(coracoes == 0){
             bau.abrirBau();
@@ -212,6 +169,7 @@ public abstract class Fase extends Sistema{
                             lolo.poderes++;
                             countPoder = 0;
                         }
+                        removeElement(auxElemento);
                     }
                 if(hero.getPosicao().igual(auxElemento.getPosicao()))
                     if(auxElemento instanceof Inimigo){
@@ -221,25 +179,26 @@ public abstract class Fase extends Sistema{
         }
     }
     
-    public abstract void createPassavel();
+    
+    //Desenho dos elementos
     public void paint(Graphics gOld) {
  
+        //Criacao dos graficos
         Graphics g = this.getBufferStrategy().getDrawGraphics();
-        /*Criamos um contexto gráfico*/
         g2 = g.create(getInsets().left, getInsets().top, getWidth() - getInsets().right, getHeight() - getInsets().top);
         
-        /*************Desenha cenário de fundo**************/
-        
-        for (int i = 0; i < Consts.RES; i++) {
-            for (int j = 0; j < Consts.RES; j++) {
+        ///Desenha o cenário que fica no fundo
+        for (int i = 0; i < Constantes.RES; i++) {
+            for (int j = 0; j < Constantes.RES; j++) {
                 paintPassavel(i,j,"brick.png");
             }
         }
         createPassavel();
+        
+        //Processamento das informações
         if (!this.Elements.isEmpty()) {
-            this.cj.desenhaTudo(Elements);
+            this.controleJogo.desenhaTudo(Elements);
             this.leituraLolo(Elements);
-            this.cj.processaTudo(Elements);
         }
 
         g.dispose();
@@ -248,30 +207,16 @@ public abstract class Fase extends Sistema{
             getBufferStrategy().show();    
         }
         
+        // Se o Lolo entrar na porta troca de fase
         if((lolo.getPosicao().igual(porta.getPosicao()))){
-            if(contador>10){
-                this.Terminador.terminaFase();
-                return;
-            }
+            this.Terminador.terminaFase();
+            return;
         }
-        if(this.count <= 5){
-            this.count++;
-        }
+        this.count++;
     }
     
-    public void reiniciarFase(){
-        this.faseTerminou = false;
-        int tmp = lolo.vidas - 1;
-        Elements.clear();
 
-        Hero lolo2 = new Hero(7,7);
-        lolo2.vidas = tmp;
-        lolo = lolo2;
-        this.addElement(lolo);
-        
-        createFase();
-    }
-
+    // Definicao de comandos do teclado
     public void keyPressed(KeyEvent e) {
         if(this.count > 0){
             switch (e.getKeyCode()) {
@@ -311,27 +256,26 @@ public abstract class Fase extends Sistema{
                 default:
                     break;
             }
-            this.count = 0;
+             this.count = 0;
         }
         
-        cj.verificaEmpurrar(Elements);
+        controleJogo.verificaEmpurrar(Elements);
+        this.setTitle("-> Lolo: " + (lolo.getPosicao().getColuna()) + ", " + (lolo.getPosicao().getLinha()));
         
-        this.setTitle("-> Cell: " + (lolo.getPosicao().getColuna()) + ", "
-                + (lolo.getPosicao().getLinha()));
-
-        //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
     }
     
+    //Desenha o plano de fundo
     public void paintPassavel(int i, int j, String Imagem){
         try{
-            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + Imagem);
-            g2.drawImage(newImage,j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Constantes.PATH + Imagem);
+            g2.drawImage(newImage,j * Constantes.CELL_SIDE, i * Constantes.CELL_SIDE, Constantes.CELL_SIDE, Constantes.CELL_SIDE, null);
         } catch (IOException ex) {
             Logger.getLogger(Sistema.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
     
     
+    // Stream e Arquivos
     public void fileRegister(ObjectOutput out) throws IOException{
         out.writeObject(this.Elements);
         out.close();
@@ -380,17 +324,56 @@ public abstract class Fase extends Sistema{
         lolo = (Hero)Elements.get(0);
     }
     
+    // Mouse
     public void mousePressed(MouseEvent e) {
-        /* Clique do mouse desligado*/
-         int x = e.getX();
-         int y = e.getY();
-     
-         this.setTitle("X: "+ x + ", Y: " + y +
-         " -> Cell: " + (y/Consts.CELL_SIDE) + ", " + (x/Consts.CELL_SIDE));
+        int x = e.getX();
+        int y = e.getY();
+
+        this.setTitle("X: "+ x + ", Y: " + y + " -> Cell: " + (y/Constantes.CELL_SIDE) + ", " + (x/Constantes.CELL_SIDE));
         
-         this.lolo.getPosicao().setPosicao(y/Consts.CELL_SIDE, x/Consts.CELL_SIDE);
-         
+        //Lolo ira para a posicao do clique, caso o usuario precise
+        this.lolo.getPosicao().setPosicao(y/Constantes.CELL_SIDE, x/Constantes.CELL_SIDE);
         repaint();
+    }
+    
+    //Verificacao da vida e poder
+    public void verificaPoder(){
+        switch(lolo.poderes){
+            case 0:
+                this.addElement(new Icone(6,13, "Icons/num0.png"));
+                break;
+            case 1:
+                this.addElement(new Icone(6,13, "Icons/num1.png"));
+                break;
+            case 2:
+                this.addElement(new Icone(6,13, "Icons/num2.png"));
+                break;
+            case 3:
+                this.addElement(new Icone(6,13, "Icons/num3.png"));
+                break;
+            case 4:
+               this.addElement(new Icone(6,13, "Icons/num4.png"));
+               break;
+        }
+    }
+    
+    public void verificaVida(){
+        switch(lolo.vidas){
+            case 0:
+                stopFase();
+                this.Terminador.iniciarFim(false);
+                this.addElement(new Icone(2,13, "Icons/num0.png"));
+                break;
+            case 1:
+                this.addElement(new Icone(2,13, "Icons/num1.png"));
+                break;
+            case 2:
+                this.addElement(new Icone(2,13, "Icons/num2.png"));
+                break;
+            case 3:
+                this.addElement(new Icone(2,13, "Icons/num3.png"));
+                break;
+        }
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          

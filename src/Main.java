@@ -7,15 +7,22 @@ public class Main {
         System.out.println("Comandos:\n"
         + "Aperte S para salvar o jogo.\n"
         + "Aperte E para carregar o jogo salvo.\n"
-        + "Aperte Z para atirar o poder\n"
-        + "Aperte R para reiniciar a fase atual\n"
-        + "Caso a fase apresente algum erro, aperte P para pular de fase\n");
+        + "Aperte Z para atirar o poder.\n"
+        + "Aperte R para reiniciar a fase atual.\n"
+        + "Caso a fase apresente algum erro, aperte P para pular de fase.\n"
+        + "Ou use o mouse para se locomover (Apenas se houver erros).\n");
         
+        System.out.println("Instruções:\n"
+        + "Pegue todos os corações e corra para o bau.\n"
+        + "Apos pegar o bau os monstros morrerao.\n"
+        + "Você tem 3 vidas por nível\n"
+        + "Boa Sorte!");
+        
+        //Iniciar o jogo
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 VideoGame v1 = new VideoGame();
                 v1.iniciarTela();
-                //v1.startGame();
             }
         });
     }

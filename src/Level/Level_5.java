@@ -7,10 +7,6 @@ import Obstacles.*;
 import Auxiliar.*;
 import Entities.Hero;
 
-/**
- *
- * @author marcussilva
- */
 public class Level_5 extends Fase{
     
     public Level_5(ObserverJogo Terminador){
@@ -21,21 +17,19 @@ public class Level_5 extends Fase{
     public void start(){
         super.createFase();
         super.start();
-        lolo.setPosicao(12,11);
+        lolo.setPosicao(12,6);
     }
     
     @Override
     public void reiniciarFase(){
-        int tmp = lolo.vidas - 1;
+        lolo.vidas -= 1;
         Elements.clear();
 
-        Hero lolo2 = new Hero(12,11);
-        lolo2.vidas = tmp;
-        lolo = lolo2;
         this.addElement(lolo);
-        
+        lolo.setPosicao(12,6);
         createFase();
     }
+    
     public void createPassavel(){}
     
     public void createInteragivel(){

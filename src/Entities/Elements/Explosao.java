@@ -1,6 +1,6 @@
 package Entities.Elements;
 
-import Auxiliar.Consts;
+import Auxiliar.Constantes;
 import Auxiliar.Posicao;
 import Entities.Elemento;
 
@@ -15,16 +15,16 @@ public class Explosao extends Elemento {
     
     @Override
     public void autoDesenho(){
-        if(delay < 1*Consts.TIMER){
+        if(delay < 1*Constantes.TIMER){
             this.setImage("explosao1.png");
             delay++;
-        }else if(delay < 2*Consts.TIMER){
+        }else if(delay < 2*Constantes.TIMER){
             this.setImage("explosao2.png"); 
             delay++;
-        }else if(delay < 3*Consts.TIMER){
+        }else if(delay < 3*Constantes.TIMER){
             this.setImage("explosao3.png"); 
             delay++;
-        }else if(delay < 4*Consts.TIMER){
+        }else if(delay < 4*Constantes.TIMER){
             this.setImage("explosao4.png"); 
             delay++;
         }else

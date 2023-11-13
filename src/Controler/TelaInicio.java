@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+// Primeiras telas que serao apresentadas
 
 public class TelaInicio extends Sistema{
     private Graphics g2;
@@ -40,10 +41,10 @@ public class TelaInicio extends Sistema{
         this.addMouseListener(this);
         this.addKeyListener(this);
 
-        this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right, Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
+        this.setSize(Constantes.RES * Constantes.CELL_SIDE + getInsets().left + getInsets().right, Constantes.RES * Constantes.CELL_SIDE + getInsets().top + getInsets().bottom);
 
         try {
-            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + imagem);
+            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Constantes.PATH + imagem);
             JPanel imagePanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {

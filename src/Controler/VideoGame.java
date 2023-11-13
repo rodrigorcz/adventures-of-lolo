@@ -12,6 +12,7 @@ public class VideoGame implements ObserverJogo{
     private TelaFinal fim;
     private int indexLevel;
     
+    //Instanciacao de todas as fases e telas
     public VideoGame(){
         this.fase = new ArrayList<>();
         this.inicio = new TelaInicio(this);
@@ -26,6 +27,49 @@ public class VideoGame implements ObserverJogo{
         this.indexLevel = 0;
     }
 
+    // Inicia a Fase
+    public void startGame(){
+        Fase fase = this.getFase();
+        java.awt.EventQueue.invokeLater(fase::start);
+    }
+
+    // Avança para proxima fase
+    public void nextFase() {
+        if(++indexLevel >= fase.size()){
+            this.iniciarFim(true);
+            return;
+        }
+        this.startGame();
+    }
+    
+    // Inicio e Terminos das Telas
+    public void iniciarTela(){
+        inicio.start();
+    }
+    
+    @Override
+    public void iniciarFim(boolean venceu){
+        fim.start(venceu);
+    }
+    
+    @Override
+    public void terminaFase() {
+        this.getFase().stopFase();
+        this.nextFase();
+    }
+    
+    @Override
+    public void terminaInicio(){
+        inicio.stop();
+        startGame();
+    }
+    @Override
+    public void terminaFim(){
+        fim.stop();
+        System.exit(0);
+    }
+    
+    //Gets e Sets
     public ArrayList<Fase> getArray() {
         return fase;
     }
@@ -38,46 +82,5 @@ public class VideoGame implements ObserverJogo{
       return this.fase.get(this.indexLevel);
     }
     
-    @Override
-    public void terminaFase() {
-        this.getFase().stopFase();
-        this.nextFase();
-    }
-
-   
-    public void nextFase() {
-        if(++indexLevel >= fase.size()){
-            this.iniciarFim(true);
-            return;
-        }
-        this.startGame();
-    }
-    
-    public void terminaInicio(){
-        inicio.stop();
-        startGame();
-    }
-    
-    public void terminaFim(){
-        fim.stop();
-        System.exit(0);
-    }
-    
-    public void iniciarTela(){
-        inicio.start();
-    }
-    
-    public void iniciarFim(boolean venceu){
-        fim.start(venceu);
-    }
-    
-    public void startGame(){
-        Fase fase = this.getFase();
-        java.awt.EventQueue.invokeLater(fase::start);
-    }
-
-    public void setArray(SaveData sd) {
-        
-    }
-    
+    public void setArray(SaveData sd) {}
 }

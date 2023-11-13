@@ -15,11 +15,11 @@ public class Minhoca extends Inimigo{
     
     @Override
     public void autoDesenho(){
-        if(delay < 2*Consts.TIMER){
+        if(delay < 2*Constantes.TIMER){
             this.setImage("minhocaE.png");
             delay++;
         }
-        else if(delay < 4*Consts.TIMER){
+        else if(delay < 4*Constantes.TIMER){
             this.setImage("minhocaD.png"); 
             delay++;
         } else 

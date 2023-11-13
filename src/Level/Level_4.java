@@ -3,7 +3,6 @@ package Level;
 import Entities.Elements.Porta;
 import Entities.Elements.Bau;
 import Entities.Elements.Coracao;
-import Entities.Enemy.Minhoca;
 import Entities.Elements.Icone;
 import Entities.Enemy.*;
 import Obstacles.*;
@@ -25,16 +24,14 @@ public class Level_4 extends Fase{
     
     @Override
     public void reiniciarFase(){
-        int tmp = lolo.vidas - 1;
+        lolo.vidas -= 1;
         Elements.clear();
 
-        Hero lolo2 = new Hero(12,11);
-        lolo2.vidas = tmp;
-        lolo = lolo2;
         this.addElement(lolo);
-        
+        lolo.setPosicao(12,11);
         createFase();
     }
+    
     public void createPassavel(){
         //Grama morta
         for(int i = 3; i<= 11;i++){

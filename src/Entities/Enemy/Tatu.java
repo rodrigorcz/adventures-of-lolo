@@ -38,7 +38,7 @@ public class Tatu extends Inimigo{
     public void autoDesenho(){
         super.autoDesenho();
         this.countTime++;
-        if(this.countTime == Consts.TIMER-1){
+        if(this.countTime == Constantes.TIMER-1){
             if(orientacaoTatu == 1){
                 if(!this.moveDown())
                     orientacaoTatu = 2;
