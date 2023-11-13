@@ -68,7 +68,7 @@ public class ControleDeJogo {
                         umaFase.remove(pIesimoPersonagem);
                         return true;
                     }
-                    Ovo o = new Ovo(pIesimoPersonagem.getPosicao().getLinha(),pIesimoPersonagem.getPosicao().getColuna());
+                    Ovo o = new Ovo(pIesimoPersonagem.getPosicao().getLinha(),pIesimoPersonagem.getPosicao().getColuna(), pIesimoPersonagem.getTipo());
                     umaFase.remove(pIesimoPersonagem);
                     umaFase.add(o);
                     return true;
