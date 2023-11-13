@@ -33,9 +33,9 @@ public abstract class Fase extends Sistema{
     private ObserverJogo Terminador;
     private int count = 0;
     private int countPoder = 0;
-    private boolean faseTerminou;
     
-    //Variaveis inerentes de cada fase
+     //Variaveis inerentes de cada fase
+    public boolean faseTerminou;
     public Hero lolo;
     public ArrayList<Elemento> Elements;
     protected BlocoEmpurravel bloco;
@@ -364,7 +364,7 @@ public abstract class Fase extends Sistema{
                 this.Terminador.iniciarFim(false);
                 this.addElement(new Icone(2,13, "Icons/num0.png"));
                 break;
-            case 1:
+            case 1:                                      
                 this.addElement(new Icone(2,13, "Icons/num1.png"));
                 break;
             case 2:

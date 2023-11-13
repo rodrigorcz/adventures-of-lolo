@@ -24,7 +24,7 @@ public class Level_5 extends Fase{
     public void reiniciarFase(){
         lolo.vidas -= 1;
         Elements.clear();
-
+        faseTerminou = false;
         this.addElement(lolo);
         lolo.setPosicao(12,6);
         createFase();

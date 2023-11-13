@@ -27,8 +27,11 @@ public class TelaFinal extends Sistema{
     }
     
     public void keyPressed(KeyEvent e) {
-        this.stop();
-        this.Terminador.terminaFim();
+        if(indice >= 2){
+            this.stop();
+            this.Terminador.terminaFim();
+        }
+        indice++;
     }
     
     public void terminarTela(boolean i){

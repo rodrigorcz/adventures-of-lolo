@@ -31,6 +31,7 @@ public class Level_2 extends Fase{
 
         this.addElement(lolo);
         lolo.setPosicao(12,11);
+        faseTerminou = false;
         createFase();
     }
     
