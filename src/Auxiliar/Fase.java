@@ -215,7 +215,7 @@ public abstract class Fase extends Sistema{
         this.count++;
     }
     
-
+    
     // Definicao de comandos do teclado
     public void keyPressed(KeyEvent e) {
         if(this.count > 0){
@@ -274,20 +274,27 @@ public abstract class Fase extends Sistema{
          }
     }
     
-    
-    // Stream e Arquivos
-    public void fileRegister(ObjectOutput out) throws IOException{
+    public void fileRegister(ObjectOutput out) throws IOException {
         out.writeObject(this.Elements);
+        out.writeObject(this.bau);
+        out.writeObject(this.porta);
+        out.writeObject(this.coracoes);
         out.close();
     }
     
     public void fileReader(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException {
         ArrayList<Elemento> savedElements = null;
+        Bau b = null;
+        Porta p = null;
+        int savedHearts = 0;
 
         try (FileInputStream fileIn = new FileInputStream(fileName);
              ObjectInputStream in = new ObjectInputStream(fileIn)) {
 
             savedElements = (ArrayList<Elemento>) in.readObject();
+            b = (Bau) in.readObject();
+            p = (Porta) in.readObject();
+            savedHearts = (int) in.readObject();
 
             System.out.println("Jogo carregado com sucesso");
 
@@ -297,21 +304,24 @@ public abstract class Fase extends Sistema{
 
         if (savedElements != null) {
             this.Elements = savedElements;
+            this.bau = b;
+            this.porta = p;
+            this.coracoes = savedHearts;
+        }
+    }
+    
+    public void save() throws FileNotFoundException, IOException {
+        try (FileOutputStream s = new FileOutputStream("saveGame.txt");
+             ObjectOutputStream d = new ObjectOutputStream(s)) {
+            this.fileRegister(d);
+            System.out.println("Jogo Salvo");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ControleDeJogo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ControleDeJogo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    
-    public void save() throws FileNotFoundException, IOException{
-        try(FileOutputStream s = new FileOutputStream("saveGame.txt")){
-            ObjectOutputStream d = new ObjectOutputStream(s);
-            this.fileRegister(d);
-            System.out.println("Jogo Salvo");
-        }catch(FileNotFoundException ex){
-            Logger.getLogger(ControleDeJogo.class.getName()).log(Level.SEVERE, null, ex);
-        }catch(IOException ex){
-            Logger.getLogger(ControleDeJogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     public void load(){
         try{
