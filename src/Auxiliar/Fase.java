@@ -6,7 +6,7 @@ import Entities.Enemy.*;
 import Auxiliar.*;
 import Controler.*;
 import Obstacles.*;
-import Save.SaveLoad;
+
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -278,6 +278,7 @@ public abstract class Fase extends Sistema{
         out.writeObject(this.Elements);
         out.writeObject(this.bau);
         out.writeObject(this.porta);
+        out.writeObject(this.fase);
         out.writeObject(this.coracoes);
         out.close();
     }
@@ -286,6 +287,7 @@ public abstract class Fase extends Sistema{
         ArrayList<Elemento> savedElements = null;
         Bau b = null;
         Porta p = null;
+        VideoGame fs = null;
         int savedHearts = 0;
 
         try (FileInputStream fileIn = new FileInputStream(fileName);
@@ -294,6 +296,7 @@ public abstract class Fase extends Sistema{
             savedElements = (ArrayList<Elemento>) in.readObject();
             b = (Bau) in.readObject();
             p = (Porta) in.readObject();
+            fs = (VideoGame) in.readObject();
             savedHearts = (int) in.readObject();
 
             System.out.println("Jogo carregado com sucesso");
@@ -306,6 +309,7 @@ public abstract class Fase extends Sistema{
             this.Elements = savedElements;
             this.bau = b;
             this.porta = p;
+            this.fase = fs;
             this.coracoes = savedHearts;
         }
     }

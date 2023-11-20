@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import Level.*;
 import Auxiliar.*;
-import Save.SaveData;
 
 public class VideoGame implements ObserverJogo{
     private ArrayList<Fase> fase;
@@ -23,6 +22,7 @@ public class VideoGame implements ObserverJogo{
         this.fase.add(new Level_3(this));
         this.fase.add(new Level_4(this));
         this.fase.add(new Level_5(this));
+        this.fase.add(new Level_6(this));
          
         this.indexLevel = 0;
     }
@@ -81,6 +81,5 @@ public class VideoGame implements ObserverJogo{
     public Fase getFase(){
       return this.fase.get(this.indexLevel);
     }
-    
-    public void setArray(SaveData sd) {}
+
 }
