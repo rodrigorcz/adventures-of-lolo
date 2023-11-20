@@ -3,6 +3,8 @@ import Controler.*;
 public class Main {
 
     public static void main(String[] args) {
+        System.out.println("Avisos:\n"
+        + "Para um melhor desempenho talvez seja interessante deixar o jogo em tela cheia\n");
         
         System.out.println("Comandos:\n"
         + "Aperte S para salvar o jogo.\n"
@@ -15,9 +17,13 @@ public class Main {
         System.out.println("Instruções:\n"
         + "Pegue todos os corações e corra para o bau.\n"
         + "Apos pegar o bau os monstros morrerao.\n"
-        + "Você tem 3 vidas por nível\n"
-        + "Boa Sorte!");
+        + "O jogo possui 6 niveis."
+        + "Em cada nível você tem 3 vidas\n"
+        + "Boa Sorte!\n");
         
+        System.out.println("Feito por:\n"
+                + "Rodrigo Rodrigues de Castro - 13695362\n"
+                + "Marcus Vinicius da Silva - 13833150\n");
         //Iniciar o jogo
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
