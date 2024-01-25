@@ -1,2 +1,3 @@
-# Adventures of Lolo
-This repository has been created to host files and codes used in the project of the Object-oriented programming (OOP) discipline. The objective of the project is to build a video game based on the game Adventures Of Lolo 2, using OOP concepts and the Java computer language. For the development of the project, the Netbeans integrated development environment will be used.
+# Adventures of Lolo 2
+Este repositório contém os arquivos e os códigos relacionados ao trabalho da disciplina de Programação Orientada a Objetos (SCC0604) da USP de São Carlos. O trbalho consiste em fazer um jogo baseado no jogo Adventures of Lolo 2, o qual foi lançado no ano de 1990 pela HAL Laboratory. Para a elaboração do jogo foi utilizada a linguagem de programação Java na versão 17.0.9 do JDK, já o ambiente de desenvolvimento utilizado foi o Apache Netbeans 17 e versões posteriores.
+Esse possui 6 níveis, onde o objetivo é pegar todos os corações presentes no mapa para assim passar para a próxima fase. Nessas fases serão encontrados diferentes tipos de obstáculos além de diferentes inimigos que tentarão dar um fim na jornada do nosso herói.
