@@ -1,6 +1,9 @@
 ## Adventures of Lolo 2
 
-<img align="middle" src="game.gif" width="360px" alt="animated gif"/>
+<div align ="center">
+  <img src="game.gif" width="480px" alt="animated gif"/>
+</div>
+
 
 ## Description
 
