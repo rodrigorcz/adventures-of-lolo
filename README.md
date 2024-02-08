@@ -7,7 +7,7 @@
 
 ## Description
 
-This repository hosts files and codes used in the Object Oriented Programming (OOP) project at the University of São Paulo. The objective of the project is to build a video game based on the game Adventures Of Lolo 2 released for the Nintendo Entertainment System (NES), using OOP concepts and the Java computer language. The Netbeans integrated development environment was used to develop the project.
+This repository hosts files and codes used in the project of the Object Oriented Programming (OOP) discipline taught at the University of São Paulo. The objective of the project is to build a video game based on the Adventures Of Lolo 2 game released for the Nintendo Entertainment System (NES), using OOP concepts and the Java computer language. The Netbeans integrated development environment was used to develop the project.
 
 ## Objective
 
